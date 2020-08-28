@@ -1,9 +1,7 @@
 <template>
-  <section class="article-container"
-    :style="{
-      backgroundColor: bgColor,
-    }"
-  >
+  <section class="article-container" :style="{
+      backgroundColor
+    }">
     <article class="article" :style="{ color: textColor }">
       <slot />
     </article>
@@ -14,15 +12,15 @@
 export default {
   name: 'ArticleContainer',
   props: {
-    bgColor: {
+    backgroundColor: {
       type: String,
-      default: '#ffffff',
+      default: '#ffffff'
     },
     textColor: {
       type: String,
-      default: 'initial',
+      default: 'initial'
     }
-  },
+  }
 }
 </script>
 

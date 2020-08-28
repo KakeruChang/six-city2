@@ -215,7 +215,6 @@ export default {
                 parseInt(entry.target.dataset.target, 10)
               )
             } else {
-              console.log('up test')
               window.scrollTo({
                 top: this.$refs[`target${this.active}`][0].offsetTop
               })
