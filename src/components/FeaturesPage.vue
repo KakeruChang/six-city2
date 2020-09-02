@@ -1,6 +1,11 @@
 <template>
   <div class="container" ref="featureContainer">
-    <Progress v-if="!isInside" :active="active" :length="features.length" />
+    <Progress
+      v-if="!isInside"
+      :active="active"
+      :length="features.length"
+      :displayAreaFromTop="displayAreaFromTop"
+    />
     <!-- data-area -->
     <div v-for="(feature, i) in features" :key="feature.id">
       <div v-if="!isInside" class="target outside" :data-target="i">
@@ -16,7 +21,11 @@
           >{{ text }}</p>
           <router-link :to="feature.url" style="text-decoration:none;" v-if="feature.titleOut">
             <span class="btn-arrow" @click="goToPage(feature)" v-if="feature.titleOut">
-              <span :class="{ jump: !isInside }">{{ !isInside ? '￫' : '￩' }}</span>
+              <span :class="{ jump: !isInside }">
+                {{
+                !isInside ? '￫' : '￩'
+                }}
+              </span>
             </span>
           </router-link>
         </div>
@@ -29,12 +38,12 @@
         style="background:rgb(23,23,23);"
       >
         <div style="color:#fff;fontSize:50px;height:54.4vh">{{ i }}</div>
-        <FeatureContent :active="i" />
+        <FeatureContent :active="i" :isHide="false" />
       </div>
     </div>
 
     <!-- display-area -->
-    <div class="display-area" style="opacity:0.5;" :style="{ height: !isInside && '100vh' }">
+    <div class="display-area" style="opacity:1;" :style="displayAreaStyle">
       <img
         class="display-area-bg"
         v-if="features[active].img"
@@ -50,15 +59,12 @@
           :src="features[active].sideTitleImg"
           alt
         />
-        <!-- <span
-          class="side-title-text"
-          :style="{ color: title.color }"
-          v-for="title in features[active].sideTitle"
-          :key="title.text"
-        >{{ title.text }}</span>-->
       </div>
-      <div class="display-content" :class="{ active: areaActive }">
-        <div class="display-outside" :class="{inactive:isInside}">
+      <div
+        class="display-content"
+        :class="{ active: areaActive,'no-img':areaActive && !features[active].titleOut }"
+      >
+        <div class="display-outside" :class="{ inactive: isInside }">
           <template v-if="!isInside">
             <div class="title-outside">{{ features[active].titleOut }}</div>
             <p
@@ -75,51 +81,30 @@
             <span
               class="btn-arrow"
               :class="{ inside: isInside }"
+              :style="{ transform: isInside?`translate(-${arrowBaseDisplacement}%,calc( ${arrowBaseDisplacement}% + ${replacementInside*100}vh))`:'translate(0, 0)' }"
               @click="goToPage(features[active])"
               v-if="features[active].titleOut"
             >
-              <span :class="{ jump: !isInside }">{{ !isInside ? '￫' : '￩' }}</span>
+              <!-- transform: translate(-300%, 300%); -->
+              <span :class="{ jump: !isInside }">
+                {{
+                !isInside ? '￫' : '￩'
+                }}
+              </span>
             </span>
           </router-link>
         </div>
-        <div class="display-inside" :class="{active:isInside}">
+        <div class="display-inside" :class="{ active: isInside }">
           <template v-if="isInside">
-            <FeatureContent :active="active" />
+            <FeatureContent :isHide="isHide" :active="active" />
           </template>
         </div>
       </div>
-
-      <!-- <div class="outside-area">
-        <div class="title-outside">{{ features[active].titleOut }}</div>
-        <p
-          class="text-outside"
-          v-for="(text, i) in features[active].textOut"
-          :key="`display${features[active].id}${i}`"
-        >{{ text }}</p>
-        <router-link
-          :to="features[active].url"
-          style="text-decoration:none;"
-          v-if="features[active].titleOut"
-        >
-          <span
-            class="btn-arrow"
-            @click="goToPage(features[active])"
-            v-if="features[active].titleOut"
-          >
-            <span :class="{ jump: !isInside }">
-              {{
-              !isInside ? '￫' : '￩'
-              }}
-            </span>
-          </span>
-        </router-link>
-      </div>-->
     </div>
   </div>
 </template>
 
 <script>
-import ArticleDetailv2 from './ArticleDetailv2'
 import FeatureContent from './FeatureContent'
 import Progress from '@/components/Progress.vue'
 import { rwdMethods } from '@/mixins/masterBuilder.js'
@@ -131,60 +116,127 @@ export default {
   components: {
     Progress,
     FeatureContent
-    // ArticleDetailv2
   },
   data() {
     return {
       isInside: false,
       muted: false,
-      insideContent: {},
+      // insideContent: {},
       // oldActive: 0,
       observer: {},
       contentInView: false,
       direction: '',
-      areaActive: true
+      areaActive: true,
+      isHide: true,
+      progressInside: 0,
+      replacementInside: 0,
+      displayAreaFromTop: 0
     }
   },
   methods: {
     goToPage(feature) {
       if (!this.isInside) {
         this.isInside = true
+        setTimeout(() => {
+          this.isHide = false
+        }, 500)
         this.$emit('emitIsInside', true)
-        this.insideContent = { ...feature }
+        // this.insideContent = { ...feature }
 
         this.constructObserver()
+        window.addEventListener('scroll', this.countProgressInside, false)
         window.removeEventListener('scroll', this.countActiveByHeight, false)
       } else {
         this.isInside = false
+        this.isHide = true
         this.$emit('emitIsInside', false)
-        this.insideContent = {}
+        // this.insideContent = {}
         this.$router.back()
 
         this.destroyObserver()
+        window.removeEventListener('scroll', this.countProgressInside, false)
         window.addEventListener('scroll', this.countActiveByHeight, false)
+      }
+    },
+    countProgressInside() {
+      const { pageYOffset, innerHeight } = window
+      const targetTop = this.$refs[`target${this.active}`][0].offsetTop
+      const targetHeight = this.$refs[`target${this.active}`][0].offsetHeight
+
+      this.progressInside =
+        (pageYOffset - targetTop) / (targetHeight - innerHeight)
+
+      if (this.progressInside < 0) {
+        this.replacementInside =
+          0 * (1 - innerHeight / targetHeight) * (targetHeight / innerHeight)
+      } else if (this.progressInside > 1) {
+        this.replacementInside =
+          1 * (1 - innerHeight / targetHeight) * (targetHeight / innerHeight)
+      } else {
+        this.replacementInside =
+          this.progressInside *
+          (1 - innerHeight / targetHeight) *
+          (targetHeight / innerHeight)
+      }
+
+      // prevent escaping from area
+      const containerTop = this.$refs.featureContainer.offsetTop
+      const containerHeight = this.$refs.featureContainer.offsetHeight
+      // up
+      if (pageYOffset < containerTop) {
+        window.scrollTo({ top: containerTop })
+      }
+      // down
+      if (pageYOffset + innerHeight > containerTop + containerHeight) {
+        window.scrollTo({ top: containerTop + containerHeight - innerHeight })
       }
     },
     checkPath() {
       if (Object.keys(this.$route.params).length !== 0) {
         this.isInside = true
+        setTimeout(() => {
+          this.isHide = false
+        }, 500)
         this.$emit('emitIsInside', true)
 
         this.constructObserver()
+        window.addEventListener('scroll', this.countProgressInside, false)
         window.removeEventListener('scroll', this.countActiveByHeight, false)
       }
     },
     countActiveByHeight() {
       const { innerHeight, pageYOffset } = window
+      const containerTop = this.$refs.featureContainer.offsetTop
+      const containerHeight = this.$refs.featureContainer.offsetHeight
 
-      this.$emit('emitActive', Math.round(pageYOffset / innerHeight))
+      if (pageYOffset < containerTop) {
+        this.displayAreaFromTop = containerTop - pageYOffset
+      } else if (pageYOffset + innerHeight > containerTop + containerHeight) {
+        this.displayAreaFromTop = -(
+          pageYOffset +
+          innerHeight -
+          (containerTop + containerHeight)
+        )
+      } else {
+        this.displayAreaFromTop = 0
+
+        const activeIndex = Math.round(
+          (pageYOffset - containerTop) / innerHeight
+        )
+        if (activeIndex < this.features.length) {
+          this.$emit('emitActive', activeIndex)
+        }
+      }
     },
     handlePopState(e) {
       if (this.isInside) {
         this.isInside = false
+        this.isHide = true
         this.$emit('emitIsInside', false)
-        this.insideContent = {}
+        // this.insideContent = {}
 
         this.destroyObserver()
+        window.removeEventListener('scroll', this.countProgressInside, false)
         window.addEventListener('scroll', this.countActiveByHeight, false)
       }
     },
@@ -199,9 +251,6 @@ export default {
       const callback = (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // console.log(parseInt(entry.target.dataset.target, 10))
-
-            // set active
             if (parseInt(entry.target.dataset.target) > this.active) {
               this.direction = 'down'
             } else if (parseInt(entry.target.dataset.target) < this.active) {
@@ -218,14 +267,6 @@ export default {
               window.scrollTo({
                 top: this.$refs[`target${this.active}`][0].offsetTop
               })
-              // this.$emit(
-              //   'emitActive',
-              //   parseInt(entry.target.dataset.target, 10)
-              // )
-              // this.$emit(
-              //   'emitActive',
-              //   parseInt(entry.target.dataset.target, 10) + 1
-              // )
             }
           }
         })
@@ -251,6 +292,28 @@ export default {
       this.observer = {}
     }
   },
+  computed: {
+    displayAreaStyle() {
+      let areaStyle = {
+        top: `${this.displayAreaFromTop}px`,
+        height: !this.isInside && '100vh',
+        transform: `translateY(-${this.replacementInside * 100}vh)`
+      }
+      if (!this.isInside) {
+        areaStyle = { ...areaStyle, overflow: 'hidden' }
+      }
+
+      return areaStyle
+    },
+    arrowBaseDisplacement() {
+      const { innerWidth } = window
+
+      if (innerWidth > 768) return 300
+      else if (innerWidth < 375) return 100
+      else if (innerWidth >= 375 && innerWidth < 576) return 150
+      return 200
+    }
+  },
   watch: {
     active: function () {
       this.areaActive = false
@@ -266,24 +329,6 @@ export default {
             path: `/${this.features[this.active + 1].url}`
           })
           this.$refs[`target${this.active + 1}`][0].scrollIntoView()
-
-          // if (this.direction === 'down') {
-          //   console.log('direction:down')
-          //   this.$router.push({ path: '/' })
-          //   this.$router.push({
-          //     path: `/${this.features[this.active + 1].url}`
-          //   })
-          //   this.$refs[`target${this.active + 1}`][0].scrollIntoView()
-          // }
-          // if (this.direction === 'up') {
-          //   this.$router.push({ path: '/' })
-          //   this.$router.push({
-          //     path: `/${this.features[this.active - 1].url}`
-          //   })
-          //   this.$refs[`target${this.active - 1}`][0].scrollIntoView({
-          //     block: 'end'
-          //   })
-          // }
         } else {
           // only down will be renewed
           this.$router.push({ path: '/' })
@@ -294,12 +339,13 @@ export default {
     isInside: function () {
       if (!this.isInside) {
         setTimeout(() => {
-          window.scrollTo({ top: 0 })
+          window.scrollTo({ top: this.$refs.featureContainer.offsetTop })
         }, 0)
       }
     }
   },
   mounted() {
+    this.countActiveByHeight()
     window.addEventListener('scroll', this.countActiveByHeight, false)
     window.addEventListener('popstate', this.handlePopState, false)
 
@@ -347,14 +393,7 @@ export default {
     transform: translateY(0);
   }
 }
-// .side-title-text {
-//   display: inline-block;
-//   opacity: 0.3;
-//   font-family: SourceHanSerifTC-Heavy, source-han-serif-tc, sans-serif;
-//   font-size: 90px;
-//   font-weight: 900;
-//   line-height: 1.22;
-// }
+
 .outside-area {
   position: absolute;
   left: 14.2%;
@@ -374,8 +413,12 @@ export default {
   }
 }
 .text-outside {
+  width: 95%;
   @media screen and (min-width: 1025px) {
     width: 400px;
+  }
+  @media screen and (min-width: 768px) {
+    width: 600px;
   }
   @media screen and (max-width: 1024.98px) {
     font-size: 20px;
@@ -408,14 +451,15 @@ export default {
   transition: all 0.25s ease-out;
   &.inside {
     transform: translate(-300%, 300%);
+    transition: none;
   }
 }
 .display-area {
   position: fixed;
-  top: 0;
   left: 0;
   z-index: 10;
   width: 100vw;
+  height: 100%;
   max-width: 100%;
   background-color: rgb(23, 23, 23);
   display: flex;
@@ -433,6 +477,9 @@ export default {
     height: 80vh;
     width: 80vw;
     max-width: 80%;
+    @media screen and (max-width: 1025px) {
+      height: 80vw;
+    }
   }
   &.active {
     transform: translateX(0);
@@ -445,16 +492,19 @@ export default {
   &.active {
     transform: translateY(0);
   }
+  // &.no-img {
+  // transform: translateY(-25vh);
+  // }
   z-index: 11;
   position: absolute;
   left: 0;
-  // padding-left: 14.2%;
   width: 100%;
   top: 35%;
   @media screen and (max-width: 1024.98px) {
-    top: 50%;
+    top: 65%;
   }
-  @media screen and (max-width: 413.98px) {
+  @media screen and (max-width: 767.98px) {
+    top: 50%;
   }
 }
 
@@ -467,6 +517,9 @@ export default {
   &.inactive {
     padding-top: 10%;
     padding-left: 20%;
+    @media screen and (max-width: 768px) {
+      padding-top: 0;
+    }
   }
 }
 .display-inside {
@@ -518,9 +571,4 @@ export default {
     font-weight: 900;
   }
 }
-
-// video {
-//   width: 100vw;
-//   height: 100vh;
-// }
 </style>

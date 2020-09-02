@@ -270,13 +270,14 @@
       <FooterLogo />
     </PageFooter>
     <PageBackTop />-->
-
+    <div style="height:200vh;background-color:pink;" />
     <FeaturesPage
       @emitActive="updateActive"
       @emitIsInside="updateIsInside"
       :active="active"
       :features="features"
     />
+    <div style="height:200vh;background-color:yellow;" />
   </div>
 </template>
 
