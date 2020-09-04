@@ -5,7 +5,9 @@
         <span class="gray-line" />
       </div>
       <div class="indicator-wrapper">
-        <NmdArrow iconColor="#afafaf" />
+        <span @click="scrollToNext">
+          <NmdArrow iconColor="#afafaf" />
+        </span>
       </div>
       <div class="indicator-wrapper">
         <span class="indicator-text" style="color:#ff2300;margin-top:16px;">下一篇</span>
@@ -41,6 +43,11 @@ export default {
   },
   data() {
     return { content }
+  },
+  methods: {
+    scrollToNext() {
+      this.$emit('scrollToNext')
+    }
   },
   computed: {
     contentWithInsideLength() {

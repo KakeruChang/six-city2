@@ -1,5 +1,5 @@
 <template>
-  <div class="article-youtube">
+  <div class="article-youtube" :class="{'article-margin ':articleMargin}">
     <iframe
       class="article-youtube__responsive-item"
       :src="youtubeSrc"
@@ -38,21 +38,27 @@ export default {
     jsonProps: {
       type: Object,
       default: null
+    },
+    articleMargin: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
     youtubeSrc() {
-      return this.src + 
-      '?playsinline=1&rel=0&controls=' +
-      (this.controlsValue === 'yes' ? 1 : 0) +
-      '&showinfo=' +
-      (this.showinfoValue === 'yes' ? 1 : 0) +
-      '&autoplay=' +
-      (this.autoPlayValue === 'yes' ? 1 : 0) +
-      '&mute=' +
-      (this.mutedValue === 'yes' ? 1 : 0);
+      return (
+        this.src +
+        '?playsinline=1&rel=0&controls=' +
+        (this.controlsValue === 'yes' ? 1 : 0) +
+        '&showinfo=' +
+        (this.showinfoValue === 'yes' ? 1 : 0) +
+        '&autoplay=' +
+        (this.autoPlayValue === 'yes' ? 1 : 0) +
+        '&mute=' +
+        (this.mutedValue === 'yes' ? 1 : 0)
+      )
     }
-  },
+  }
 }
 </script>
 
@@ -63,6 +69,8 @@ export default {
   width: 100%;
   height: 0;
   padding-bottom: 56.25%;
+}
+.article-margin {
   @include layout-margin;
 }
 .article-youtube__responsive-item {

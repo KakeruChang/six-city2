@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="example">
     <!-- <PageIndicator></PageIndicator>
     <HeaderTypeC pageTitle="你的數位隱私保障了嗎？">
       <a class="active" aria-label="outlink" name="outlink">數位隱私變商品</a>
@@ -270,14 +270,14 @@
       <FooterLogo />
     </PageFooter>
     <PageBackTop />-->
-    <div style="height:200vh;background-color:pink;" />
+    <div style="height:50vh;background-color:pink;" />
     <FeaturesPage
       @emitActive="updateActive"
       @emitIsInside="updateIsInside"
       :active="active"
       :features="features"
     />
-    <div style="height:200vh;background-color:yellow;" />
+    <div style="height:50vh;background-color:yellow;" />
   </div>
 </template>
 
@@ -348,4 +348,8 @@ export default {
   }
 }
 </script>
-<style lang="scss" scope></style>
+<style lang="scss">
+::-webkit-scrollbar {
+  display: none;
+}
+</style>

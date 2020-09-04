@@ -21,11 +21,7 @@
           >{{ text }}</p>
           <router-link :to="feature.url" style="text-decoration:none;" v-if="feature.titleOut">
             <span class="btn-arrow" @click="goToPage(feature)" v-if="feature.titleOut">
-              <span :class="{ jump: !isInside }">
-                {{
-                !isInside ? '￫' : '￩'
-                }}
-              </span>
+              <span :class="{ jump: !isInside }">{{ !isInside ? '￫' : '￩' }}</span>
             </span>
           </router-link>
         </div>
@@ -37,8 +33,8 @@
         :data-target="i"
         style="background:rgb(23,23,23);"
       >
-        <div style="color:#fff;fontSize:50px;height:54.4vh">{{ i }}</div>
-        <FeatureContent :active="i" :isHide="false" />
+        <div style="height:54.4vh" />
+        <FeatureContent :active="i" :isHide="false" :opacity="0" />
       </div>
     </div>
 
@@ -62,7 +58,10 @@
       </div>
       <div
         class="display-content"
-        :class="{ active: areaActive,'no-img':areaActive && !features[active].titleOut }"
+        :class="{
+          active: areaActive,
+          'no-img': areaActive && !features[active].titleOut
+        }"
       >
         <div class="display-outside" :class="{ inactive: isInside }">
           <template v-if="!isInside">
@@ -81,22 +80,23 @@
             <span
               class="btn-arrow"
               :class="{ inside: isInside }"
-              :style="{ transform: isInside?`translate(-${arrowBaseDisplacement}%,calc( ${arrowBaseDisplacement}% + ${replacementInside*100}vh))`:'translate(0, 0)' }"
+              :style="{
+                transform: isInside
+                  ? `translate(-${arrowBaseDisplacement}%,calc( ${arrowBaseDisplacement}% + ${displacementInside *
+                      100}vh))`
+                  : 'translate(0, 0)'
+              }"
               @click="goToPage(features[active])"
               v-if="features[active].titleOut"
             >
               <!-- transform: translate(-300%, 300%); -->
-              <span :class="{ jump: !isInside }">
-                {{
-                !isInside ? '￫' : '￩'
-                }}
-              </span>
+              <span :class="{ jump: !isInside }">{{ !isInside ? '￫' : '￩' }}</span>
             </span>
           </router-link>
         </div>
         <div class="display-inside" :class="{ active: isInside }">
           <template v-if="isInside">
-            <FeatureContent :isHide="isHide" :active="active" />
+            <FeatureContent :isHide="isHide" :active="active" @scrollToNext="scrollToNext" />
           </template>
         </div>
       </div>
@@ -107,11 +107,11 @@
 <script>
 import FeatureContent from './FeatureContent'
 import Progress from '@/components/Progress.vue'
-import { rwdMethods } from '@/mixins/masterBuilder.js'
+import { rwdMethods, sendGaMethods } from '@/mixins/masterBuilder.js'
 
 export default {
   name: 'FeaturesPage',
-  mixins: [rwdMethods],
+  mixins: [rwdMethods, sendGaMethods],
   props: { active: { type: Number, default: 0 }, features: { type: Array } },
   components: {
     Progress,
@@ -129,8 +129,10 @@ export default {
       areaActive: true,
       isHide: true,
       progressInside: 0,
-      replacementInside: 0,
-      displayAreaFromTop: 0
+      progressInsideIndex: null,
+      displacementInside: 0,
+      displayAreaFromTop: 0,
+      nextTrigger: false
     }
   },
   methods: {
@@ -146,50 +148,88 @@ export default {
         this.constructObserver()
         window.addEventListener('scroll', this.countProgressInside, false)
         window.removeEventListener('scroll', this.countActiveByHeight, false)
+
+        this.sendGA({
+          category: 'related',
+          action: 'click',
+          label: `article_${this.features[this.active].titleOut}`
+        })
       } else {
         this.isInside = false
         this.isHide = true
         this.$emit('emitIsInside', false)
         // this.insideContent = {}
         this.$router.back()
+        this.displayAreaFromTop = 0
 
         this.destroyObserver()
         window.removeEventListener('scroll', this.countProgressInside, false)
         window.addEventListener('scroll', this.countActiveByHeight, false)
+
+        this.sendGA({
+          category: 'back',
+          action: 'click',
+          label: 'back'
+        })
       }
     },
     countProgressInside() {
-      const { pageYOffset, innerHeight } = window
-      const targetTop = this.$refs[`target${this.active}`][0].offsetTop
-      const targetHeight = this.$refs[`target${this.active}`][0].offsetHeight
+      this.$nextTick(() => {
+        const { pageYOffset, innerHeight } = window
+        const targetTop = this.$refs[`target${this.active}`][0].offsetTop
+        const targetHeight = this.$refs[`target${this.active}`][0].offsetHeight
+        this.progressInside =
+          (pageYOffset - targetTop) / (targetHeight - innerHeight)
 
-      this.progressInside =
-        (pageYOffset - targetTop) / (targetHeight - innerHeight)
+        // count the replacement of inside part
+        if (this.progressInside < 0) {
+          this.displacementInside =
+            0 * (1 - innerHeight / targetHeight) * (targetHeight / innerHeight)
+          window.scrollTo({
+            top: this.$refs[`target${this.active}`][0].offsetTop
+          })
+        } else if (this.progressInside > 1) {
+          this.displacementInside =
+            1 * (1 - innerHeight / targetHeight) * (targetHeight / innerHeight)
+        } else {
+          this.displacementInside =
+            this.progressInside *
+            (1 - innerHeight / targetHeight) *
+            (targetHeight / innerHeight)
+        }
 
-      if (this.progressInside < 0) {
-        this.replacementInside =
-          0 * (1 - innerHeight / targetHeight) * (targetHeight / innerHeight)
-      } else if (this.progressInside > 1) {
-        this.replacementInside =
-          1 * (1 - innerHeight / targetHeight) * (targetHeight / innerHeight)
-      } else {
-        this.replacementInside =
-          this.progressInside *
-          (1 - innerHeight / targetHeight) *
-          (targetHeight / innerHeight)
-      }
+        //send ga
+        if (this.progressInside > 0 && this.progressInside < 1) {
+          for (let i = 0; i < 10; i += 1) {
+            if (
+              this.progressInside > i * 0.1 &&
+              this.progressInside < (i + 1) * 0.1
+            ) {
+              if (this.progressInsideIndex !== i) {
+                this.sendGA({
+                  category: 'read',
+                  action: 'scroll',
+                  label: `${this.features[this.active].titleOut}:${i + 1}0%`
+                })
 
-      // prevent escaping from area
-      const containerTop = this.$refs.featureContainer.offsetTop
-      const containerHeight = this.$refs.featureContainer.offsetHeight
-      // up
-      if (pageYOffset < containerTop) {
-        window.scrollTo({ top: containerTop })
-      }
-      // down
-      if (pageYOffset + innerHeight > containerTop + containerHeight) {
-        window.scrollTo({ top: containerTop + containerHeight - innerHeight })
-      }
+                this.progressInsideIndex = i
+              }
+            }
+          }
+        }
+
+        // prevent escaping from area
+        const containerTop = this.$refs.featureContainer.offsetTop
+        const containerHeight = this.$refs.featureContainer.offsetHeight
+        // up
+        if (pageYOffset < containerTop) {
+          window.scrollTo({ top: containerTop })
+        }
+        // down
+        if (pageYOffset + innerHeight > containerTop + containerHeight) {
+          window.scrollTo({ top: containerTop + containerHeight - innerHeight })
+        }
+      })
     },
     checkPath() {
       if (Object.keys(this.$route.params).length !== 0) {
@@ -198,6 +238,19 @@ export default {
           this.isHide = false
         }, 500)
         this.$emit('emitIsInside', true)
+
+        const urlId = this.$route.params.id
+        for (let i = 0; i < this.features.length; i += 1) {
+          if (this.features[i].url === urlId) {
+            this.$nextTick(() => {
+              window.scrollTo({
+                top: this.$refs[`target${i}`][0].offsetTop
+              })
+              this.displayAreaFromTop = 0
+            })
+            break
+          }
+        }
 
         this.constructObserver()
         window.addEventListener('scroll', this.countProgressInside, false)
@@ -263,6 +316,31 @@ export default {
                 'emitActive',
                 parseInt(entry.target.dataset.target, 10)
               )
+
+              // send GA
+              if (
+                parseInt(entry.target.dataset.target) !== 0 &&
+                this.features[entry.target.dataset.target].titleOut
+              ) {
+                const action = this.nextTrigger ? 'click' : 'scroll'
+                this.displacementInside = 0
+                if (this.nextTrigger) {
+                  this.nextTrigger = false
+                }
+
+                console.log(
+                  `next_${action}_${
+                    this.features[entry.target.dataset.target].titleOut
+                  }`
+                )
+                this.sendGA({
+                  category: 'next',
+                  action: 'scroll',
+                  label: `next_${action}_${
+                    this.features[entry.target.dataset.target].titleOut
+                  }`
+                })
+              }
             } else {
               window.scrollTo({
                 top: this.$refs[`target${this.active}`][0].offsetTop
@@ -290,20 +368,33 @@ export default {
         this.observer.unobserve(target)
       })
       this.observer = {}
+    },
+    scrollToNext() {
+      window.scrollTo({
+        top: this.$refs[`target${this.active + 1}`][0].offsetTop
+      })
+      this.nextTrigger = true
     }
+    // handleReload(event) {
+    //   alert('jump')
+    //   // Cancel the event as stated by the standard.
+    //   event.preventDefault()
+    //   // Chrome requires returnValue to be set.
+    //   event.returnValue = ''
+    // }
   },
   computed: {
     displayAreaStyle() {
       let areaStyle = {
         top: `${this.displayAreaFromTop}px`,
         height: !this.isInside && '100vh',
-        transform: `translateY(-${this.replacementInside * 100}vh)`
+        transform: `translateY(-${this.displacementInside * 100}vh)`
       }
       if (!this.isInside) {
         areaStyle = { ...areaStyle, overflow: 'hidden' }
       }
 
-      return areaStyle
+      return { ...areaStyle }
     },
     arrowBaseDisplacement() {
       const { innerWidth } = window
@@ -316,10 +407,14 @@ export default {
   },
   watch: {
     active: function () {
-      this.areaActive = false
-      setTimeout(() => {
+      if (this.isInside) {
         this.areaActive = true
-      }, 500)
+      } else {
+        this.areaActive = false
+        setTimeout(() => {
+          this.areaActive = true
+        }, 500)
+      }
 
       if (this.isInside) {
         if (!this.features[this.active].url) {
@@ -339,6 +434,7 @@ export default {
     isInside: function () {
       if (!this.isInside) {
         setTimeout(() => {
+          this.displacementInside = 0
           window.scrollTo({ top: this.$refs.featureContainer.offsetTop })
         }, 0)
       }
@@ -348,12 +444,18 @@ export default {
     this.countActiveByHeight()
     window.addEventListener('scroll', this.countActiveByHeight, false)
     window.addEventListener('popstate', this.handlePopState, false)
-
     this.checkPath()
+
+    // window.addEventListener('beforeunload', function (event) {
+
+    // })
   },
   destroyed() {
     window.removeEventListener('scroll', this.countActiveByHeight, false)
-    window.addEventListener('popstate', this.handlePopState, false)
+    window.removeEventListener('popstate', this.handlePopState, false)
+    if (Object.keys(this.observer).length > 0) {
+      this.destroyObserver()
+    }
   }
 }
 </script>
@@ -367,6 +469,7 @@ export default {
   position: relative;
 }
 .side-title {
+  overflow: hidden;
   height: 100vh;
   margin-left: 11px;
   display: flex;
