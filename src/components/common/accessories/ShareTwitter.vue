@@ -8,10 +8,7 @@
       name="share-twitter"
       @click="sendGA(formatGA('HeaderShareTwitter'))"
     >
-      <button
-        aria-label="share"
-        name="share-twitter"
-      >
+      <button aria-label="share" name="share-twitter">
         <i
           :class="{
             'icon-twitter-brands': true,
@@ -25,7 +22,7 @@
 </template>
 
 <script>
-import { sendGaMethods } from '@/mixins/masterBuilder.js';
+import { sendGaMethods } from '@/mixins/masterBuilder.js'
 
 export default {
   name: 'ShareTwitter',
@@ -33,19 +30,21 @@ export default {
   props: {
     href: {
       type: String,
-      default: document.querySelector('meta[property="og:url"]').content,
+      default: document.querySelector('meta[property="og:url"]').content
     },
     theme: {
       type: String,
       default: 'light'
-    },
+    }
   },
   computed: {
     shareUrl() {
-      return `https://twitter.com/intent/tweet?text=${encodeURIComponent(document.querySelector('meta[property="og:description"]').content)}%0D%0A%0D%0A${encodeURIComponent(this.href)}`;
-    },
-  },
-};
+      return `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+        document.querySelector('meta[property="og:description"]').content
+      )}%0D%0A%0D%0A${encodeURIComponent(this.href)}`
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

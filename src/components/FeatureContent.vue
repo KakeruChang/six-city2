@@ -36,6 +36,7 @@
           @scrollToNext="scrollToNext"
         />
       </ArticleContainer>
+      <div class="safe-area" v-if="active !== content.length" />
     </template>
   </div>
 </template>
@@ -104,5 +105,8 @@ export default {
 <style lang="scss" scoped>
 .detail-container {
   width: 100%;
+}
+.safe-area {
+  margin-bottom: 100vh;
 }
 </style>

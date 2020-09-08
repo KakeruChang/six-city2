@@ -1,28 +1,8 @@
 <template>
   <div id="app" class="example">
-    <!-- <PageIndicator></PageIndicator>
-    <HeaderTypeC pageTitle="你的數位隱私保障了嗎？">
-      <a class="active" aria-label="outlink" name="outlink">數位隱私變商品</a>
-      <a
-        href="#"
-        target="_blank"
-        rel="noopener"
-        aria-label="outlink"
-        name="outlink"
-        @click="sendGA(formatGA('MenuLink_2'))"
-        >政府正在監控你</a
-      >
-      <a
-        href="#"
-        target="_blank"
-        rel="noopener"
-        aria-label="outlink"
-        name="outlink"
-        @click="sendGA(formatGA('MenuLink_3'))"
-        >測驗透明人指數</a
-      >
-    </HeaderTypeC>
-    <PageCover
+    <!-- <PageIndicator></PageIndicator> -->
+    <HeaderTypeA1 theme="dark"></HeaderTypeA1>
+    <!-- <PageCover
       :srcMob="require('@/assets/img/cover/mob.jpg')"
       :srcPad="require('@/assets/img/cover/mob.jpg')"
       :srcPc="require('@/assets/img/cover/pc.jpg')"
@@ -270,6 +250,7 @@
       <FooterLogo />
     </PageFooter>
     <PageBackTop />-->
+
     <div style="height:50vh;background-color:pink;" />
     <FeaturesPage
       @emitActive="updateActive"
@@ -277,7 +258,13 @@
       :active="active"
       :features="features"
     />
-    <div style="height:50vh;background-color:yellow;" />
+    <PageFooterV1>
+      <ShareProud />
+      <TaipeiEditor />
+      <TaipeiBottomTitle />
+      <FooterFbComment />
+    </PageFooterV1>
+    <PageBackTop />
   </div>
 </template>
 
@@ -289,21 +276,24 @@
 // import ArticleQuote from '@/components/common/ui/ArticleQuote.vue'
 // import ArticleYoutube from '@/components/common/ui/ArticleYoutube.vue'
 // import CastAnchor from '@/components/common/accessories/CastAnchor.vue'
-// import FooterEditor from '@/components/common/footer/FooterEditor.vue'
-// import FooterFbComment from '@/components/common/footer/FooterFbComment.vue'
+import FooterEditor from '@/components/common/footer/FooterEditor.vue'
+import FooterFbComment from '@/components/common/footer/FooterFbComment.vue'
 // import FooterLogo from '@/components/common/footer/FooterLogo.vue'
 // import FooterNextArticle from '@/components/common/footer/FooterNextArticle.vue'
 // import FooterRelatedArticle from '@/components/common/footer/FooterRelatedArticle.vue'
 // import FooterShare from '@/components/common/footer/FooterShare.vue'
-// import HeaderTypeC from '@/components/common/header/HeaderTypeC.vue'
+import HeaderTypeA1 from '@/components/common/header/HeaderTypeA1.vue'
 // // import NmdButton from '@/components/common/accessories/NmdButton.vue'
-// import PageBackTop from '@/components/common/ui/PageBackTop.vue'
+import PageBackTop from '@/components/common/ui/PageBackTop.vue'
 // import PageCover from '@/components/common/ui/PageCover.vue'
-// import PageFooter from '@/components/common/footer/PageFooter.vue'
+import PageFooterV1 from '@/components/common/footer/PageFooterV1.vue'
 // import PageIndicator from '@/components/common/ui/PageIndicator.vue'
 // import TestVideo from '@/components/TestVideo.vue'
 
 import FeaturesPage from '@/components/FeaturesPage.vue'
+import TaipeiEditor from '@/components/TaipeiEditor.vue'
+import TaipeiBottomTitle from '@/components/TaipeiBottomTitle.vue'
+import ShareProud from '@/components/ShareProud.vue'
 
 import articleContent from './data'
 
@@ -318,18 +308,21 @@ export default {
     // ArticleYoutube,
     // CastAnchor,
     // FooterEditor,
-    // FooterFbComment,
+    FooterFbComment,
     // FooterLogo,
     // FooterNextArticle,
     // FooterRelatedArticle,
     // FooterShare,
-    // HeaderTypeC,
-    // PageBackTop,
+    HeaderTypeA1,
+    PageBackTop,
     // PageCover,
-    // PageFooter,
+    PageFooterV1,
     // PageIndicator,
     // TestVideo,
-    FeaturesPage
+    FeaturesPage,
+    TaipeiEditor,
+    TaipeiBottomTitle,
+    ShareProud
   },
   data() {
     return {
@@ -351,5 +344,14 @@ export default {
 <style lang="scss">
 ::-webkit-scrollbar {
   display: none;
+}
+.header-bar__nav__container_dark {
+  background-color: rgb(23, 23, 23) !important;
+}
+.header-bar-logo-dark {
+  background-color: rgb(23, 23, 23) !important;
+}
+.udn-logo.dark {
+  background-color: rgb(23, 23, 23) !important;
 }
 </style>

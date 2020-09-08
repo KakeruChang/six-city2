@@ -28,19 +28,18 @@
 </template>
 
 <script>
-
 export default {
   name: 'HeaderHamburger',
   props: {
     theme: {
-      type: String,
+      type: String
     },
     menuActiveFlag: {
       type: Boolean,
-      default: false,
-    },
-  },
-};
+      default: false
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -63,7 +62,7 @@ export default {
     width: 100%;
     height: 2px;
     background-color: #121212;
-    transition: .333s ease-in-out;
+    transition: 0.333s ease-in-out;
     &.header-hamburger__line--white {
       background-color: #ffffff;
     }

@@ -534,6 +534,38 @@ export default {
   color: #eeeeee;
   margin: 15px 0 19px;
 }
+.display-area {
+  position: fixed;
+  left: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 100%;
+  max-width: 100%;
+  background-color: rgb(23, 23, 23);
+  display: flex;
+  // transition: all 0.1s linear;
+}
+.display-area-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  max-width: 100%;
+  transition: all 0.25s ease-out;
+  transform: translateX(100%);
+  &.inside {
+    height: 80vh;
+    width: 80vw;
+    max-width: 80%;
+    @media screen and (max-width: 1025px) {
+      height: 80vw;
+    }
+  }
+  &.active {
+    transform: translateX(0);
+  }
+}
 .btn-arrow {
   text-decoration: none;
   display: flex;
@@ -557,38 +589,6 @@ export default {
     transition: none;
   }
 }
-.display-area {
-  position: fixed;
-  left: 0;
-  z-index: 10;
-  width: 100vw;
-  height: 100%;
-  max-width: 100%;
-  background-color: rgb(23, 23, 23);
-  display: flex;
-}
-.display-area-bg {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  width: 100vw;
-  max-width: 100%;
-  transition: all 0.25s ease-out;
-  transform: translateX(100%);
-  &.inside {
-    height: 80vh;
-    width: 80vw;
-    max-width: 80%;
-    @media screen and (max-width: 1025px) {
-      height: 80vw;
-    }
-  }
-  &.active {
-    transform: translateX(0);
-  }
-}
-
 .display-content {
   transform: translateY(100vh);
   transition: all 0.25s ease-in;

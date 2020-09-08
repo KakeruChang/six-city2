@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ backgroundColor }">
+  <div :style="{ backgroundColor}">
     <template v-if="activeWithInside!==contentWithInsideLength">
       <div class="indicator-wrapper">
         <span class="gray-line" />
