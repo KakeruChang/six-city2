@@ -1,6 +1,7 @@
 <template>
   <header :class="{
-      'header-bar': true
+      'header-bar': true,
+      'header-bar--hide': !activeFlag,
     }">
     <!-- <header :class="{
       'header-bar': true,

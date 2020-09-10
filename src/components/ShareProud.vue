@@ -20,13 +20,18 @@
       </div>
       <img :src="metas[active].img" class="proud-img" :alt="metas[active].text" />
       <div class="link-wrapper">
-        <a class="link-share link-lg" :href="shareUrl" target="_blank" @click="printResilt">
+        <a class="link-share link-lg" :href="shareUrl" target="_blank" @click="shareImg">
           <span>
             <i class="icon-facebook-f-brands" />
             分享圖片
           </span>
         </a>
-        <a class="link-next link-lg" href="https://www.google.com/" target="_blank">下一篇：新北市</a>
+        <a
+          class="link-next link-lg"
+          href="https://www.google.com/"
+          target="_blank"
+          @click="goToNext"
+        >下一篇：新北市</a>
       </div>
     </ArticleContainer>
   </div>
@@ -87,8 +92,19 @@ export default {
     changeMeta(i) {
       this.active = i
     },
-    printResilt() {
-      console.log(this.shareUrl)
+    shareImg() {
+      this.sendGA({
+        category: 'share',
+        action: 'click',
+        label: `fb_${this.metas[this.active].text}`
+      })
+    },
+    goToNext() {
+      this.sendGA({
+        category: 'furtherreading',
+        action: 'click',
+        label: 'furtherreading_新北市'
+      })
     }
   },
   computed: {

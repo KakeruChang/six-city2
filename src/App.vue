@@ -250,8 +250,13 @@
       <FooterLogo />
     </PageFooter>
     <PageBackTop />-->
-
-    <div style="height:50vh;background-color:pink;" />
+    <MainVideo
+      city="台北"
+      description="在新與舊的碰撞中前進"
+      :videoPC="require('./assets/Taipei/video/Taipei_video_web.mp4')"
+      :videoMob="require('./assets/Taipei/video/Taipei_videp_mob.mp4')"
+    />
+    <TaipeiData />
     <FeaturesPage
       @emitActive="updateActive"
       @emitIsInside="updateIsInside"
@@ -264,7 +269,9 @@
       <TaipeiBottomTitle />
       <FooterFbComment />
     </PageFooterV1>
-    <PageBackTop />
+    <template v-if="!isInside">
+      <PageBackTop />
+    </template>
   </div>
 </template>
 
@@ -294,6 +301,8 @@ import FeaturesPage from '@/components/FeaturesPage.vue'
 import TaipeiEditor from '@/components/TaipeiEditor.vue'
 import TaipeiBottomTitle from '@/components/TaipeiBottomTitle.vue'
 import ShareProud from '@/components/ShareProud.vue'
+import TaipeiData from '@/components/TaipeiData.vue'
+import MainVideo from '@/components/MainVideo.vue'
 
 import articleContent from './data'
 
@@ -322,7 +331,9 @@ export default {
     FeaturesPage,
     TaipeiEditor,
     TaipeiBottomTitle,
-    ShareProud
+    ShareProud,
+    TaipeiData,
+    MainVideo
   },
   data() {
     return {

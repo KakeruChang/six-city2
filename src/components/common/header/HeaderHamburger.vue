@@ -6,6 +6,7 @@
         'header-hamburger__line--white': theme === 'dark',
         'header-hamburger__line-1': true,
         'header-hamburger__line-1--active': menuActiveFlag,
+        'header-hamburger__line--black':theme === 'dark'&&menuActiveFlag
       }"
     />
     <span
@@ -14,6 +15,7 @@
         'header-hamburger__line--white': theme === 'dark',
         'header-hamburger__line-2': true,
         'header-hamburger__line-2--active': menuActiveFlag,
+        'header-hamburger__line--black':theme === 'dark'&&menuActiveFlag
       }"
     />
     <span
@@ -22,6 +24,7 @@
         'header-hamburger__line--white': theme === 'dark',
         'header-hamburger__line-3': true,
         'header-hamburger__line-3--active': menuActiveFlag,
+        'header-hamburger__line--black':theme === 'dark'&&menuActiveFlag
       }"
     />
   </nav>
@@ -56,6 +59,7 @@ export default {
   -webkit-appearance: none;
   -webkit-tap-highlight-color: #ffffff00;
   cursor: pointer;
+  z-index: 5001;
 
   .header-hamburger__line {
     display: block;
@@ -65,6 +69,9 @@ export default {
     transition: 0.333s ease-in-out;
     &.header-hamburger__line--white {
       background-color: #ffffff;
+    }
+    &.header-hamburger__line--black {
+      background-color: #000000;
     }
   }
 

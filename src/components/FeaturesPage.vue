@@ -40,12 +40,18 @@
 
     <!-- display-area -->
     <div class="display-area" style="opacity:1;" :style="displayAreaStyle">
-      <img
+      <!-- <img
         class="display-area-bg"
         v-if="features[active].img"
         :class="{ active: areaActive, inside: isInside }"
         :src="features[active].img.bg[deviceType === 'pc' ? 'web' : deviceType]"
         alt
+      />-->
+      <div
+        class="display-area-bg"
+        v-if="features[active].img"
+        :class="{ active: areaActive, inside: isInside }"
+        :style="{backgroundImage:`url(${features[active].img.bg[deviceType === 'pc' ? 'web' : deviceType]})`}"
       />
       <!-- display-area-outside -->
       <div class="side-title">
@@ -554,13 +560,15 @@ export default {
   max-width: 100%;
   transition: all 0.25s ease-out;
   transform: translateX(100%);
+  background-size: cover;
+  background-position: 75% 25%;
   &.inside {
     height: 80vh;
     width: 80vw;
     max-width: 80%;
-    @media screen and (max-width: 1025px) {
-      height: 80vw;
-    }
+    // @media screen and (max-width: 1025px) {
+    //   height: 80vw;
+    // }
   }
   &.active {
     transform: translateX(0);
