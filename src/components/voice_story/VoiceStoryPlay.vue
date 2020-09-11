@@ -1,5 +1,5 @@
 <template>
-  <div class="voice-story-play">
+  <div class="voice-story-play" ref="VoiceStoryPlay">
     <button
       class="button voice-story-play__play-button"
       aria-label="play-button"
@@ -83,6 +83,27 @@ export default {
           label: `sound_click_${this.titleGA}`
         })
       }
+    },
+    intersectionObserver() {
+      const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: [0]
+      }
+
+      const callback = (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            if (this.isPlay) {
+              this.theSound.pause()
+              this.isPlay = false
+            }
+          }
+        })
+      }
+
+      const observer = new IntersectionObserver(callback, options)
+      return observer
     }
   },
   mounted() {
@@ -118,6 +139,8 @@ export default {
         this.soundProgress = 0
       }
     }
+
+    this.intersectionObserver().observe(this.$refs['VoiceStoryPlay'])
   }
 }
 </script>
