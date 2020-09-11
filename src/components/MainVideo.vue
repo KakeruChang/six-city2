@@ -76,12 +76,10 @@ export default {
   },
   methods: {
     pauseVideo() {
-      console.log('pause')
       this.isPaused = true
       this.player.pause()
     },
     continueVideo() {
-      console.log('continue')
       this.isPaused = false
       this.player.play()
     },
@@ -104,7 +102,6 @@ export default {
         if (target !== this.currentIndex) {
           const result = target !== 0 ? target * baseNumber : videoLength
 
-          console.log(`sendGA:觀看${result}秒`)
           this.sendGA({
             category: 'video',
             action: 'play',
@@ -127,7 +124,6 @@ export default {
 
       const callback = (entries, observer) => {
         entries.forEach((entry) => {
-          console.log(entry)
           if (entry.isIntersecting) {
             this.continueVideo()
           } else {

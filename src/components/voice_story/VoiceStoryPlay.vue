@@ -9,14 +9,14 @@
       <img
         class="voice-story-play__play-button__icon"
         v-if="isPlay"
-        src="../../assets/six-city/play.svg"
-        alt=""
+        src="../../assets/six-city/stop.svg"
+        alt
       />
       <img
         class="voice-story-play__play-button__icon"
         v-else
-        src="../../assets/six-city/stop.svg"
-        alt=""
+        src="../../assets/six-city/play.svg"
+        alt
       />
     </button>
     <VoiceStoryWave :isPlay="isPlay" :progress="soundProgress" />
@@ -26,6 +26,7 @@
 <script>
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
 import VoiceStoryWave from './VoiceStoryWave.vue'
+
 export default {
   name: 'VoiceStoryPlay',
   mixins: [sendGaMethods],
@@ -42,12 +43,18 @@ export default {
     shouldSoundStop: {
       type: Boolean,
       default: false
+    },
+    titleGA: {
+      type: String,
+      default: ''
     }
   },
   data() {
     return {
       isPlay: false,
-      soundProgress: 0
+      soundProgress: 0,
+      stopGATrigger: false,
+      currentIndex: 0
     }
   },
   watch: {
@@ -66,19 +73,42 @@ export default {
       this.isPlay = !this.isPlay
       if (this.isPlay) this.theSound.play()
       else this.theSound.pause()
-      this.handleSendGA()
+      this.handleSendClickingGA()
     },
-    handleSendGA() {
-      this.sendGA({
-        category: 'sound',
-        action: 'click',
-        label: `${this.isPlay ? 'play' : 'pause'}${this.voiceIndex}`
-      })
+    handleSendClickingGA() {
+      if (this.isPlay) {
+        this.sendGA({
+          category: 'sound',
+          action: 'click',
+          label: `sound_click_${this.titleGA}`
+        })
+      }
     }
   },
   mounted() {
     this.theSound = new Audio(this.voiceSrc)
-    this.theSound.ontimeupdate = e => {
+    this.theSound.ontimeupdate = (e) => {
+      // send GA
+      if (!this.stopGATrigger && this.isPlay) {
+        const baseNumber = 3
+        const target = Math.floor(e.target.currentTime / baseNumber)
+
+        if (target !== this.currentIndex) {
+          const result = target !== 0 ? target * baseNumber : e.target.duration
+
+          this.sendGA({
+            category: 'sound',
+            action: 'play',
+            label: `${this.titleGA}${result}秒`
+          })
+          this.currentIndex = target
+
+          if (result === e.target.duration) {
+            this.stopGATrigger = true
+          }
+        }
+      }
+
       // update sound progress
       this.soundProgress =
         ((((e.target.currentTime / e.target.duration) * 100) / 5) | 0) + 1

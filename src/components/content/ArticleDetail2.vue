@@ -19,7 +19,7 @@
       >「台北人在做事情的時候，其實是有使命感，是在想說，我想把台北打造成一個國際上大家會認同、會想來玩，或是可以被更多不同的人看到的地方，」廖薏淳是台灣年度調酒活動Bar Surfing共同創辦人，也是文創產業投資公司「天使放大」執行長，她指出，台北人意識到自己是帶動台灣前進的火車頭，台北的娛樂、文化產業因此需要不斷精進、升級，拉近與國際一線城市的距離，而台北人也得快速習得各項生存技能，才能跟上這座硬體、軟體都不斷升級的城市。</p>
     </ArticleContainer>
 
-    <ArticleYoutube src="https://www.youtube.com/embed/BpS9DUZOuqw" :articleMargin="false" />
+    <ArticleYoutube src="https://www.youtube.com/embed/yGOm-hoUZFk" :articleMargin="false" />
 
     <ArticleContainer v-if="!isHide">
       <p

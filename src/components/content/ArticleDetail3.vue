@@ -4,7 +4,7 @@
       backgroundColor="transparent"
       :cssProperty="{ paddingBottom: 10, paddingTop:paddingTopArt0 && 0,paddingBottom:'32px' }"
     >
-      <h1 class="title">上凱道的一百種方式</h1>
+      <h1 class="title">上凱道的一百種理由</h1>
     </ArticleContainer>
     <ArticleContainer backgroundColor="transparent" :cssProperty="{ paddingTop: 0 }">
       <!-- <p

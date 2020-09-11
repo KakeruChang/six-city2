@@ -15,7 +15,7 @@
       >「如果台灣自己有這種書店，我還擔心這間書店會開不起來，」晚間9點半，銅鑼灣書店仍滿是慕名而來的年輕讀者，最後一組客人離去後，林榮基關上鐵門，身後約10坪大的空間便從書店變成他的臥室，林榮基坐在床鋪前的辦公桌旁，回憶當初選擇在台灣重操舊業的原因。</p>
     </ArticleContainer>
 
-    <ArticleYoutube src="https://www.youtube.com/embed/BpS9DUZOuqw" :articleMargin="false" />
+    <ArticleYoutube src="https://www.youtube.com/embed/O3lhkd8fIJk" :articleMargin="false" />
 
     <ArticleContainer v-if="!isHide">
       <p

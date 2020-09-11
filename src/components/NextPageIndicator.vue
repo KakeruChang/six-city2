@@ -10,10 +10,18 @@
         </span>
       </div>
       <div class="indicator-wrapper">
-        <span class="indicator-text" style="color:#ff2300;margin-top:16px;">下一篇</span>
+        <span
+          class="indicator-text pointer"
+          @click="scrollToNext"
+          style="color:#ff2300;margin-top:16px;"
+        >下一篇</span>
       </div>
       <div class="indicator-wrapper">
-        <span class="indicator-text" style="color:#171717;margin-top:5px;">{{ nextTitle }}</span>
+        <span
+          class="indicator-text pointer"
+          @click="scrollToNext"
+          style="color:#171717;margin-top:5px;"
+        >{{ nextTitle }}</span>
       </div>
     </template>
     <div class="indicator-wrapper">
@@ -92,5 +100,8 @@ export default {
   font-size: 18px;
   line-height: 1.89;
   color: #afafaf;
+}
+.pointer {
+  cursor: pointer;
 }
 </style>

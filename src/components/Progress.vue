@@ -4,6 +4,7 @@
       class="progress-item"
       :class="{ active: active === i }"
       v-for="(item, i) in length"
+      @click="clickProgress(i)"
       :key="i"
     />
   </div>
@@ -17,6 +18,11 @@ export default {
     length: { type: Number },
     displayAreaFromTop: {
       type: Number
+    }
+  },
+  methods: {
+    clickProgress(i) {
+      this.$emit('progressClicked', i)
     }
   },
   computed: {
@@ -74,6 +80,7 @@ export default {
   z-index: 300;
 }
 .progress-item {
+  cursor: pointer;
   height: 43.6px;
   @media screen and (max-width: 1024.98px) {
     height: 60px;
@@ -82,10 +89,10 @@ export default {
     height: 23px;
   }
   width: 1px;
-  background-color: #fff;
-  opacity: 0.5;
+
+  background-color: #5b5b5b;
   &.active {
-    opacity: 1;
+    background-color: #fff;
   }
   margin: 3.9px 0;
 }

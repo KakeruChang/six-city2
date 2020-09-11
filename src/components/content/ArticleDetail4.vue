@@ -4,12 +4,16 @@
       backgroundColor="transparent"
       :cssProperty="{ paddingBottom: 10, paddingTop: paddingTopArt0 && 0 ,paddingBottom:'32px'}"
     >
-      <h1 class="title">上凱道的一百種方式</h1>
+      <h1 class="title">西門紅樓</h1>
+      <h1 class="title">迎向陽光的同志文化</h1>
     </ArticleContainer>
     <ArticleContainer backgroundColor="transparent" :cssProperty="{ paddingTop: 0 }">
       <div class="voice-wrapper">
         <div class="voice-text">聽西門紅樓同志酒吧的聲音</div>
-        <VoiceStoryPlay voiceSrc="string" />
+        <VoiceStoryPlay
+          :voiceSrc="require('../../assets/media/5_Taipei_ximen_voice.mp3')"
+          titleGA="聽西門紅樓同志酒吧的聲音"
+        />
       </div>
       <p
         class="content-1"

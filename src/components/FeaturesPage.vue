@@ -5,6 +5,7 @@
       :active="active"
       :length="features.length"
       :displayAreaFromTop="displayAreaFromTop"
+      @progressClicked="progressBeClicked"
     />
     <!-- data-area -->
     <div v-for="(feature, i) in features" :key="feature.id">
@@ -144,6 +145,10 @@ export default {
   methods: {
     goToPage(feature) {
       if (!this.isInside) {
+        this.constructObserver()
+        window.addEventListener('scroll', this.countProgressInside, false)
+        window.removeEventListener('scroll', this.countActiveByHeight, false)
+
         this.isInside = true
         setTimeout(() => {
           this.isHide = false
@@ -151,16 +156,16 @@ export default {
         this.$emit('emitIsInside', true)
         // this.insideContent = { ...feature }
 
-        this.constructObserver()
-        window.addEventListener('scroll', this.countProgressInside, false)
-        window.removeEventListener('scroll', this.countActiveByHeight, false)
-
         this.sendGA({
           category: 'related',
           action: 'click',
           label: `article_${this.features[this.active].titleOut}`
         })
       } else {
+        this.destroyObserver()
+        window.removeEventListener('scroll', this.countProgressInside, false)
+        // add scroll event listner is moved to watch part
+
         this.isInside = false
         this.isHide = true
         this.$emit('emitIsInside', false)
@@ -168,15 +173,12 @@ export default {
         this.$router.back()
         this.displayAreaFromTop = 0
 
-        this.destroyObserver()
-        window.removeEventListener('scroll', this.countProgressInside, false)
-        window.addEventListener('scroll', this.countActiveByHeight, false)
-
         this.sendGA({
           category: 'back',
           action: 'click',
           label: 'back'
         })
+        console.log(this.active)
       }
     },
     countProgressInside() {
@@ -276,6 +278,7 @@ export default {
           innerHeight -
           (containerTop + containerHeight)
         )
+        this.$emit('emitActive', this.features.length - 1)
       } else {
         this.displayAreaFromTop = 0
 
@@ -317,7 +320,8 @@ export default {
             } else {
               this.direction = ''
             }
-            if (this.direction !== 'up') {
+            console.log(this.direction)
+            if (this.direction === 'down') {
               this.$emit(
                 'emitActive',
                 parseInt(entry.target.dataset.target, 10)
@@ -347,7 +351,8 @@ export default {
                   }`
                 })
               }
-            } else {
+            }
+            if (this.direction === 'up') {
               window.scrollTo({
                 top: this.$refs[`target${this.active}`][0].offsetTop
               })
@@ -380,6 +385,12 @@ export default {
         top: this.$refs[`target${this.active + 1}`][0].offsetTop
       })
       this.nextTrigger = true
+    },
+    progressBeClicked(i) {
+      window.scrollTo({
+        top: this.$refs.featureContainer.offsetTop + innerHeight * i
+      })
+      this.$emit('emitActive', i)
     }
     // handleReload(event) {
     //   alert('jump')
@@ -416,10 +427,11 @@ export default {
       if (this.isInside) {
         this.areaActive = true
       } else {
+        // this.areaActive = true
         this.areaActive = false
         setTimeout(() => {
           this.areaActive = true
-        }, 500)
+        }, 250)
       }
 
       if (this.isInside) {
@@ -438,10 +450,19 @@ export default {
       }
     },
     isInside: function () {
+      const { innerHeight } = window
+
       if (!this.isInside) {
         setTimeout(() => {
           this.displacementInside = 0
-          window.scrollTo({ top: this.$refs.featureContainer.offsetTop })
+          console.log('this.active:', this.active)
+          console.log('innerHeight:', innerHeight)
+          window.scrollTo({
+            top:
+              this.$refs.featureContainer.offsetTop + innerHeight * this.active
+          })
+
+          window.addEventListener('scroll', this.countActiveByHeight, false)
         }, 0)
       }
     }
@@ -496,9 +517,11 @@ export default {
     max-width: 33px;
   }
   min-height: 100%;
-  transform: translateY(100vh);
-  transition: all 0.25s ease-in;
+  opacity: 0;
+  transform: translateY(50vh);
+  transition: transform 0.25s ease-in;
   &.active {
+    opacity: 1;
     transform: translateY(0);
   }
 }
@@ -558,20 +581,23 @@ export default {
   height: 100vh;
   width: 100vw;
   max-width: 100%;
-  transition: all 0.25s ease-out;
-  transform: translateX(100%);
+  transition: all 0.5s ease-out;
+  // transform: translateX(100%);
+  opacity: 0;
   background-size: cover;
   background-position: 75% 25%;
   &.inside {
     height: 80vh;
     width: 80vw;
     max-width: 80%;
+    transition: all 0.25s ease-out;
     // @media screen and (max-width: 1025px) {
     //   height: 80vw;
     // }
   }
   &.active {
-    transform: translateX(0);
+    opacity: 1;
+    // transform: translateX(0);
   }
 }
 .btn-arrow {
@@ -599,8 +625,10 @@ export default {
 }
 .display-content {
   transform: translateY(100vh);
-  transition: all 0.25s ease-in;
+  opacity: 0;
+  transition: transform 0.25s ease-in;
   &.active {
+    opacity: 1;
     transform: translateY(0);
   }
   // &.no-img {

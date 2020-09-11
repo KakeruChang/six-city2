@@ -10,7 +10,10 @@
     <ArticleContainer backgroundColor="transparent" :cssProperty="{ paddingTop: 0 }">
       <div class="voice-wrapper">
         <div class="voice-text">聽卡米地的聲音</div>
-        <VoiceStoryPlay voiceSrc="string" />
+        <VoiceStoryPlay
+          :voiceSrc="require('../../assets/media/6_Taipei_stand_up_comedy_voice.mp3')"
+          titleGA="聽卡米地的聲音"
+        />
       </div>
       <p class="content-1">什麼樣的笑話才會讓台北人買單？台北人觀賞喜劇的心態，有什麼不同？</p>
       <p class="content-1">自2007年起，卡米地喜劇俱樂部不斷用喜劇挑戰台北人的笑點，與台北人交手13年來，卡米地創辦人張碩修已學會從台北人的笑聲中，聽出不少端倪。</p>

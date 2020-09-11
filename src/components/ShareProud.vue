@@ -110,7 +110,7 @@ export default {
   computed: {
     shareUrl() {
       const link = window.location + this.metas[this.active].url
-      console.log(link)
+
       const url = encodeURIComponent(window.location)
 
       return (
