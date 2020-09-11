@@ -33,6 +33,7 @@
         <NextPageIndicator
           :active="active"
           :nextTitle="determineNextTitle"
+          :progressToNextPage="progressToNextPage"
           @scrollToNext="scrollToNext"
         />
       </ArticleContainer>
@@ -67,6 +68,9 @@ export default {
     opacity: {
       type: Number,
       default: 1
+    },
+    progressToNextPage: {
+      type: Number
     }
   },
   data() {

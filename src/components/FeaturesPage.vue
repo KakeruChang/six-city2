@@ -41,24 +41,24 @@
 
     <!-- display-area -->
     <div class="display-area" style="opacity:1;" :style="displayAreaStyle">
-      <!-- <img
+      <img
         class="display-area-bg"
         v-if="features[active].img"
         :class="{ active: areaActive, inside: isInside }"
         :src="features[active].img.bg[deviceType === 'pc' ? 'web' : deviceType]"
         alt
-      />-->
-      <div
+      />
+      <!-- <div
         class="display-area-bg"
         v-if="features[active].img"
         :class="{ active: areaActive, inside: isInside }"
         :style="{backgroundImage:`url(${features[active].img.bg[deviceType === 'pc' ? 'web' : deviceType]})`}"
-      />
+      />-->
       <!-- display-area-outside -->
       <div class="side-title">
         <img
           class="side-title-img"
-          :class="{ active: areaActive }"
+          :class="{ active: areaActive||!isSideTitleChanged,inside:isInside}"
           :src="features[active].sideTitleImg"
           alt
         />
@@ -103,7 +103,12 @@
         </div>
         <div class="display-inside" :class="{ active: isInside }">
           <template v-if="isInside">
-            <FeatureContent :isHide="isHide" :active="active" @scrollToNext="scrollToNext" />
+            <FeatureContent
+              :isHide="isHide"
+              :active="active"
+              @scrollToNext="scrollToNext"
+              :progressToNextPage="progressToNextPage"
+            />
           </template>
         </div>
       </div>
@@ -137,9 +142,19 @@ export default {
       isHide: true,
       progressInside: 0,
       progressInsideIndex: null,
+      progressToNextPage: 0,
       displacementInside: 0,
       displayAreaFromTop: 0,
-      nextTrigger: false
+      nextTrigger: false,
+      oldScrollingPosition: 0,
+      isSideTitleChanged: false
+    }
+  },
+  methods: {
+    preventNav(event) {
+      if (!this.isEditing) return
+      event.preventDefault()
+      event.returnValue = ''
     }
   },
   methods: {
@@ -148,13 +163,12 @@ export default {
         this.constructObserver()
         window.addEventListener('scroll', this.countProgressInside, false)
         window.removeEventListener('scroll', this.countActiveByHeight, false)
-
+        this.direction = ''
         this.isInside = true
         setTimeout(() => {
           this.isHide = false
         }, 500)
         this.$emit('emitIsInside', true)
-        // this.insideContent = { ...feature }
 
         this.sendGA({
           category: 'related',
@@ -204,6 +218,27 @@ export default {
             this.progressInside *
             (1 - innerHeight / targetHeight) *
             (targetHeight / innerHeight)
+        }
+
+        // count : progressToNextPage
+        if (
+          this.$refs[`target${this.active}`] &&
+          this.$refs[`target${this.active + 1}`]
+        ) {
+          const result =
+            -(
+              pageYOffset -
+              (this.$refs[`target${this.active}`][0].offsetTop +
+                this.$refs[`target${this.active}`][0].offsetHeight)
+            ) /
+            (this.$refs[`target${this.active + 1}`][0].offsetTop -
+              (this.$refs[`target${this.active}`][0].offsetTop +
+                this.$refs[`target${this.active}`][0].offsetHeight))
+          if (result > 1 || result < 0) {
+            this.progressToNextPage = 1
+          } else {
+            this.progressToNextPage = result
+          }
         }
 
         //send ga
@@ -270,6 +305,13 @@ export default {
       const containerTop = this.$refs.featureContainer.offsetTop
       const containerHeight = this.$refs.featureContainer.offsetHeight
 
+      if (pageYOffset > this.oldScrollingPosition) {
+        this.direction = 'down'
+      }
+      if (pageYOffset < this.oldScrollingPosition) {
+        this.direction = 'up'
+      }
+
       if (pageYOffset < containerTop) {
         this.displayAreaFromTop = containerTop - pageYOffset
       } else if (pageYOffset + innerHeight > containerTop + containerHeight) {
@@ -288,7 +330,11 @@ export default {
         if (activeIndex < this.features.length) {
           this.$emit('emitActive', activeIndex)
         }
+
+        // onload
+        this.$emit('emitOnloadGA', this.features[activeIndex].GATitle)
       }
+      this.oldScrollingPosition = pageYOffset
     },
     handlePopState(e) {
       if (this.isInside) {
@@ -426,15 +472,10 @@ export default {
     active: function () {
       if (this.isInside) {
         this.areaActive = true
-      } else {
-        // this.areaActive = true
-        this.areaActive = false
-        setTimeout(() => {
-          this.areaActive = true
-        }, 250)
-      }
 
-      if (this.isInside) {
+        // onload
+        this.$emit('emitOnloadGA', this.features[this.active].GATitle)
+
         if (!this.features[this.active].url) {
           console.log('if:page not exist')
           this.$router.push({ path: '/' })
@@ -447,7 +488,38 @@ export default {
           this.$router.push({ path: '/' })
           this.$router.push({ path: `/${this.features[this.active].url}` })
         }
+      } else {
+        if (this.direction === 'up') {
+          this.isSideTitleChanged =
+            this.features[this.active].sideTitleImg !==
+            this.features[this.active + 1].sideTitleImg
+        }
+        if (this.direction === 'down') {
+          this.isSideTitleChanged =
+            this.features[this.active].sideTitleImg !==
+            this.features[this.active - 1].sideTitleImg
+        }
+
+        this.areaActive = false
+        setTimeout(() => {
+          this.areaActive = true
+        }, 250)
       }
+
+      // if (this.isInside) {
+      //   if (!this.features[this.active].url) {
+      //     console.log('if:page not exist')
+      //     this.$router.push({ path: '/' })
+      //     this.$router.push({
+      //       path: `/${this.features[this.active + 1].url}`
+      //     })
+      //     this.$refs[`target${this.active + 1}`][0].scrollIntoView()
+      //   } else {
+      //     // only down will be renewed
+      //     this.$router.push({ path: '/' })
+      //     this.$router.push({ path: `/${this.features[this.active].url}` })
+      //   }
+      // }
     },
     isInside: function () {
       const { innerHeight } = window
@@ -472,10 +544,6 @@ export default {
     window.addEventListener('scroll', this.countActiveByHeight, false)
     window.addEventListener('popstate', this.handlePopState, false)
     this.checkPath()
-
-    // window.addEventListener('beforeunload', function (event) {
-
-    // })
   },
   destroyed() {
     window.removeEventListener('scroll', this.countActiveByHeight, false)
@@ -513,8 +581,8 @@ export default {
   @media screen and (max-width: 1024.98px) {
     max-width: 52px;
   }
-  @media screen and (max-width: 413.98px) {
-    max-width: 33px;
+  @media screen and (max-width: 414px) {
+    max-width: 31px;
   }
   min-height: 100%;
   opacity: 0;
@@ -523,6 +591,11 @@ export default {
   &.active {
     opacity: 1;
     transform: translateY(0);
+  }
+  &.inside {
+    @media screen and (max-width: 1025px) {
+      display: none;
+    }
   }
 }
 
@@ -578,22 +651,25 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
-  height: 100vh;
+  // height: 100vh;
   width: 100vw;
   max-width: 100%;
   transition: all 0.5s ease-out;
   // transform: translateX(100%);
   opacity: 0;
-  background-size: cover;
-  background-position: 75% 25%;
+  // @media screen and (max-width: 1025px) {
+  //   width: 110vw;
+  //   max-width: 110%;
+  // }
   &.inside {
-    height: 80vh;
+    // height: 80vh;
     width: 80vw;
     max-width: 80%;
-    transition: all 0.25s ease-out;
-    // @media screen and (max-width: 1025px) {
-    //   height: 80vw;
-    // }
+    // transition: all 0.25s ease-out;
+    @media screen and (max-width: 1025px) {
+      width: 90vw;
+      max-width: 90%;
+    }
   }
   &.active {
     opacity: 1;
@@ -656,7 +732,7 @@ export default {
   &.inactive {
     padding-top: 10%;
     padding-left: 20%;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1025px) {
       padding-top: 0;
     }
   }

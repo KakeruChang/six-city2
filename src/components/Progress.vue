@@ -70,8 +70,8 @@ export default {
   @media screen and (max-width: 576px) {
     left: 8.5vw;
   }
-  @media screen and (max-width: 413.98px) {
-    left: 7vw;
+  @media screen and (max-width: 414px) {
+    left: 6vw;
   }
   @media screen and (max-width: 374.98px) {
     left: 8vw;
@@ -82,12 +82,12 @@ export default {
 .progress-item {
   cursor: pointer;
   height: 43.6px;
-  @media screen and (max-width: 1024.98px) {
-    height: 60px;
-  }
-  @media screen and (max-width: 767.98px) {
-    height: 23px;
-  }
+  // @media screen and (max-width: 1024.98px) {
+  //   height: 60px;
+  // }
+  // @media screen and (max-width: 767.98px) {
+  //   height: 23px;
+  // }
   width: 1px;
 
   background-color: #5b5b5b;

@@ -2,7 +2,13 @@
   <div :style="{ backgroundColor}">
     <template v-if="activeWithInside!==contentWithInsideLength">
       <div class="indicator-wrapper">
-        <span class="gray-line" />
+        <span>{{`${Math.round((1-progressToNextPage)*100)}%`}}</span>
+      </div>
+      <div class="indicator-wrapper">
+        <div class="indicator-line">
+          <span class="red-line" :style="{height:`${(1-progressToNextPage)*100}%`}" />
+          <span class="gray-line" :style="{height:`${progressToNextPage*100}%`}" />
+        </div>
       </div>
       <div class="indicator-wrapper">
         <span @click="scrollToNext">
@@ -47,6 +53,9 @@ export default {
     },
     active: {
       type: Number
+    },
+    progressToNextPage: {
+      type: Number
     }
   },
   data() {
@@ -85,10 +94,20 @@ export default {
   display: flex;
   justify-content: center;
 }
+.indicator-line {
+  display: flex;
+  flex-direction: column;
+  height: 180px;
+  align-items: center;
+}
 .gray-line {
   width: 2px;
-  height: 180px;
   background-color: rgb(176, 176, 176);
+}
+.red-line {
+  width: 6px;
+  border-radius: 5px;
+  background-color: #ff2300;
 }
 .indicator-text {
   font-size: 20px;
