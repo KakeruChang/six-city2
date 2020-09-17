@@ -80,7 +80,7 @@
             >{{ text }}</p>
           </template>
           <router-link
-            :to="features[active].url"
+            :to="`${rootUrl}/${features[active].url}`"
             style="text-decoration:none"
             v-if="features[active].titleOut"
           >
@@ -89,7 +89,7 @@
               :class="{ inside: isInside }"
               :style="{
                 transform: isInside
-                  ? `translate(-${arrowBaseDisplacement}%,calc( ${arrowBaseDisplacement}% + ${displacementInside *
+                  ? `translate(-${arrowBaseDisplacement.x}%,calc( ${arrowBaseDisplacement.y}% + ${displacementInside *
                       100}vh))`
                   : 'translate(0, 0)'
               }"
@@ -133,8 +133,6 @@ export default {
     return {
       isInside: false,
       muted: false,
-      // insideContent: {},
-      // oldActive: 0,
       observer: {},
       contentInView: false,
       direction: '',
@@ -147,7 +145,8 @@ export default {
       displayAreaFromTop: 0,
       nextTrigger: false,
       oldScrollingPosition: 0,
-      isSideTitleChanged: false
+      isSideTitleChanged: false,
+      rootUrl: '/Taipei'
     }
   },
   methods: {
@@ -284,7 +283,8 @@ export default {
 
         const urlId = this.$route.params.id
         for (let i = 0; i < this.features.length; i += 1) {
-          if (this.features[i].url === urlId) {
+          // if (this.features[i].url === urlId) {
+          if (this.features[i].url.indexOf(urlId) !== -1) {
             this.$nextTick(() => {
               window.scrollTo({
                 top: this.$refs[`target${i}`][0].offsetTop
@@ -298,6 +298,29 @@ export default {
         this.constructObserver()
         window.addEventListener('scroll', this.countProgressInside, false)
         window.removeEventListener('scroll', this.countActiveByHeight, false)
+      } else {
+        // on test machine
+        // console.log('on test machine')
+        // const { path } = this.$route
+        // console.log(path)
+        // for (let i = 0; i < this.features.length; i += 1) {
+        //   console.log(this.features[i].url)
+        //   console.log(path.indexOf(this.features[i].url))
+        //   if (path.indexOf(this.features[i].url) !== -1) {
+        //     this.isInside = true
+        //     setTimeout(() => {
+        //       this.isHide = false
+        //     }, 500)
+        //     this.$emit('emitIsInside', true)
+        //     this.$nextTick(() => {
+        //       window.scrollTo({
+        //         top: this.$refs[`target${i}`][0].offsetTop
+        //       })
+        //       this.displayAreaFromTop = 0
+        //     })
+        //     break
+        //   }
+        // }
       }
     },
     countActiveByHeight() {
@@ -438,13 +461,6 @@ export default {
       })
       this.$emit('emitActive', i)
     }
-    // handleReload(event) {
-    //   alert('jump')
-    //   // Cancel the event as stated by the standard.
-    //   event.preventDefault()
-    //   // Chrome requires returnValue to be set.
-    //   event.returnValue = ''
-    // }
   },
   computed: {
     displayAreaStyle() {
@@ -462,10 +478,11 @@ export default {
     arrowBaseDisplacement() {
       const { innerWidth } = window
 
-      if (innerWidth > 768) return 300
-      else if (innerWidth < 375) return 100
-      else if (innerWidth >= 375 && innerWidth < 576) return 150
-      return 200
+      if (innerWidth > 768) return { x: 300, y: 300 }
+      else if (innerWidth < 375) return { x: 100, y: 450 }
+      else if (innerWidth >= 375 && innerWidth < 576) return { x: 150, y: 500 }
+      // 576~768
+      return { x: 200, y: 200 }
     }
   },
   watch: {
@@ -478,15 +495,17 @@ export default {
 
         if (!this.features[this.active].url) {
           console.log('if:page not exist')
-          this.$router.push({ path: '/' })
+          this.$router.push({ path: this.rootUrl })
           this.$router.push({
-            path: `/${this.features[this.active + 1].url}`
+            path: `${this.rootUrl}/${this.features[this.active + 1].url}`
           })
           this.$refs[`target${this.active + 1}`][0].scrollIntoView()
         } else {
           // only down will be renewed
-          this.$router.push({ path: '/' })
-          this.$router.push({ path: `/${this.features[this.active].url}` })
+          this.$router.push({ path: this.rootUrl })
+          this.$router.push({
+            path: `${this.rootUrl}/${this.features[this.active].url}`
+          })
         }
       } else {
         if (this.direction === 'up') {
@@ -505,21 +524,6 @@ export default {
           this.areaActive = true
         }, 250)
       }
-
-      // if (this.isInside) {
-      //   if (!this.features[this.active].url) {
-      //     console.log('if:page not exist')
-      //     this.$router.push({ path: '/' })
-      //     this.$router.push({
-      //       path: `/${this.features[this.active + 1].url}`
-      //     })
-      //     this.$refs[`target${this.active + 1}`][0].scrollIntoView()
-      //   } else {
-      //     // only down will be renewed
-      //     this.$router.push({ path: '/' })
-      //     this.$router.push({ path: `/${this.features[this.active].url}` })
-      //   }
-      // }
     },
     isInside: function () {
       const { innerHeight } = window
@@ -707,9 +711,20 @@ export default {
     opacity: 1;
     transform: translateY(0);
   }
-  // &.no-img {
-  // transform: translateY(-25vh);
-  // }
+  &.no-img {
+    @media screen and (max-width: 1024.98px) {
+      transform: translateY(-45vh);
+    }
+    @media screen and (max-width: 767.98px) {
+      transform: translateY(-35vh);
+    }
+    @media screen and (max-width: 414px) {
+      transform: translateY(-25vh);
+    }
+    @media screen and (max-width: 374.98px) {
+      transform: translateY(-34vh);
+    }
+  }
   z-index: 11;
   position: absolute;
   left: 0;
@@ -740,10 +755,15 @@ export default {
 .display-inside {
   z-index: 12;
   position: relative;
-  transform: translate(-25%, -25%);
+  transform: translate(-10%, -10%);
+  opacity: 0;
   transition: all 0.25s ease-out;
   &.active {
     transform: translate(0, 0);
+    opacity: 1;
+  }
+  @media screen and (max-width: 768px) {
+    transform: translate(5%, -5%);
   }
 }
 

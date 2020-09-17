@@ -41,17 +41,9 @@ const articleContent = [
     ],
     inside: {
       title: ['走入歷史的誠品敦南店']
-      // article: {
-      //   '0': [
-      //     '陪伴讀者30年的誠品敦南店，在2020年6月1日凌晨熄燈。',
-      //     '誠品敦南店是全球首家24小時書店，也曾是台灣的文化地標與城市之光，而隨著熄燈號吹起，敦南誠品24小時書店的閱讀風景與無數人的青春記憶，也正式走入歷史。',
-      //     '1989年，第一家誠品書店於台北仁愛敦南圓環旁開幕，6年後搬到誠品敦南店現址，誠品舉辦一場盛大的「今日不打烊」搬遷派對，讀者到凌晨4點還不肯散去，同時間誠品也舉辦「看不見的書店」徵文，有4成讀者希望書店不打烊，給了經營團隊新的靈感：何不來辦一間不打烊書店？'
-      //   ]
-      // }
     },
     url: 'eslite',
     id: 'eslite',
-    // sideTitle: [{ text: '消失的地景', color: '#706f6f' }],
     sideTitleImg: SideTitleImgLandscape,
     img: {
       bg: { web: taipeiBgWebImg0, pad: taipeiBgPadImg0, mob: taipeiBgMobImg0 }
@@ -68,10 +60,6 @@ const articleContent = [
     },
     url: 'taipei-main-station',
     id: 'taipei-main-station',
-    // sideTitle: [
-    //   { text: '台北的', color: '#706f6f' },
-    //   { text: '不變', color: '#ff2300' }
-    // ],
     sideTitleImg: SideTitleImgInvariant,
     img: {
       bg: { web: taipeiBgWebImg1, pad: taipeiBgPadImg1, mob: taipeiBgMobImg1 }
@@ -86,10 +74,6 @@ const articleContent = [
     inside: { title: ['台北人的使命感：', '讓台灣被世界看見'] },
     url: 'sense-of-calling',
     id: 'sense-of-calling',
-    // sideTitle: [
-    //   { text: '台北的', color: '#706f6f' },
-    //   { text: '變', color: '#ff2300' }
-    // ],
     sideTitleImg: SideTitleImgVariant,
     img: {
       bg: { web: taipeiBgWebImg2, pad: taipeiBgPadImg2, mob: taipeiBgMobImg2 }
@@ -106,10 +90,6 @@ const articleContent = [
     },
     url: 'democracy',
     id: 'democracy',
-    // sideTitle: [
-    //   { text: '台北的', color: '#706f6f' },
-    //   { text: '變', color: '#ff2300' }
-    // ],
     sideTitleImg: SideTitleImgVariant,
     img: {
       bg: { web: taipeiBgWebImg3, pad: taipeiBgPadImg3, mob: taipeiBgMobImg3 }
@@ -126,10 +106,6 @@ const articleContent = [
     },
     url: 'ximen',
     id: 'ximen',
-    // sideTitle: [
-    //   { text: '台北的', color: '#706f6f' },
-    //   { text: '變', color: '#ff2300' }
-    // ],
     sideTitleImg: SideTitleImgVariant,
     img: {
       bg: { web: taipeiBgWebImg4, pad: taipeiBgPadImg4, mob: taipeiBgMobImg4 }
@@ -146,10 +122,6 @@ const articleContent = [
     },
     url: 'stand-up-comedy',
     id: 'stand-up-comedy',
-    // sideTitle: [
-    //   { text: '台北的', color: '#706f6f' },
-    //   { text: '變', color: '#ff2300' }
-    // ],
     sideTitleImg: SideTitleImgVariant,
     img: {
       bg: { web: taipeiBgWebImg5, pad: taipeiBgPadImg5, mob: taipeiBgMobImg5 }
@@ -164,10 +136,6 @@ const articleContent = [
     inside: { title: ['台北人的味蕾'] },
     url: 'food',
     id: 'food',
-    // sideTitle: [
-    //   { text: '台北的', color: '#706f6f' },
-    //   { text: '變', color: '#ff2300' }
-    // ],
     sideTitleImg: SideTitleImgVariant,
     img: {
       bg: { web: taipeiBgWebImg6, pad: taipeiBgPadImg6, mob: taipeiBgMobImg6 }
@@ -180,10 +148,6 @@ const articleContent = [
       '在歷經不斷對話、溝通，不同思想相互碰撞、激盪後，下個20年，台北將被帶往何處？'
     ],
     id: 'test7',
-    // sideTitle: [
-    //   { text: '台北', color: '#706f6f' },
-    //   { text: '下個20年', color: '#ff2300' }
-    // ],
     sideTitleImg: SideTitleImg20Years
   },
   {
@@ -195,10 +159,6 @@ const articleContent = [
     inside: { title: ['為什麼台北需要銅鑼灣書店？'] },
     url: 'causeway-bay-books',
     id: 'causeway-bay-books',
-    // sideTitle: [
-    //   { text: '台北', color: '#706f6f' },
-    //   { text: '下個20年', color: '#ff2300' }
-    // ],
     sideTitleImg: SideTitleImg20Years,
     img: {
       bg: { web: taipeiBgWebImg8, pad: taipeiBgPadImg8, mob: taipeiBgMobImg8 }
@@ -215,10 +175,6 @@ const articleContent = [
     },
     url: 'paradox',
     id: 'paradox',
-    // sideTitle: [
-    //   { text: '台北', color: '#706f6f' },
-    //   { text: '下個20年', color: '#ff2300' }
-    // ],
     sideTitleImg: SideTitleImg20Years,
     img: {
       bg: { web: taipeiBgWebImg9, pad: taipeiBgPadImg9, mob: taipeiBgMobImg9 }

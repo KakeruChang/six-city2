@@ -39,13 +39,21 @@ export default {
   },
   computed: {
     shareUrl() {
-      const url = encodeURIComponent(this.href)
+      // const url = encodeURIComponent(this.href)
+      console.log(window.location)
+      const url = encodeURIComponent(window.location)
+      console.log(url)
       return (
         'https://www.facebook.com/dialog/share?app_id=1010324812347164&display=popup&href=' +
         url +
         '&redirect_uri=' +
         url
       )
+    }
+  },
+  methods: {
+    handleUrl() {
+      console.log(window.location.href)
     }
   }
 }

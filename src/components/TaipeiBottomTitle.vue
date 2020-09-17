@@ -18,7 +18,7 @@ export default {
 
 <style lang="scss" scoped>
 h1 {
-  font-family: sans-serif;
+  font-family: source-han-serif-tc, serif;
   font-size: 60px;
   font-weight: 900;
   line-height: 1.83;

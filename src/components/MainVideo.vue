@@ -174,7 +174,7 @@ export default {
   .city {
     width: 512px;
     // height: 662px;
-    font-family: sans-serif;
+    font-family: source-han-serif-tc, serif;
     font-size: 520px;
     font-weight: 900;
     line-height: 1.15;
@@ -185,7 +185,7 @@ export default {
       font-size: 380px;
     }
     @media screen and (max-width: 800px) {
-      margin-top: 100px;
+      // margin-top: 50px;
       width: 300px;
       font-size: 300px;
     }
@@ -203,7 +203,7 @@ export default {
     align-items: center;
     & > span {
       width: 45px;
-      font-family: sans-serif;
+      font-family: source-han-serif-tc, serif;
       font-size: 40px;
       font-weight: bold;
       line-height: 1.13;
@@ -214,11 +214,11 @@ export default {
       }
     }
     @media screen and (max-width: 1150px) {
-      margin-top: 50px;
+      margin-top: 65px;
     }
-    @media screen and (max-width: 800px) {
-      margin-top: 100px;
-    }
+    // @media screen and (max-width: 800px) {
+    //   margin-top: 50px;
+    // }
   }
 }
 .video {

@@ -8,7 +8,11 @@
       <img :src="require('../assets/Taipei/SVG words/Taipei_proud.svg')" alt />
     </picture>
     <ArticleContainer backgroundColor="transparent">
-      <h2 class="proud-title">分享台北市讓你驕傲的地方</h2>
+      <div class="proud-title" v-if="isMob">
+        <h2 style="margin:0">分享台北市讓你</h2>
+        <h2>驕傲的地方</h2>
+      </div>
+      <h2 class="proud-title" v-else>分享台北市讓你驕傲的地方</h2>
       <div class="btn-wrapper">
         <button
           v-for="(meta,i) in metas"
@@ -50,37 +54,37 @@ export default {
       metas: [
         {
           text: '獨立書店',
-          url: 'test',
+          url: '/sharing/independent-bookstore',
           id: 'taipei-meta-1',
           img: require('../assets/Taipei/share/Taipei_sharing_independent_bookstore.jpg')
         },
         {
           text: '同志文化',
-          url: '',
+          url: '/sharing/LGBT-culture',
           id: 'taipei-meta-2',
           img: require('../assets/Taipei/share/Taipei_sharing_LGBT_culture.jpg')
         },
         {
           text: '國際化',
-          url: '',
+          url: '/sharing/globalization',
           id: 'taipei-meta-3',
           img: require('../assets/Taipei/share/Taipei_sharing_globalization.jpg')
         },
         {
           text: '特色酒吧',
-          url: '',
+          url: '/sharing/bars',
           id: 'taipei-meta-4',
           img: require('../assets/Taipei/share/Taipei_sharing_bars.jpg')
         },
         {
           text: '藝文風氣',
-          url: '',
+          url: '/sharing/art-and-cuture',
           id: 'taipei-meta-5',
           img: require('../assets/Taipei/share/Taipei_sharing_art_and_cuture.jpg')
         },
         {
           text: '凱達格蘭大道',
-          url: '',
+          url: '/sharing/ketagalan-blvd',
           id: 'taipei-meta-6',
           img: require('../assets/Taipei/share/Taipei_sharing_ketagalan_blvd.jpg')
         }
@@ -108,10 +112,17 @@ export default {
     }
   },
   computed: {
+    isMob() {
+      const { innerWidth } = window
+      if (innerWidth > 414) return false
+
+      return true
+    },
     shareUrl() {
       const link = window.location + this.metas[this.active].url
 
-      const url = encodeURIComponent(window.location)
+      // const url = encodeURIComponent(window.location)
+      const url = encodeURIComponent(link)
 
       return (
         'https://www.facebook.com/dialog/share?app_id=1010324812347164&display=popup&href=' +
@@ -125,6 +136,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h2 {
+  font-family: source-han-serif-tc, serif;
+}
 .share-proud {
   background-color: rgb(23, 23, 23);
   padding-bottom: 82px;

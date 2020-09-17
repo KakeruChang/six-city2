@@ -89,16 +89,14 @@ export default {
 .data-content {
   margin-top: 50px;
   .number {
-    font-family: adobe-arabic, sans-serif;
+    font-family: AdobeArabic, sans-serif;
+    // font-family: source-han-serif-tc, serif;
     font-size: 120px;
     font-weight: bold;
     line-height: 0.5;
     color: #ff2300;
     @media screen and (max-width: 414px) {
       font-size: 100px;
-    }
-    @media screen and (max-width: 374.98px) {
-      font-size: 90px;
     }
   }
   .unit {

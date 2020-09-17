@@ -3,8 +3,18 @@
 const Fake = { template: '<span></span>' }
 
 const routes = [
-  { path: '/:id', component: Fake }
-  // { path: '/', component: Foo, exact: true }
+  {
+    path: '/Taipei',
+    component: { template: '<span></span>' }
+  },
+  {
+    path: '/Taipei/:id',
+    component: { template: '<span></span>' }
+  },
+  {
+    path: '*',
+    redirect: '/Taipei'
+  }
 ]
 
 export default routes

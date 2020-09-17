@@ -2,7 +2,7 @@
   <div style="width:100%;">
     <ArticleContainer
       backgroundColor="transparent"
-      :cssProperty="{ paddingBottom: 10, paddingTop:paddingTopArt0 && 0 ,paddingBottom:'32px'}"
+      :cssProperty="{ paddingBottom: 10, paddingTop:paddingTopArt0 && 0 ,paddingBottom:'10px'}"
     >
       <h1 class="title">左轉有書張慧如：</h1>
       <h1 class="title">台北正處於矛盾、拉扯的狀態</h1>
@@ -70,7 +70,7 @@ export default {
   font-family: source-han-serif-tc, sans-serif;
   font-size: 36px;
   font-weight: bold;
-  line-height: 1;
+  line-height: 1.4;
   color: #eeeeee;
   @media screen and (max-width: 1024.98px) {
     font-size: 28px;
