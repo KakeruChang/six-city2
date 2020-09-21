@@ -19,10 +19,22 @@
             class="text-outside"
             v-for="(text, i) in feature.textOut"
             :key="`${feature.id}${i}`"
-          >{{ text }}</p>
-          <router-link :to="feature.url" style="text-decoration:none;" v-if="feature.titleOut">
-            <span class="btn-arrow" @click="goToPage(feature)" v-if="feature.titleOut">
-              <span :class="{ jump: !isInside }">{{ !isInside ? '￫' : '￩' }}</span>
+          >
+            {{ text }}
+          </p>
+          <router-link
+            :to="feature.url"
+            style="text-decoration:none;"
+            v-if="feature.titleOut"
+          >
+            <span
+              class="btn-arrow"
+              @click="goToPage(feature)"
+              v-if="feature.titleOut"
+            >
+              <span :class="{ jump: !isInside }">{{
+                !isInside ? '￫' : '￩'
+              }}</span>
             </span>
           </router-link>
         </div>
@@ -58,7 +70,10 @@
       <div class="side-title">
         <img
           class="side-title-img"
-          :class="{ active: areaActive||!isSideTitleChanged,inside:isInside}"
+          :class="{
+            active: areaActive || !isSideTitleChanged,
+            inside: isInside
+          }"
           :src="features[active].sideTitleImg"
           alt
         />
@@ -77,7 +92,9 @@
               class="text-outside"
               v-for="(text, i) in features[active].textOut"
               :key="`${features[active].id}${i}`"
-            >{{ text }}</p>
+            >
+              {{ text }}
+            </p>
           </template>
           <router-link
             :to="`${rootUrl}/${features[active].url}`"
@@ -89,15 +106,18 @@
               :class="{ inside: isInside }"
               :style="{
                 transform: isInside
-                  ? `translate(-${arrowBaseDisplacement.x}%,calc( ${arrowBaseDisplacement.y}% + ${displacementInside *
-                      100}vh))`
+                  ? `translate(-${arrowBaseDisplacement.x}%,calc( ${
+                      arrowBaseDisplacement.y
+                    }% + ${displacementInside * 100}vh))`
                   : 'translate(0, 0)'
               }"
               @click="goToPage(features[active])"
               v-if="features[active].titleOut"
             >
               <!-- transform: translate(-300%, 300%); -->
-              <span :class="{ jump: !isInside }">{{ !isInside ? '￫' : '￩' }}</span>
+              <span :class="{ jump: !isInside }">{{
+                !isInside ? '￫' : '￩'
+              }}</span>
             </span>
           </router-link>
         </div>
@@ -282,9 +302,12 @@ export default {
         this.$emit('emitIsInside', true)
 
         const urlId = this.$route.params.id
+        console.log(urlId)
         for (let i = 0; i < this.features.length; i += 1) {
           // if (this.features[i].url === urlId) {
-          if (this.features[i].url.indexOf(urlId) !== -1) {
+          console.log(i)
+          console.log(this.features[i])
+          if (this.features[i].url?.indexOf(urlId) !== -1) {
             this.$nextTick(() => {
               window.scrollTo({
                 top: this.$refs[`target${i}`][0].offsetTop
@@ -380,7 +403,7 @@ export default {
       }
 
       const callback = (entries, observer) => {
-        entries.forEach((entry) => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             if (parseInt(entry.target.dataset.target) > this.active) {
               this.direction = 'down'
@@ -414,7 +437,7 @@ export default {
                 )
                 this.sendGA({
                   category: 'next',
-                  action: 'scroll',
+                  action,
                   label: `next_${action}_${
                     this.features[entry.target.dataset.target].titleOut
                   }`
@@ -486,7 +509,7 @@ export default {
     }
   },
   watch: {
-    active: function () {
+    active: function() {
       if (this.isInside) {
         this.areaActive = true
 
@@ -525,7 +548,7 @@ export default {
         }, 250)
       }
     },
-    isInside: function () {
+    isInside: function() {
       const { innerHeight } = window
 
       if (!this.isInside) {
@@ -616,9 +639,11 @@ export default {
   color: #eeeeee;
   @media screen and (max-width: 1024.98px) {
     font-size: 28px;
+    // width: 280px;
   }
   @media screen and (max-width: 413.98px) {
     font-size: 25px;
+    // width: 250px;
   }
 }
 .text-outside {

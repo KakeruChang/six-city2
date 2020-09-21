@@ -4,12 +4,10 @@ const Fake = { template: '<span></span>' }
 
 const routes = [
   {
-    path: '/Taipei',
-    component: { template: '<span></span>' }
+    path: '/Taipei'
   },
   {
-    path: '/Taipei/:id',
-    component: { template: '<span></span>' }
+    path: '/Taipei/:id'
   },
   {
     path: '*',

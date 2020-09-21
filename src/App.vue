@@ -1,6 +1,13 @@
 <template>
   <div id="app" class="example">
-    <HeaderTypeA1 theme="dark"></HeaderTypeA1>
+    <HeaderTypeA1
+      theme="dark"
+      :active="active"
+      :rootCity="`${folderRoute}/Taipei`"
+      :isInside="isInside"
+      metaMainDescription="台北市不斷向前滾動，城市面貌也持續翻新，這座城市在這20年來有什麼改變？台北有什麼矛盾與衝突？《聯合報》團隊從各種角度看台北，希望帶領讀者更清楚看見這座城市的脈動。"
+      metaMainTitle="台北市：在新與舊的碰撞中前進 | 專題 | 聯合報"
+    ></HeaderTypeA1>
     <OnloadAnchorFrame GAtitle="page read: 台北 前言" @emitOnloadGA="updateOnloadGATitle">
       <MainVideo
         city="台北"
@@ -73,7 +80,8 @@ export default {
       features: articleContent,
       active: 0,
       isInside: false,
-      onloadGATitle: null
+      onloadGATitle: null,
+      folderRoute: 'test/cities'
     }
   },
   methods: {

@@ -37,7 +37,7 @@
           @scrollToNext="scrollToNext"
         />
       </ArticleContainer>
-      <div class="safe-area" v-if="active !== content.length" />
+      <div class="safe-area" v-if="active !== content.length-1" />
     </template>
   </div>
 </template>

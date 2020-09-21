@@ -1,5 +1,5 @@
 <template>
-  <div class="progress" :style="{top:`${top}px`}">
+  <div class="progress" :style="{ top: `${top}px` }">
     <span
       class="progress-item"
       :class="{ active: active === i }"
@@ -39,8 +39,16 @@ export default {
       } else if (innerWidth < 576 && innerWidth >= 414) {
         adjustment = innerWidth * 0.65
       } else if (innerWidth < 414 && innerWidth >= 375) {
-        adjustment = innerWidth * 0.65
-      } else if (innerWidth < 375) {
+        adjustment = innerWidth * 0.7
+        if (innerHeight > 670) {
+          adjustment = innerWidth * 0.75
+        }
+      } else if (innerWidth < 375 && innerWidth >= 335) {
+        adjustment = innerWidth * 0.75
+        if (innerHeight < 600) {
+          adjustment = innerWidth * 0.65
+        }
+      } else if (innerWidth < 335) {
         adjustment = innerWidth * 0.75
       }
 
@@ -74,6 +82,12 @@ export default {
     left: 6vw;
   }
   @media screen and (max-width: 374.98px) {
+    left: 8vw;
+  }
+  @media screen and (max-width: 374.98px) and(max-height:600px) {
+    left: 7vw;
+  }
+  @media screen and (max-width: 334.98px) {
     left: 8vw;
   }
 

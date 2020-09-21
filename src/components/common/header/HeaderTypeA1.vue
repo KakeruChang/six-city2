@@ -86,13 +86,26 @@
       <nav class="header-bar__nav">
         <div class="header-bar-share__container">
           <div class="header-bar-share__share-icon">
-            <ShareFb :theme="theme" />
+            <ShareFb :theme="theme" :active="active" :rootCity="rootCity" :isInside="isInside" />
           </div>
           <div class="header-bar-share__share-icon">
-            <ShareLine :theme="theme" />
+            <ShareLine
+              :theme="theme"
+              :active="active"
+              :rootCity="rootCity"
+              :isInside="isInside"
+              :metaMainTitle="metaMainTitle"
+              :metaMainDescription="metaMainDescription"
+            />
           </div>
           <div class="header-bar-share__share-icon">
-            <ShareTwitter :theme="theme" />
+            <ShareTwitter
+              :theme="theme"
+              :active="active"
+              :rootCity="rootCity"
+              :isInside="isInside"
+              :metaMainDescription="metaMainDescription"
+            />
           </div>
         </div>
         <div
@@ -144,7 +157,12 @@ export default {
     withSubpage: {
       type: Boolean,
       default: true
-    }
+    },
+    active: { type: Number },
+    rootCity: { type: String },
+    isInside: { type: Boolean },
+    metaMainDescription: { type: String },
+    metaMainTitle: { type: String }
   },
   components: {
     HeaderHamburger,

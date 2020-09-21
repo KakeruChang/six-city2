@@ -23,6 +23,7 @@
 
 <script>
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
+import content from '../../../data'
 
 export default {
   name: 'ShareTwitter',
@@ -35,10 +36,34 @@ export default {
     theme: {
       type: String,
       default: 'light'
-    }
+    },
+    active: { type: Number },
+    rootCity: { type: String },
+    isInside: { type: Boolean },
+    metaMainDescription: { type: String }
+  },
+  data() {
+    return { content }
   },
   computed: {
     shareUrl() {
+      // let sharedUrl
+      // let shareContent
+
+      // if (this.isInside) {
+      //   sharedUrl = `${window.location.origin}/${this.rootCity}/${
+      //     this.content[this.active].url
+      //   }`
+      //   shareContent = this.content[this.active].meta.description
+      // } else {
+      //   sharedUrl = `${window.location.origin}/${this.rootCity}`
+      //   shareContent = this.metaMainDescription
+      // }
+
+      // return `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+      //   shareContent
+      // )}%0D%0A%0D%0A${encodeURIComponent(sharedUrl)}`
+
       return `https://twitter.com/intent/tweet?text=${encodeURIComponent(
         document.querySelector('meta[property="og:description"]').content
       )}%0D%0A%0D%0A${encodeURIComponent(this.href)}`

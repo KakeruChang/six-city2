@@ -24,6 +24,7 @@
 <script>
 import Utils from '@/utils/udn-newmedia-utils'
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
+import content from '../../../data'
 
 const isMobile = Utils.detectMob()
 const isInApp = Utils.isFacebookApp(148) || Utils.isLineApp()
@@ -39,7 +40,15 @@ export default {
     theme: {
       type: String,
       default: 'light'
-    }
+    },
+    active: { type: Number },
+    rootCity: { type: String },
+    isInside: { type: Boolean },
+    metaMainTitle: { type: String },
+    metaMainDescription: { type: String }
+  },
+  data() {
+    return { content }
   },
   computed: {
     shareUrl() {
@@ -47,7 +56,6 @@ export default {
       const shareContent = document.querySelector(
         'meta[property="og:description"]'
       ).content
-
       // desktop
       if (!isMobile) {
         return `https://social-plugins.line.me/lineit/share?text=${encodeURIComponent(
@@ -70,6 +78,44 @@ export default {
       )}%0D%0A%0D%0A${encodeURIComponent(
         shareContent
       )}%0D%0A%0D%0A${encodeURIComponent(this.href)}`
+      // let sharedUrl
+      // let sharedText
+      // let sharedContent
+
+      // if (this.isInside) {
+      //   sharedUrl = `${window.location.origin}/${this.rootCity}/${
+      //     this.content[this.active].url
+      //   }`
+      //   sharedContent = this.content[this.active].meta.description
+      //   sharedText = this.content[this.active].meta.title
+      // } else {
+      //   sharedUrl = `${window.location.origin}/${this.rootCity}`
+      //   sharedContent = this.metaMainDescription
+      //   sharedText = this.metaMainTitle
+      // }
+
+      // // desktop
+      // if (!isMobile) {
+      //   return `https://social-plugins.line.me/lineit/share?text=${encodeURIComponent(
+      //     sharedText
+      //   )}%0D%0A%0D%0A${encodeURIComponent(
+      //     sharedContent
+      //   )}&url=${encodeURIComponent(sharedUrl)}`
+      // }
+      // // mobile
+      // if (!isInApp) {
+      //   return `https://line.naver.jp/R/msg/text/?${encodeURIComponent(
+      //     sharedText
+      //   )}%0D%0A%0D%0A${encodeURIComponent(
+      //     sharedContent
+      //   )}%0D%0A%0D%0A${encodeURIComponent(sharedUrl)}`
+      // }
+      // // mobile in-app webview
+      // return `https://line.naver.jp/R/msg/text/?${encodeURIComponent(
+      //   sharedText
+      // )}%0D%0A%0D%0A${encodeURIComponent(
+      //   sharedContent
+      // )}%0D%0A%0D%0A${encodeURIComponent(sharedUrl)}`
     },
     target() {
       if (!isMobile) return '_blank'
