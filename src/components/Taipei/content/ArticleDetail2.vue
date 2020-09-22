@@ -51,13 +51,13 @@
       <ArticleColumnOne
         v-if="!isHide"
         :srcMob="
-          require('../../assets/Taipei/mob/3_Taipei_sense_of_calling_pic1.jpg')
+          require('../../../assets/Taipei/mob/3_Taipei_sense_of_calling_pic1.jpg')
         "
         :srcPad="
-          require('../../assets/Taipei/pad/3_Taipei_sense_of_calling_pic1.jpg')
+          require('../../../assets/Taipei/pad/3_Taipei_sense_of_calling_pic1.jpg')
         "
         :srcPc="
-          require('../../assets/Taipei/web/3_Taipei_sense_of_calling_pic1.jpg')
+          require('../../../assets/Taipei/web/3_Taipei_sense_of_calling_pic1.jpg')
         "
         alt="BAR PUN是近年在台北興起的秘密酒吧，提供台北人更進階、高端的品飲體驗。"
         >BAR
@@ -82,9 +82,9 @@
 </template>
 
 <script>
-import ArticleContainer from '../common/ui/ArticleContainer'
-import ArticleColumnOne from '../common/ui/ArticleColumnOne'
-import ArticleYoutube from '../common/ui/ArticleYoutube'
+import ArticleContainer from '../../common/ui/ArticleContainer'
+import ArticleColumnOne from '../../common/ui/ArticleColumnOne'
+import ArticleYoutube from '../../common/ui/ArticleYoutube'
 
 export default {
   name: 'ArticleDetail2',

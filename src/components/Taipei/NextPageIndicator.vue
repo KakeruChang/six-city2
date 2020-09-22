@@ -1,13 +1,19 @@
 <template>
-  <div :style="{ backgroundColor}">
-    <template v-if="activeWithInside!==contentWithInsideLength">
+  <div :style="{ backgroundColor }">
+    <template v-if="activeWithInside !== contentWithInsideLength">
       <div class="indicator-wrapper">
-        <span>{{`${Math.round((1-progressToNextPage)*100)}%`}}</span>
+        <span>{{ `${Math.round((1 - progressToNextPage) * 100)}%` }}</span>
       </div>
       <div class="indicator-wrapper">
         <div class="indicator-line">
-          <span class="red-line" :style="{height:`${(1-progressToNextPage)*100}%`}" />
-          <span class="gray-line" :style="{height:`${progressToNextPage*100}%`}" />
+          <span
+            class="red-line"
+            :style="{ height: `${(1 - progressToNextPage) * 100}%` }"
+          />
+          <span
+            class="gray-line"
+            :style="{ height: `${progressToNextPage * 100}%` }"
+          />
         </div>
       </div>
       <div class="indicator-wrapper">
@@ -20,25 +26,29 @@
           class="indicator-text pointer"
           @click="scrollToNext"
           style="color:#ff2300;margin-top:16px;"
-        >下一篇</span>
+          >下一篇</span
+        >
       </div>
       <div class="indicator-wrapper">
         <span
           class="indicator-text pointer"
           @click="scrollToNext"
           style="color:#171717;margin-top:5px;"
-        >{{ nextTitle }}</span>
+          >{{ nextTitle }}</span
+        >
       </div>
     </template>
     <div class="indicator-wrapper">
-      <span class="indicator-page">{{ activeWithInside }}/{{contentWithInsideLength}}</span>
+      <span class="indicator-page"
+        >{{ activeWithInside }}/{{ contentWithInsideLength }}</span
+      >
     </div>
   </div>
 </template>
 
 <script>
-import NmdArrow from './common/accessories/NmdArrow'
-import content from '../data'
+import NmdArrow from '../common/accessories/NmdArrow'
+import content from '../../data/data-taipei'
 
 export default {
   name: 'NextPageIndicator',
@@ -69,7 +79,7 @@ export default {
   computed: {
     contentWithInsideLength() {
       let count = 0
-      this.content.forEach((item) => {
+      this.content.forEach(item => {
         if (item.titleOut) {
           count += 1
         }

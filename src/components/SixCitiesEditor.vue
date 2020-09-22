@@ -1,5 +1,5 @@
 <template>
-  <div class="taipei-editor">
+  <div class="six-cities-editor ">
     <FooterEditor>
       <div>
         <p>製作人</p>
@@ -45,13 +45,13 @@ import FooterEditor from '@/components/common/footer/FooterEditor.vue'
 import FooterQuestionnaire from '@/components/common/footer/FooterQuestionnaire.vue'
 
 export default {
-  name: 'TaipeiEditor',
+  name: 'SixCitiesEditor',
   components: { FooterEditor, FooterQuestionnaire }
 }
 </script>
 
 <style lang="scss" scoped>
-.taipei-editor {
+.six-cities-editor {
   background-color: rgb(23, 23, 23);
 }
 .question-wrapper {

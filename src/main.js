@@ -16,9 +16,9 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes,
-  // base: '/'
-  base: '/test/cities',
-  mode: 'history'
+  base: '/'
+  // base: '/test/cities',
+  // mode: 'history'
 })
 
 // router.afterEach(async (to, from, next) => {

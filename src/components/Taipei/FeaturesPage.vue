@@ -47,7 +47,12 @@
         style="background:rgb(23,23,23);"
       >
         <div style="height:54.4vh" />
-        <FeatureContent :active="i" :isHide="false" :opacity="0" />
+        <FeatureContent
+          :active="i"
+          :isHide="false"
+          :opacity="0"
+          :features="features"
+        />
       </div>
     </div>
 
@@ -138,7 +143,7 @@
 
 <script>
 import FeatureContent from './FeatureContent'
-import Progress from '@/components/Progress.vue'
+import Progress from '../Progress.vue'
 import { rwdMethods, sendGaMethods } from '@/mixins/masterBuilder.js'
 
 export default {

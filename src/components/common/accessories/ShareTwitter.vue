@@ -13,7 +13,7 @@
           :class="{
             'icon-twitter-brands': true,
             'icon-theme-light': theme === 'light',
-            'icon-theme-dark': theme === 'dark',
+            'icon-theme-dark': theme === 'dark'
           }"
         />
       </button>
@@ -23,7 +23,7 @@
 
 <script>
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
-import content from '../../../data'
+import content from '../../../data/data-taipei'
 
 export default {
   name: 'ShareTwitter',

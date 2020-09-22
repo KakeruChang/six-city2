@@ -1,13 +1,15 @@
-// import ArticleDetail from './components/ArticleDetail.vue'
+import Taipei from './components/Taipei/Taipei'
 
 const Fake = { template: '<span></span>' }
 
 const routes = [
   {
-    path: '/Taipei'
+    path: '/Taipei',
+    component: Taipei
   },
   {
-    path: '/Taipei/:id'
+    path: '/Taipei/:id',
+    component: Taipei
   },
   {
     path: '*',

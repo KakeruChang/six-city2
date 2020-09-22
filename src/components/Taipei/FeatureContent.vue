@@ -1,5 +1,5 @@
 <template>
-  <div class="detail-container" :style="{opacity}">
+  <div class="detail-container" :style="{ opacity }">
     <template v-if="active === 0">
       <ArticleDetail0 :isHide="isHide" />
     </template>
@@ -37,15 +37,15 @@
           @scrollToNext="scrollToNext"
         />
       </ArticleContainer>
-      <div class="safe-area" v-if="active !== content.length-1" />
+      <div class="safe-area" v-if="active !== features.length - 1" />
     </template>
   </div>
 </template>
 
 <script>
-import content from '../data'
+import content from '../../data/data-taipei'
 import NextPageIndicator from './NextPageIndicator'
-import ArticleContainer from './common/ui/ArticleContainer'
+import ArticleContainer from '../common/ui/ArticleContainer'
 import ArticleDetail0 from './content/ArticleDetail0'
 import ArticleDetail1 from './content/ArticleDetail1'
 import ArticleDetail2 from './content/ArticleDetail2'
@@ -71,7 +71,8 @@ export default {
     },
     progressToNextPage: {
       type: Number
-    }
+    },
+    features: { type: Array }
   },
   data() {
     return { content }
@@ -96,12 +97,12 @@ export default {
   },
   computed: {
     determineNextTitle() {
-      if (this.active === this.content.length - 1) return ''
+      if (this.active === this.features.length - 1) return ''
 
-      if (!this.content[this.active + 1].titleOut) {
-        return this.content[this.active + 2].titleOut
+      if (!this.features[this.active + 1].titleOut) {
+        return this.features[this.active + 2].titleOut
       }
-      return this.content[this.active + 1].titleOut
+      return this.features[this.active + 1].titleOut
     }
   }
 }

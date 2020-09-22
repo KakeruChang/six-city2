@@ -2,10 +2,13 @@
   <div class="share-proud">
     <picture class="proud-side-title">
       <source
-        :srcset="require('../assets/Taipei/SVG words/Taipei_proud_mob.svg')"
+        :srcset="require('../../assets/Taipei/SVG words/Taipei_proud_mob.svg')"
         media="(max-width: 767.8px)"
       />
-      <img :src="require('../assets/Taipei/SVG words/Taipei_proud.svg')" alt />
+      <img
+        :src="require('../../assets/Taipei/SVG words/Taipei_proud.svg')"
+        alt
+      />
     </picture>
     <ArticleContainer backgroundColor="transparent">
       <div class="proud-title" v-if="isMob">
@@ -15,16 +18,27 @@
       <h2 class="proud-title" v-else>分享台北市讓你驕傲的地方</h2>
       <div class="btn-wrapper">
         <button
-          v-for="(meta,i) in metas"
+          v-for="(meta, i) in metas"
           class="proud-btn"
-          :class="{active:active===i}"
+          :class="{ active: active === i }"
           @click="changeMeta(i)"
           :key="meta.id"
-        >{{meta.text}}</button>
+        >
+          {{ meta.text }}
+        </button>
       </div>
-      <img :src="metas[active].img" class="proud-img" :alt="metas[active].text" />
+      <img
+        :src="metas[active].img"
+        class="proud-img"
+        :alt="metas[active].text"
+      />
       <div class="link-wrapper">
-        <a class="link-share link-lg" :href="shareUrl" target="_blank" @click="shareImg">
+        <a
+          class="link-share link-lg"
+          :href="shareUrl"
+          target="_blank"
+          @click="shareImg"
+        >
           <span>
             <i class="icon-facebook-f-brands" />
             分享圖片
@@ -35,14 +49,15 @@
           href="https://www.google.com/"
           target="_blank"
           @click="goToNext"
-        >下一篇：新北市</a>
+          >下一篇：新北市</a
+        >
       </div>
     </ArticleContainer>
   </div>
 </template>
 
 <script>
-import ArticleContainer from './common/ui/ArticleContainer'
+import ArticleContainer from '../common/ui/ArticleContainer'
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
 
 export default {
@@ -56,37 +71,37 @@ export default {
           text: '獨立書店',
           url: '/sharing/independent-bookstore',
           id: 'taipei-meta-1',
-          img: require('../assets/Taipei/share/Taipei_sharing_independent_bookstore.jpg')
+          img: require('../../assets/Taipei/share/Taipei_sharing_independent_bookstore.jpg')
         },
         {
           text: '同志文化',
           url: '/sharing/LGBT-culture',
           id: 'taipei-meta-2',
-          img: require('../assets/Taipei/share/Taipei_sharing_LGBT_culture.jpg')
+          img: require('../../assets/Taipei/share/Taipei_sharing_LGBT_culture.jpg')
         },
         {
           text: '國際化',
           url: '/sharing/globalization',
           id: 'taipei-meta-3',
-          img: require('../assets/Taipei/share/Taipei_sharing_globalization.jpg')
+          img: require('../../assets/Taipei/share/Taipei_sharing_globalization.jpg')
         },
         {
           text: '特色酒吧',
           url: '/sharing/bars',
           id: 'taipei-meta-4',
-          img: require('../assets/Taipei/share/Taipei_sharing_bars.jpg')
+          img: require('../../assets/Taipei/share/Taipei_sharing_bars.jpg')
         },
         {
           text: '藝文風氣',
           url: '/sharing/art-and-cuture',
           id: 'taipei-meta-5',
-          img: require('../assets/Taipei/share/Taipei_sharing_art_and_cuture.jpg')
+          img: require('../../assets/Taipei/share/Taipei_sharing_art_and_cuture.jpg')
         },
         {
           text: '凱達格蘭大道',
           url: '/sharing/ketagalan-blvd',
           id: 'taipei-meta-6',
-          img: require('../assets/Taipei/share/Taipei_sharing_ketagalan_blvd.jpg')
+          img: require('../../assets/Taipei/share/Taipei_sharing_ketagalan_blvd.jpg')
         }
       ],
       active: 0

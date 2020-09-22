@@ -1,14 +1,12 @@
 <template>
-  <ArticleContainer :cssProperty="{paddingBottom:0}">
+  <ArticleContainer :cssProperty="{ paddingBottom: 0 }">
     <h1>這20年來</h1>
-    <h1>
-      <span style="color: #ff2300">台北</span> 還有哪些變與不變？
-    </h1>
+    <h1><span style="color: #ff2300">台北</span> 還有哪些變與不變？</h1>
   </ArticleContainer>
 </template>
 
 <script>
-import ArticleContainer from './common/ui/ArticleContainer'
+import ArticleContainer from '../common/ui/ArticleContainer'
 
 export default {
   name: 'TaipeiBottomTitle',

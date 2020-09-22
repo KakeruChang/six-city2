@@ -13,7 +13,7 @@
           :class="{
             'icon-line-brands': true,
             'icon-theme-light': theme === 'light',
-            'icon-theme-dark': theme === 'dark',
+            'icon-theme-dark': theme === 'dark'
           }"
         />
       </button>
@@ -24,7 +24,7 @@
 <script>
 import Utils from '@/utils/udn-newmedia-utils'
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
-import content from '../../../data'
+import content from '../../../data/data-taipei'
 
 const isMobile = Utils.detectMob()
 const isInApp = Utils.isFacebookApp(148) || Utils.isLineApp()
