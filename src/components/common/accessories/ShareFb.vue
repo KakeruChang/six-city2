@@ -23,7 +23,8 @@
 
 <script>
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
-import content from '../../../data/data-taipei'
+import taipeiData from '../../../data/data-taipei'
+import newTaipeiData from '../../../data/data-new-taipei'
 
 export default {
   name: 'ShareFb',
@@ -41,12 +42,8 @@ export default {
     rootCity: { type: String },
     isInside: { type: Boolean }
   },
-  data() {
-    return { content }
-  },
   computed: {
     shareUrl() {
-      // const url = encodeURIComponent(this.href)
       let newShareUrl
 
       if (this.isInside) {
@@ -56,8 +53,6 @@ export default {
       } else {
         newShareUrl = `${window.location.origin}/${this.rootCity}`
       }
-      // console.log(window.location)
-      // console.log(newShareUrl)
 
       const url = encodeURIComponent(newShareUrl)
 
@@ -67,6 +62,13 @@ export default {
         '&redirect_uri=' +
         url
       )
+    },
+    content() {
+      if (this.$route.path.indexOf('New-Taipei') !== -1) {
+        return newTaipeiData
+      }
+      // Taipei
+      return taipeiData
     }
   }
 }

@@ -34,6 +34,9 @@
         <p>2020.12.8</p>
       </div>
     </FooterEditor>
+    <div>
+      <FooterShare />
+    </div>
     <div class="question-wrapper">
       <FooterQuestionnaire href="https://www.surveycake.com/s/KpQKN" />
     </div>
@@ -43,10 +46,11 @@
 <script>
 import FooterEditor from '@/components/common/footer/FooterEditor.vue'
 import FooterQuestionnaire from '@/components/common/footer/FooterQuestionnaire.vue'
+import FooterShare from '@/components/common/footer/FooterShare.vue'
 
 export default {
   name: 'SixCitiesEditor',
-  components: { FooterEditor, FooterQuestionnaire }
+  components: { FooterEditor, FooterQuestionnaire, FooterShare }
 }
 </script>
 
@@ -55,6 +59,6 @@ export default {
   background-color: rgb(23, 23, 23);
 }
 .question-wrapper {
-  padding: 82px 0 123px;
+  padding-bottom: 123px;
 }
 </style>

@@ -6,18 +6,8 @@
       name="play-button"
       @click="handleButtonClick"
     >
-      <img
-        class="voice-story-play__play-button__icon"
-        v-if="isPlay"
-        src="../../assets/six-city/stop.svg"
-        alt
-      />
-      <img
-        class="voice-story-play__play-button__icon"
-        v-else
-        src="../../assets/six-city/play.svg"
-        alt
-      />
+      <img class="voice-story-play__play-button__icon" v-if="isPlay" :src="imgStop" alt />
+      <img class="voice-story-play__play-button__icon" v-else :src="imgPlay" alt />
     </button>
     <VoiceStoryWave :isPlay="isPlay" :progress="soundProgress" />
   </div>
@@ -47,6 +37,12 @@ export default {
     titleGA: {
       type: String,
       default: ''
+    },
+    imgPlay: {
+      type: String
+    },
+    imgStop: {
+      type: String
     }
   },
   data() {

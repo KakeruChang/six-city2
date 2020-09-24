@@ -44,13 +44,13 @@
             分享圖片
           </span>
         </a>
-        <a
+        <router-link
           class="link-next link-lg"
-          href="https://www.google.com/"
+          to="./New-Taipei"
           target="_blank"
           @click="goToNext"
-          >下一篇：新北市</a
-        >
+          >下一篇：新北市
+        </router-link>
       </div>
     </ArticleContainer>
   </div>

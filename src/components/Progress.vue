@@ -3,6 +3,7 @@
     <span
       class="progress-item"
       :class="{ active: active === i }"
+      :style="{ height: barLength }"
       v-for="(item, i) in length"
       @click="clickProgress(i)"
       :key="i"
@@ -18,6 +19,10 @@ export default {
     length: { type: Number },
     displayAreaFromTop: {
       type: Number
+    },
+    barLength: {
+      type: String,
+      default: '43px'
     }
   },
   methods: {
@@ -95,13 +100,6 @@ export default {
 }
 .progress-item {
   cursor: pointer;
-  height: 43.6px;
-  // @media screen and (max-width: 1024.98px) {
-  //   height: 60px;
-  // }
-  // @media screen and (max-width: 767.98px) {
-  //   height: 23px;
-  // }
   width: 1px;
 
   background-color: #5b5b5b;

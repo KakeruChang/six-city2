@@ -23,7 +23,8 @@
 
 <script>
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
-import content from '../../../data/data-taipei'
+import taipeiData from '../../../data/data-taipei'
+import newTaipeiData from '../../../data/data-new-taipei'
 
 export default {
   name: 'ShareTwitter',
@@ -42,31 +43,35 @@ export default {
     isInside: { type: Boolean },
     metaMainDescription: { type: String }
   },
-  data() {
-    return { content }
-  },
   computed: {
+    content() {
+      if (this.$route.path.indexOf('New-Taipei') !== -1) {
+        return newTaipeiData
+      }
+      // Taipei
+      return taipeiData
+    },
     shareUrl() {
-      // let sharedUrl
-      // let shareContent
+      let sharedUrl
+      let shareContent
 
-      // if (this.isInside) {
-      //   sharedUrl = `${window.location.origin}/${this.rootCity}/${
-      //     this.content[this.active].url
-      //   }`
-      //   shareContent = this.content[this.active].meta.description
-      // } else {
-      //   sharedUrl = `${window.location.origin}/${this.rootCity}`
-      //   shareContent = this.metaMainDescription
-      // }
-
-      // return `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-      //   shareContent
-      // )}%0D%0A%0D%0A${encodeURIComponent(sharedUrl)}`
+      if (this.isInside) {
+        sharedUrl = `${window.location.origin}/${this.rootCity}/${
+          this.content[this.active].url
+        }`
+        shareContent = this.content[this.active].meta.description
+      } else {
+        sharedUrl = `${window.location.origin}/${this.rootCity}`
+        shareContent = this.metaMainDescription
+      }
 
       return `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-        document.querySelector('meta[property="og:description"]').content
-      )}%0D%0A%0D%0A${encodeURIComponent(this.href)}`
+        shareContent
+      )}%0D%0A%0D%0A${encodeURIComponent(sharedUrl)}`
+
+      // return `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+      //   document.querySelector('meta[property="og:description"]').content
+      // )}%0D%0A%0D%0A${encodeURIComponent(this.href)}`
     }
   }
 }

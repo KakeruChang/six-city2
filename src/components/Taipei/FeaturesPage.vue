@@ -19,22 +19,14 @@
             class="text-outside"
             v-for="(text, i) in feature.textOut"
             :key="`${feature.id}${i}`"
-          >
-            {{ text }}
-          </p>
-          <router-link
-            :to="feature.url"
-            style="text-decoration:none;"
-            v-if="feature.titleOut"
-          >
-            <span
-              class="btn-arrow"
-              @click="goToPage(feature)"
-              v-if="feature.titleOut"
-            >
-              <span :class="{ jump: !isInside }">{{
+          >{{ text }}</p>
+          <router-link :to="feature.url" style="text-decoration:none;" v-if="feature.titleOut">
+            <span class="btn-arrow" @click="goToPage(feature)" v-if="feature.titleOut">
+              <span :class="{ jump: !isInside }">
+                {{
                 !isInside ? '￫' : '￩'
-              }}</span>
+                }}
+              </span>
             </span>
           </router-link>
         </div>
@@ -47,12 +39,7 @@
         style="background:rgb(23,23,23);"
       >
         <div style="height:54.4vh" />
-        <FeatureContent
-          :active="i"
-          :isHide="false"
-          :opacity="0"
-          :features="features"
-        />
+        <FeatureContent :active="i" :isHide="false" :opacity="0" :features="features" />
       </div>
     </div>
 
@@ -97,9 +84,7 @@
               class="text-outside"
               v-for="(text, i) in features[active].textOut"
               :key="`${features[active].id}${i}`"
-            >
-              {{ text }}
-            </p>
+            >{{ text }}</p>
           </template>
           <router-link
             :to="`${rootUrl}/${features[active].url}`"
@@ -120,9 +105,11 @@
               v-if="features[active].titleOut"
             >
               <!-- transform: translate(-300%, 300%); -->
-              <span :class="{ jump: !isInside }">{{
+              <span :class="{ jump: !isInside }">
+                {{
                 !isInside ? '￫' : '￩'
-              }}</span>
+                }}
+              </span>
             </span>
           </router-link>
         </div>
@@ -131,6 +118,7 @@
             <FeatureContent
               :isHide="isHide"
               :active="active"
+              :features="features"
               @scrollToNext="scrollToNext"
               :progressToNextPage="progressToNextPage"
             />
@@ -184,6 +172,23 @@ export default {
   methods: {
     goToPage(feature) {
       if (!this.isInside) {
+        // check position
+        if (this.displayAreaFromTop !== 0) {
+          if (this.displayAreaFromTop > 0) {
+            window.scrollTo({
+              top: this.$refs.featureContainer.offsetTop
+            })
+          } else {
+            window.scrollTo({
+              top:
+                this.$refs.featureContainer.offsetTop +
+                this.$refs.featureContainer.offsetHeight -
+                window.innerHeight
+            })
+          }
+          this.displayAreaFromTop = 0
+        }
+
         this.constructObserver()
         window.addEventListener('scroll', this.countProgressInside, false)
         window.removeEventListener('scroll', this.countActiveByHeight, false)
@@ -408,7 +413,7 @@ export default {
       }
 
       const callback = (entries, observer) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             if (parseInt(entry.target.dataset.target) > this.active) {
               this.direction = 'down'
@@ -514,7 +519,7 @@ export default {
     }
   },
   watch: {
-    active: function() {
+    active: function () {
       if (this.isInside) {
         this.areaActive = true
 
@@ -553,7 +558,7 @@ export default {
         }, 250)
       }
     },
-    isInside: function() {
+    isInside: function () {
       const { innerHeight } = window
 
       if (!this.isInside) {
