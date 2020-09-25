@@ -1,52 +1,52 @@
 <template>
   <article class="footer-logo">
     <a
-      href="https://udn.com/news/index" 
+      href="https://udn.com/news/index"
       target="_blank"
       rel="noopener"
       aria-label="聯合新聞網"
       name="聯合新聞網"
       @click="sendGA(formatGA('FooterLogoDotCom'))"
     >
-      <img :src="img.dotCom" alt="聯合新聞網">
+      <img :src="img.dotCom" alt="聯合新聞網" />
     </a>
     <a
-      href="https://udn.com/newmedia/office/" 
+      href="https://udn.com/newmedia/office/"
       target="_blank"
       rel="noopener"
       aria-label="聯合報新媒體中心"
       name="聯合報新媒體中心"
       @click="sendGA(formatGA('FooterLogoNMD'))"
     >
-      <img :src="img.nmd" alt="聯合報新媒體中心">
+      <img :src="img.nmd" alt="聯合報新媒體中心" />
     </a>
     <a
       v-if="useVision"
-      href="https://vision.udn.com/" 
+      href="https://vision.udn.com/"
       target="_blank"
       rel="noopener"
       aria-label="聯合報系願景工程"
       name="聯合報系願景工程"
       @click="sendGA(formatGA('FooterLogoVision'))"
     >
-      <img :src="img.vision" alt="聯合報系願景工程">
+      <img :src="img.vision" alt="聯合報系願景工程" />
     </a>
   </article>
 </template>
 
 <script>
-import { sendGaMethods } from "@/mixins/masterBuilder.js";
+import { sendGaMethods } from '@/mixins/masterBuilder.js'
 
-import dotCom from '~/img/logo/dot_com.jpg';
-import nmd from '~/img/logo/nmd.jpg';
-import vision from '~/img/logo/vision.jpg';
+import dotCom from '~/img/logo/dot_com.jpg'
+import nmd from '~/img/logo/nmd.jpg'
+import vision from '~/img/logo/vision.jpg'
 export default {
   name: 'FooterLogo',
   mixins: [sendGaMethods],
   props: {
     useVision: {
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
   data() {
     return {
@@ -54,9 +54,9 @@ export default {
         dotCom: dotCom,
         nmd: nmd,
         vision: vision
-      },
+      }
     }
-  },
+  }
 }
 </script>
 

@@ -2,16 +2,21 @@
   <footer class="page-footer">
     <slot />
     <div class="page-footer__copyright">
-      <p class="small">聯合報系 著作權所有 <span v-if="deviceType === 'mob'"><br></span>© udngroup.com All Rights Reserved.</p>
+      <p class="small">
+        聯合報系 著作權所有
+        <span v-if="deviceType === 'mob'">
+          <br />
+        </span>© udngroup.com All Rights Reserved.
+      </p>
     </div>
   </footer>
 </template>
 
 <script>
-import { autoResize_3 } from '@/mixins/masterBuilder.js';
+import { autoResize_3 } from '@/mixins/masterBuilder.js'
 export default {
   name: 'PageFooter',
-  mixins: [autoResize_3],
+  mixins: [autoResize_3]
 }
 </script>
 

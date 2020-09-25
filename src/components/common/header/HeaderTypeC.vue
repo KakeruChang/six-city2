@@ -1,10 +1,6 @@
 <template>
   <header class="header-bar">
-    <HeaderMenu
-      :menuActiveFlag="menuActiveFlag"
-      :theme="theme"
-      :outlink="outlink"
-    >
+    <HeaderMenu :menuActiveFlag="menuActiveFlag" :theme="theme" :outlink="outlink">
       <slot />
     </HeaderMenu>
     <div
@@ -14,13 +10,7 @@
       }"
       @click="sendGA(formatGA('HeaderUdnLogo'))"
     >
-      <a
-        :href="href"
-        target="_self"
-        rel="noopener"
-        aria-label="聯logo"
-        name="聯logo"
-      >
+      <a :href="href" target="_self" rel="noopener" aria-label="聯logo" name="聯logo">
         <UdnLogo :theme="theme" />
       </a>
     </div>
@@ -37,11 +27,13 @@
           <!-- <UdnLogo :theme="theme" /> -->
         </div>
         <div class="haeder-bar__menu-button-container">
-          <button class="haeder-bar__menu-button"
+          <button
+            class="haeder-bar__menu-button"
             @click="handleMenuButtonClick()"
             name="menu-toggle-button"
           >
-            <p :class="{
+            <p
+              :class="{
               'small': true,
               'white': theme === 'dark'
               }"
@@ -57,12 +49,9 @@
                 }"
               />
             </p>
-          </button> 
+          </button>
         </div>
-        <div
-          v-if="deviceType !== 'mob'"
-          class="header-bar__anchor-pc"
-        >
+        <div v-if="deviceType !== 'mob'" class="header-bar__anchor-pc">
           <HeaderAnchor :theme="theme" />
         </div>
       </div>
@@ -87,12 +76,12 @@
 </template>
 
 <script>
-import _debounce from 'lodash.debounce';
-import { autoResize_3, sendGaMethods } from '@/mixins/masterBuilder.js';
-import HeaderAnchor from '@/components/common/header/HeaderAnchor.vue';
-import HeaderShare from '@/components/common/header/HeaderShare.vue';
-import HeaderMenu from '@/components/common/header/HeaderMenu.vue';
-import UdnLogo from '@/components/common/accessories/UdnLogo.vue';
+import _debounce from 'lodash.debounce'
+import { autoResize_3, sendGaMethods } from '@/mixins/masterBuilder.js'
+import HeaderAnchor from '@/components/common/header/HeaderAnchor.vue'
+import HeaderShare from '@/components/common/header/HeaderShare.vue'
+import HeaderMenu from '@/components/common/header/HeaderMenu.vue'
+import UdnLogo from '@/components/common/accessories/UdnLogo.vue'
 
 export default {
   name: 'HeaderTypeC',
@@ -109,11 +98,11 @@ export default {
       default: 'light'
     },
     pageTitle: {
-      type: String,
+      type: String
     },
     href: {
       type: String,
-      default: document.querySelector('meta[property="og:url"]').content,
+      default: document.querySelector('meta[property="og:url"]').content
     },
     outlink: {
       type: Array,
@@ -125,39 +114,44 @@ export default {
       activeFlag: true,
       menuActiveFlag: false,
       lastPosition: window.pageYOffset,
-      ticking: false,
+      ticking: false
     }
   },
   methods: {
-    handleScroll: _debounce(function() {
-      if (!this.ticking) {
-        window.requestAnimationFrame(() => {
-          // activeFlag
-          if (!this.menuActiveFlag) {
-            if (this.lastPosition >= window.pageYOffset) this.activeFlag = true;
-            else this.activeFlag = false;
-            this.lastPosition = window.pageYOffset;
-          }
+    handleScroll: _debounce(
+      function () {
+        if (!this.ticking) {
+          window.requestAnimationFrame(() => {
+            // activeFlag
+            if (!this.menuActiveFlag) {
+              if (this.lastPosition >= window.pageYOffset)
+                this.activeFlag = true
+              else this.activeFlag = false
+              this.lastPosition = window.pageYOffset
+            }
 
-          this.ticking = false;
-        });
-      }
-      this.ticking = true;
-    }, 30,  {'leading': true, 'trailing': false, 'maxWait': 30}),
+            this.ticking = false
+          })
+        }
+        this.ticking = true
+      },
+      30,
+      { leading: true, trailing: false, maxWait: 30 }
+    ),
     handleMenuButtonClick() {
-      this.menuActiveFlag = !this.menuActiveFlag;
+      this.menuActiveFlag = !this.menuActiveFlag
 
-      if (this.menuActiveFlag) this.sendGA(this.formatGA('HeaderMenuOpen'));
-      else this.sendGA(this.formatGA('HeaderMenuClose'));
+      if (this.menuActiveFlag) this.sendGA(this.formatGA('HeaderMenuOpen'))
+      else this.sendGA(this.formatGA('HeaderMenuClose'))
     }
   },
   mounted() {
-    window.addEventListener('scroll', this.handleScroll, false);
+    window.addEventListener('scroll', this.handleScroll, false)
   },
   destroyed() {
-    window.removeEventListener('scroll', this.handleScroll, false);
-  },
-};
+    window.removeEventListener('scroll', this.handleScroll, false)
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -180,7 +174,7 @@ export default {
     align-items: center;
     opacity: 0.7;
     transform: scale(0.75);
-    transition: .333s ease-in;
+    transition: 0.333s ease-in;
     &:hover {
       transform: rotate(20deg);
     }
@@ -205,15 +199,15 @@ export default {
     align-items: center;
     width: 100%;
     height: 50px;
-    transition: .333s linear;
+    transition: 0.333s linear;
     &.header-bar__nav--hide {
       pointer-events: none;
-      transition: .333s .666s linear;
+      transition: 0.333s 0.666s linear;
       transform: translateY(-100%);
     }
     &.header-bar__nav--theme-dark {
       background-color: #000000;
-    } 
+    }
     &.header-bar__nav--theme-light {
       background-color: #ffffff;
     }
@@ -239,7 +233,7 @@ export default {
     height: 35px;
     padding: 0 20px 0 55px;
     transform: translateY(45px);
-    transition: .333s ease-in-out;
+    transition: 0.333s ease-in-out;
     &.header-bar__anchor-mob--hide {
       transform: translateY(-100%);
     }
@@ -256,7 +250,7 @@ export default {
     justify-content: flex-start;
     align-items: center;
     margin: 0 15px;
-    transition: .333s ease-in-out;
+    transition: 0.333s ease-in-out;
   }
   .header-bar__logo-seat {
     flex-shrink: 0;
@@ -284,7 +278,7 @@ export default {
         display: inline-block;
         padding: 3px;
         margin-left: 3px;
-        transition: .333s ease-in-out;
+        transition: 0.333s ease-in-out;
 
         &.haeder-bar__menu-button__arrow--white {
           border-color: #ededed;

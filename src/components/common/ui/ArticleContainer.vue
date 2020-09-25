@@ -2,7 +2,7 @@
   <section class="article-container" :style="{
       backgroundColor
     }">
-    <article class="article" :style="{ color: textColor }">
+    <article class="article" :style="{ color: textColor,...cssProperty }">
       <slot />
     </article>
   </section>
@@ -19,6 +19,12 @@ export default {
     textColor: {
       type: String,
       default: 'initial'
+    },
+    cssProperty: {
+      type: Object,
+      default: () => {
+        return {}
+      }
     }
   }
 }

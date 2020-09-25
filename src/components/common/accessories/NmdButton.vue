@@ -13,7 +13,7 @@
   >
     <div :class="rippleClassAttr"></div>
     <div class="nmd-button__text">
-      <p class="small" :style="{ 'color': textColor }" >
+      <p class="small" :style="{ 'color': textColor }">
         <slot />
       </p>
     </div>
@@ -58,13 +58,13 @@ export default {
     },
     clickEvent: {
       type: Function,
-      default: function() {}
+      default: function () {}
     }
   },
   data() {
     return {
-      hoverFlag: false,
-    };
+      hoverFlag: false
+    }
   },
   computed: {
     buttonClassAttr() {
@@ -88,13 +88,13 @@ export default {
         'nmd-button__ripple': true,
         'nmd-button__ripple--light': this.theme === 'contained',
         'nmd-button__ripple--dark': this.theme === 'outlined',
-        'nmd-button__ripple--hover': this.hoverFlag,
+        'nmd-button__ripple--hover': this.hoverFlag
       }
     }
   },
   methods: {
     handleHover(flag) {
-      this.hoverFlag = flag;
+      this.hoverFlag = flag
     }
   }
 }
@@ -111,6 +111,9 @@ export default {
   border-width: 1px;
   background-color: #ffffff;
   white-space: nowrap;
+  @media screen and(max-width: 576px) {
+    width: 287px;
+  }
 
   &.nmd-button--contained {
     border: none;
@@ -136,7 +139,7 @@ export default {
     }
   }
   &.nmd-button--size-s {
-    height: 40px;    
+    height: 40px;
     p {
       font-size: 10px;
     }
@@ -182,7 +185,7 @@ export default {
     border-radius: 50%;
     opacity: 0;
     transform: translate(-50%, -50%) scale(0);
-    transition: .5s ease-in-out;
+    transition: 0.5s ease-in-out;
     &.nmd-button__ripple--light {
       background-color: #434343;
     }

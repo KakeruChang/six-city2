@@ -1,9 +1,10 @@
 <template>
   <picture class="base-picture">
     <!-- <source type="image/webp"> -->
-    <source v-if="srcPc" media="(min-width:1025px)" :srcset="srcPc">
-    <source v-if="srcPad" media="(min-width:768px)" :srcset="srcPad">
-    <img class="base-picture__img"
+    <source v-if="srcPc" media="(min-width:1025px)" :srcset="srcPc" />
+    <source v-if="srcPad" media="(min-width:768px)" :srcset="srcPad" />
+    <img
+      class="base-picture__img"
       :class="{
         'base-picture__img': true,
         'base-picture__img--cover': size === 'cover',
@@ -11,7 +12,7 @@
       }"
       :src="srcMob"
       :alt="alt"
-    >
+    />
   </picture>
 </template>
 
@@ -20,19 +21,19 @@ export default {
   name: 'BasePicture',
   props: {
     srcMob: {
-      type: String,
+      type: String
     },
     srcPad: {
-      type: String,
+      type: String
     },
     srcPc: {
-      type: String,
+      type: String
     },
     size: {
       type: String,
       default: null,
-      validator: function (value) {
-        return ['cover', 'contain', null].indexOf(value) !== -1;
+      validator: function(value) {
+        return ['cover', 'contain', null].indexOf(value) !== -1
       }
     },
     alt: {

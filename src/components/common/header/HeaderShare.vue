@@ -8,9 +8,15 @@
         'header-share__container--active': toggleFlag && headerActiveFlag,
       }"
     >
-      <div class="header-share__share-icon"><ShareFb /></div>
-      <div class="header-share__share-icon"><ShareLine /></div>
-      <div class="header-share__share-icon"><ShareTwitter /></div>
+      <div class="header-share__share-icon">
+        <ShareFb />
+      </div>
+      <div class="header-share__share-icon">
+        <ShareLine />
+      </div>
+      <div class="header-share__share-icon">
+        <ShareTwitter />
+      </div>
     </div>
     <div
       v-if="isMob"
@@ -19,7 +25,7 @@
         'header-share__share-icon__toggle': true,
         'header-share__share-icon__toggle--active': toggleFlag && headerActiveFlag,
         'custom-button': true,
-      }" 
+      }"
       @click="toggle()"
     >
       <i class="icon-share-alt-solid" />
@@ -41,10 +47,10 @@
 </template>
 
 <script>
-import { autoResize_2, sendGaMethods } from '@/mixins/masterBuilder.js';
-import ShareFb from '@/components/common/accessories/ShareFb.vue';
-import ShareLine from '@/components/common/accessories/ShareLine.vue';
-import ShareTwitter from '@/components/common/accessories/ShareTwitter.vue';
+import { autoResize_2, sendGaMethods } from '@/mixins/masterBuilder.js'
+import ShareFb from '@/components/common/accessories/ShareFb.vue'
+import ShareLine from '@/components/common/accessories/ShareLine.vue'
+import ShareTwitter from '@/components/common/accessories/ShareTwitter.vue'
 
 export default {
   name: 'HeaderShare',
@@ -52,31 +58,31 @@ export default {
   components: {
     ShareFb,
     ShareLine,
-    ShareTwitter,
+    ShareTwitter
   },
   props: {
     theme: {
-      type: String,
+      type: String
     },
     headerActiveFlag: {
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
   data() {
     return {
-      toggleFlag: false,
+      toggleFlag: false
     }
   },
   watch: {
-    headerActiveFlag: function(value) {
-      if (!value) this.toggleFlag = false;
+    headerActiveFlag: function (value) {
+      if (!value) this.toggleFlag = false
     }
   },
   methods: {
     toggle() {
-      this.toggleFlag = !this.toggleFlag;
-    },
-  },
+      this.toggleFlag = !this.toggleFlag
+    }
+  }
 }
 </script>
 
@@ -107,7 +113,7 @@ export default {
     opacity: 0;
     transform-origin: 100% 0;
     transform: translate(100%, -50%) scale(0);
-    transition: .333s ease-in-out;
+    transition: 0.333s ease-in-out;
     @include pc {
       position: relative;
       top: auto;
@@ -153,7 +159,7 @@ export default {
       line-height: 0.5;
       transform: translateY(-52%);
       transform-origin: 100% 0;
-      transition: .333s ease-in-out;
+      transition: 0.333s ease-in-out;
       &.header-share__share-icon__toggle--active {
         right: 28%;
         transform: translateY(-52%) scale(1.35);

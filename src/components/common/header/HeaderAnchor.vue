@@ -13,25 +13,23 @@
         :id="'header-anchor-' + item.title"
         @click="handleScrollVert(item.title)"
       >
-        <p class="small">
-          {{item.title}}
-        </p>
+        <p class="small">{{item.title}}</p>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import { autoResize_2, sendGaMethods } from '@/mixins/masterBuilder.js';
-import vueScrollTo from 'vue-scrollto';
+import { autoResize_2, sendGaMethods } from '@/mixins/masterBuilder.js'
+import vueScrollTo from 'vue-scrollto'
 
 export default {
   name: 'HeaderAnchor',
   mixins: [autoResize_2, sendGaMethods],
   props: {
     theme: {
-      type: String,
-    },
+      type: String
+    }
   },
   data() {
     return {
@@ -40,7 +38,7 @@ export default {
   },
   methods: {
     handleScrollVert(index) {
-      vueScrollTo.scrollTo('#anchor-' + index);
+      vueScrollTo.scrollTo('#anchor-' + index)
       this.sendGA({
         category: 'anchor',
         action: 'click',
@@ -48,30 +46,32 @@ export default {
       })
     },
     handleScrollHorz(index) {
-      const anchorList = document.getElementById('header-anchor');
-      const anchor = document.getElementById('header-anchor-' + index);
+      const anchorList = document.getElementById('header-anchor')
+      const anchor = document.getElementById('header-anchor-' + index)
       anchorList.scrollTo({
         left: anchor.offsetLeft,
-        behavior: 'smooth',
-      });
+        behavior: 'smooth'
+      })
     },
     handleScroll() {
-      const list = this.anchorList;
+      const list = this.anchorList
 
       for (let i = list.length - 1; i >= 0; i--) {
-        const pos = document.getElementById('anchor-' + list[i].title).getBoundingClientRect().top;
+        const pos = document
+          .getElementById('anchor-' + list[i].title)
+          .getBoundingClientRect().top
         if (pos < 1) {
-          this.handleUpdateAnchor(i, true);
+          this.handleUpdateAnchor(i, true)
           for (let j = 0; j < list.length; j++) {
-            if (j !== i) this.handleUpdateAnchor(j, false);
+            if (j !== i) this.handleUpdateAnchor(j, false)
           }
-          break;
+          break
         }
       }
     },
     handleUpdateAnchor(index, status) {
-      this.anchorList[index].active = status;
-    },
+      this.anchorList[index].active = status
+    }
   },
   watch: {
     anchorList: {
@@ -80,25 +80,25 @@ export default {
           if (!this.onScollingFlag) {
             list.forEach((e) => {
               if (e.active) {
-                this.handleScrollHorz(e.title);
+                this.handleScrollHorz(e.title)
               }
-            });
+            })
           }
         }
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
   mounted() {
     this.$nextTick(() => {
-      this.anchorList = this.$anchorList;
-    });
+      this.anchorList = this.$anchorList
+    })
 
-    window.addEventListener('scroll', this.handleScroll, false);
+    window.addEventListener('scroll', this.handleScroll, false)
   },
   destroyed() {
-    window.removeEventListener('scroll', this.handleScroll, false);
-  },
+    window.removeEventListener('scroll', this.handleScroll, false)
+  }
 }
 </script>
 
@@ -115,7 +115,8 @@ export default {
     display: none;
   }
 }
-li, ul {
+li,
+ul {
   list-style: none;
 }
 .header-anchor__list {
@@ -131,7 +132,7 @@ li, ul {
     height: 100%;
     margin-right: 20px;
     border-bottom: solid 2px #cf060600;
-    transition: .333s ease-in-out;
+    transition: 0.333s ease-in-out;
     cursor: pointer;
 
     @include clean-tap;

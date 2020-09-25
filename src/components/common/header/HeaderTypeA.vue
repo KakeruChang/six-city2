@@ -1,30 +1,15 @@
 <template>
-  <header
-    :class="{
+  <header :class="{
       'header-bar': true,
       'header-bar--hide': !activeFlag
-    }"
-  >
-    <HeaderMenu
-      :menuActiveFlag="menuActiveFlag"
-      :simplified="true"
-      :outlink="outlink"
-    >
+    }">
+    <HeaderMenu :menuActiveFlag="menuActiveFlag" :simplified="true" :outlink="outlink">
       <slot />
     </HeaderMenu>
     <div class="header-bar__nav__container">
       <nav class="header-bar__nav">
-        <div
-          class="header-bar__logo"
-          @click="sendGA(formatGA('HeaderUdnLogo'))"
-        >
-          <a
-            :href="href"
-            target="_self"
-            rel="noopener"
-            aria-label="聯logo"
-            name="聯logo"
-          >
+        <div class="header-bar__logo" @click="sendGA(formatGA('HeaderUdnLogo'))">
+          <a :href="href" target="_self" rel="noopener" aria-label="聯logo" name="聯logo">
             <UdnLogo />
           </a>
         </div>
@@ -41,10 +26,7 @@
             <ShareTwitter />
           </div>
         </div>
-        <div
-          class="header-bar__hamburder-container"
-          @click="handleHamburgerClick"
-        >
+        <div class="header-bar__hamburder-container" @click="handleHamburgerClick">
           <HeaderHamburger :menuActiveFlag="menuActiveFlag" />
         </div>
       </nav>
@@ -99,7 +81,7 @@ export default {
       else this.sendGA(this.formatGA('HeaderMenuClose'))
     },
     handleScroll: _debounce(
-      function() {
+      function () {
         if (!this.ticking) {
           window.requestAnimationFrame(() => {
             // activeFlag

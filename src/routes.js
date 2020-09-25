@@ -1,10 +1,29 @@
-// import ArticleDetail from './components/ArticleDetail.vue'
+import Taipei from './components/Taipei/Taipei'
+import NewTaipei from './components/NewTaipei/NewTaipei.vue'
 
 const Fake = { template: '<span></span>' }
 
 const routes = [
-  { path: '/:id', component: Fake }
-  // { path: '/', component: Foo, exact: true }
+  {
+    path: '/Taipei',
+    component: Taipei
+  },
+  {
+    path: '/Taipei/:id',
+    component: Taipei
+  },
+  {
+    path: '/New-Taipei',
+    component: NewTaipei
+  },
+  {
+    path: '/New-Taipei/:id',
+    component: NewTaipei
+  },
+  {
+    path: '*',
+    redirect: '/Taipei'
+  }
 ]
 
 export default routes

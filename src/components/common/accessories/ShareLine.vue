@@ -8,15 +8,12 @@
       title="share-line"
       @click="sendGA(formatGA('HeaderShareLine'))"
     >
-      <button
-        aria-label="share"
-        name="share-line"
-      >
+      <button aria-label="share" name="share-line">
         <i
           :class="{
             'icon-line-brands': true,
             'icon-theme-light': theme === 'light',
-            'icon-theme-dark': theme === 'dark',
+            'icon-theme-dark': theme === 'dark'
           }"
         />
       </button>
@@ -26,10 +23,12 @@
 
 <script>
 import Utils from '@/utils/udn-newmedia-utils'
-import { sendGaMethods } from '@/mixins/masterBuilder.js';
+import { sendGaMethods } from '@/mixins/masterBuilder.js'
+import taipeiData from '../../../data/data-taipei'
+import newTaipeiData from '../../../data/data-new-taipei'
 
-const isMobile = Utils.detectMob();
-const isInApp = Utils.isFacebookApp(148) || Utils.isLineApp();
+const isMobile = Utils.detectMob()
+const isInApp = Utils.isFacebookApp(148) || Utils.isLineApp()
 
 export default {
   name: 'ShareLine',
@@ -37,34 +36,97 @@ export default {
   props: {
     href: {
       type: String,
-      default: document.querySelector('meta[property="og:url"]').content,
-    },    
+      default: document.querySelector('meta[property="og:url"]').content
+    },
     theme: {
       type: String,
       default: 'light'
     },
+    active: { type: Number },
+    rootCity: { type: String },
+    isInside: { type: Boolean },
+    metaMainTitle: { type: String },
+    metaMainDescription: { type: String }
   },
   computed: {
+    content() {
+      if (this.$route.path.indexOf('New-Taipei') !== -1) {
+        return newTaipeiData
+      }
+      // Taipei
+      return taipeiData
+    },
     shareUrl() {
-      const sharedText = document.querySelector('title').innerHTML
-      const shareContent = document.querySelector('meta[property="og:description"]').content
+      // const sharedText = document.querySelector('title').innerHTML
+      // const shareContent = document.querySelector(
+      //   'meta[property="og:description"]'
+      // ).content
+      // // desktop
+      // if (!isMobile) {
+      //   return `https://social-plugins.line.me/lineit/share?text=${encodeURIComponent(
+      //     sharedText
+      //   )}%0D%0A%0D%0A${encodeURIComponent(
+      //     shareContent
+      //   )}&url=${encodeURIComponent(this.href)}`
+      // }
+      // // mobile
+      // if (!isInApp) {
+      //   return `https://line.naver.jp/R/msg/text/?${encodeURIComponent(
+      //     sharedText
+      //   )}%0D%0A%0D%0A${encodeURIComponent(
+      //     shareContent
+      //   )}%0D%0A%0D%0A${encodeURIComponent(this.href)}`
+      // }
+      // // mobile in-app webview
+      // return `https://line.naver.jp/R/msg/text/?${encodeURIComponent(
+      //   sharedText
+      // )}%0D%0A%0D%0A${encodeURIComponent(
+      //   shareContent
+      // )}%0D%0A%0D%0A${encodeURIComponent(this.href)}`
+      let sharedUrl
+      let sharedText
+      let sharedContent
+
+      if (this.isInside) {
+        sharedUrl = `${window.location.origin}/${this.rootCity}/${
+          this.content[this.active].url
+        }`
+        sharedContent = this.content[this.active].meta.description
+        sharedText = this.content[this.active].meta.title
+      } else {
+        sharedUrl = `${window.location.origin}/${this.rootCity}`
+        sharedContent = this.metaMainDescription
+        sharedText = this.metaMainTitle
+      }
 
       // desktop
       if (!isMobile) {
-        return `https://social-plugins.line.me/lineit/share?text=${encodeURIComponent(sharedText)}%0D%0A%0D%0A${encodeURIComponent(shareContent)}&url=${encodeURIComponent(this.href)}`
+        return `https://social-plugins.line.me/lineit/share?text=${encodeURIComponent(
+          sharedText
+        )}%0D%0A%0D%0A${encodeURIComponent(
+          sharedContent
+        )}&url=${encodeURIComponent(sharedUrl)}`
       }
       // mobile
       if (!isInApp) {
-        return `https://line.naver.jp/R/msg/text/?${encodeURIComponent(sharedText)}%0D%0A%0D%0A${encodeURIComponent(shareContent)}%0D%0A%0D%0A${encodeURIComponent(this.href)}`
+        return `https://line.naver.jp/R/msg/text/?${encodeURIComponent(
+          sharedText
+        )}%0D%0A%0D%0A${encodeURIComponent(
+          sharedContent
+        )}%0D%0A%0D%0A${encodeURIComponent(sharedUrl)}`
       }
       // mobile in-app webview
-      return `https://line.naver.jp/R/msg/text/?${encodeURIComponent(sharedText)}%0D%0A%0D%0A${encodeURIComponent(shareContent)}%0D%0A%0D%0A${encodeURIComponent(this.href)}`
+      return `https://line.naver.jp/R/msg/text/?${encodeURIComponent(
+        sharedText
+      )}%0D%0A%0D%0A${encodeURIComponent(
+        sharedContent
+      )}%0D%0A%0D%0A${encodeURIComponent(sharedUrl)}`
     },
     target() {
-      if (!isMobile) return '_blank';
-      return '_self';
-    },
-  },
+      if (!isMobile) return '_blank'
+      return '_self'
+    }
+  }
 }
 </script>
 

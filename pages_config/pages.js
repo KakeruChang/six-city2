@@ -10,10 +10,10 @@ const noIndex = contentGenerator('../contents/noIndex.html')
 // const pathRoot = process.env.NODE_ENV === 'production' ? 'https://udn.com/newmedia/MAIN_PAGE/SUB_PAGE/' : './';
 
 /* 測試路徑 */
-const mainPage = 'http://nmdap.udn.com.tw/test/meta'
+const mainPage = 'http://nmdap.udn.com.tw/test/cities'
 const pathRoot =
   process.env.NODE_ENV === 'production'
-    ? 'http://nmdap.udn.com.tw/test/meta'
+    ? 'http://nmdap.udn.com.tw/test/cities'
     : './'
 
 module.exports = {

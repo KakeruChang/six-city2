@@ -16,9 +16,32 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes,
-  base: '/',
-  mode: 'hash'
+  base: '/'
+  // base: '/test/cities',
+  // mode: 'history'
 })
+
+// router.afterEach(async (to, from, next) => {
+//   if (from.path.indexOf('Taipei') === -1) {
+//     console.log('after')
+//   }
+// })
+
+// router.beforeEach(async (to, from, next) => {
+//   console.log(from)
+
+//   if (from.path.indexOf('Taipei') == -1) {
+//     router.push('Taipei')
+//   }
+
+//   // if (from.name === null &&
+//   //   to.name !== 'Login' &&
+//   //   (route.app.$store === undefined ||
+//   //    route.app.$store.getters.token.length === 0)) {
+//   //      route.push('/')
+//   // }
+//   //...
+// })
 
 Vue.config.productionTip = false
 Vue.prototype.$anchorList = []
