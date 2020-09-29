@@ -84,7 +84,7 @@ import ArticleColumnOne from '../../common/ui/ArticleColumnOne'
 import ArticleYoutube from '../../common/ui/ArticleYoutube'
 
 export default {
-  name: 'ArticleDetail8',
+  name: 'ArticleDetail5',
   props: {
     isHide: {
       type: Boolean

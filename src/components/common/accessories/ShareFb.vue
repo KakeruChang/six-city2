@@ -25,6 +25,7 @@
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
 import taipeiData from '../../../data/data-taipei'
 import newTaipeiData from '../../../data/data-new-taipei'
+import taoyuanData from '../../../data/data-taoyuan'
 
 export default {
   name: 'ShareFb',
@@ -64,6 +65,9 @@ export default {
       )
     },
     content() {
+      if (this.$route.path.indexOf('Taoyuan') !== -1) {
+        return taoyuanData
+      }
       if (this.$route.path.indexOf('New-Taipei') !== -1) {
         return newTaipeiData
       }

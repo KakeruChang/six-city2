@@ -1,20 +1,6 @@
 <template>
   <div class="detail-container" :style="{ opacity }">
-    <template v-if="active === 0">
-      <ArticleDetail0 :isHide="isHide" />
-    </template>
-    <template v-if="active === 1">
-      <ArticleDetail1 :isHide="isHide" />
-    </template>
-    <template v-if="active === 2">
-      <ArticleDetail2 :isHide="isHide" />
-    </template>
-    <template v-if="active === 3">
-      <ArticleDetail3 :isHide="isHide" />
-    </template>
-    <template v-if="active === 5">
-      <ArticleDetail5 :isHide="isHide" />
-    </template>
+    <ContentByCity :isHide="isHide" :active="active" />
 
     <template v-if="!isHide">
       <ArticleContainer>
@@ -33,13 +19,9 @@
 </template>
 
 <script>
+import ArticleContainer from '@/components/common/ui/ArticleContainer'
 import NextPageIndicator from './NextPageIndicator'
-import ArticleContainer from '../common/ui/ArticleContainer'
-import ArticleDetail0 from './content/ArticleDetail0'
-import ArticleDetail1 from './content/ArticleDetail1'
-import ArticleDetail2 from './content/ArticleDetail2'
-import ArticleDetail3 from './content/ArticleDetail3'
-import ArticleDetail5 from './content/ArticleDetail5'
+import ContentByCity from './ContentByCity'
 
 export default {
   name: 'FeatureContent',
@@ -63,11 +45,7 @@ export default {
   components: {
     NextPageIndicator,
     ArticleContainer,
-    ArticleDetail0,
-    ArticleDetail1,
-    ArticleDetail2,
-    ArticleDetail3,
-    ArticleDetail5
+    ContentByCity
   },
   methods: {
     scrollToNext() {
@@ -91,6 +69,6 @@ export default {
   width: 100%;
 }
 .safe-area {
-  margin-bottom: 100vh;
+  margin-bottom: 50vh;
 }
 </style>

@@ -1,7 +1,6 @@
 import Taipei from './components/Taipei/Taipei'
 import NewTaipei from './components/NewTaipei/NewTaipei.vue'
-
-const Fake = { template: '<span></span>' }
+import Taoyuan from './components/Taoyuan/Taoyuan.vue'
 
 const routes = [
   {
@@ -19,6 +18,14 @@ const routes = [
   {
     path: '/New-Taipei/:id',
     component: NewTaipei
+  },
+  {
+    path: '/Taoyuan',
+    component: Taoyuan
+  },
+  {
+    path: '/Taoyuan/:id',
+    component: Taoyuan
   },
   {
     path: '*',

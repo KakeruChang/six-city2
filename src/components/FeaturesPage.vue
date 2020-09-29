@@ -19,13 +19,21 @@
             class="text-outside"
             v-for="(text, i) in feature.textOut"
             :key="`${feature.id}${i}`"
-          >{{ text }}</p>
-          <router-link :to="feature.url" style="text-decoration:none;" v-if="feature.titleOut">
-            <span class="btn-arrow" @click="goToPage(feature)" v-if="feature.titleOut">
+          >
+            {{ text }}
+          </p>
+          <router-link
+            :to="feature.url"
+            style="text-decoration: none"
+            v-if="feature.titleOut"
+          >
+            <span
+              class="btn-arrow"
+              @click="goToPage(feature)"
+              v-if="feature.titleOut"
+            >
               <span :class="{ jump: !isInside }">
-                {{
-                !isInside ? '￫' : '￩'
-                }}
+                {{ !isInside ? '￫' : '￩' }}
               </span>
             </span>
           </router-link>
@@ -36,15 +44,20 @@
         class="target inside"
         :ref="`target${i}`"
         :data-target="i"
-        style="background:rgb(23,23,23);"
+        style="background: rgb(23, 23, 23)"
       >
-        <div style="height:54.4vh" />
-        <FeatureContent :active="i" :isHide="false" :opacity="0" :features="features" />
+        <div style="height: 54.4vh" />
+        <FeatureContent
+          :active="i"
+          :isHide="false"
+          :opacity="0"
+          :features="features"
+        />
       </div>
     </div>
 
     <!-- display-area -->
-    <div class="display-area" style="opacity:1;" :style="displayAreaStyle">
+    <div class="display-area" style="opacity: 1" :style="displayAreaStyle">
       <img
         class="display-area-bg"
         v-if="features[active].img"
@@ -78,11 +91,13 @@
               class="text-outside"
               v-for="(text, i) in features[active].textOut"
               :key="`${features[active].id}${i}`"
-            >{{ text }}</p>
+            >
+              {{ text }}
+            </p>
           </template>
           <router-link
             :to="`${rootUrl}/${features[active].url}`"
-            style="text-decoration:none"
+            style="text-decoration: none"
             v-if="features[active].titleOut"
           >
             <span
@@ -101,9 +116,7 @@
             >
               <!-- transform: translate(-300%, 300%); -->
               <span :class="{ jump: !isInside }">
-                {{
-                !isInside ? '￫' : '￩'
-                }}
+                {{ !isInside ? '￫' : '￩' }}
               </span>
             </span>
           </router-link>
@@ -127,7 +140,7 @@
 
 <script>
 import FeatureContent from './FeatureContent'
-import Progress from '../Progress.vue'
+import Progress from './Progress.vue'
 import { rwdMethods, sendGaMethods } from '@/mixins/masterBuilder.js'
 
 export default {
@@ -259,7 +272,8 @@ export default {
         ) {
           const result =
             -(
-              pageYOffset -
+              pageYOffset +
+              0.5 * innerHeight -
               (this.$refs[`target${this.active}`][0].offsetTop +
                 this.$refs[`target${this.active}`][0].offsetHeight)
             ) /
@@ -393,7 +407,7 @@ export default {
       }
 
       const callback = (entries, observer) => {
-        entries.forEach((entry) => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             if (parseInt(entry.target.dataset.target) > this.active) {
               this.direction = 'down'
@@ -500,7 +514,7 @@ export default {
     }
   },
   watch: {
-    active: function () {
+    active: function() {
       if (this.isInside) {
         this.areaActive = true
 
@@ -542,7 +556,7 @@ export default {
         }, 250)
       }
     },
-    isInside: function () {
+    isInside: function() {
       const { innerHeight } = window
 
       if (!this.isInside) {

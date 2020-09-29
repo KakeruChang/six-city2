@@ -3,23 +3,23 @@
     <HeaderTypeA1
       theme="dark"
       :active="active"
-      :rootCity="`${folderRoute}/Taipei`"
+      :rootCity="`${folderRoute}/Taoyuan`"
       :isInside="isInside"
-      metaMainDescription="台北市不斷向前滾動，城市面貌也持續翻新，這座城市在這20年來有什麼改變？台北有什麼矛盾與衝突？《聯合報》團隊從各種角度看台北，希望帶領讀者更清楚看見這座城市的脈動。"
-      metaMainTitle="台北市：在新與舊的碰撞中前進 | 專題 | 聯合報"
+      metaMainDescription="桃園為擺脫工業城市印象，正亟欲發展新的城市面貌，卻很少有人靜下來思考，桃園要的到底是甚麼？桃園已經有什麼？《聯合報》團隊從各種角度看桃園，帶領讀者更清楚看見這座城市的脈動。"
+      metaMainTitle="桃園市：城市的樣貌不該只有一種| 專題 | 聯合報"
     ></HeaderTypeA1>
     <OnloadAnchorFrame
-      GAtitle="page read: 台北 前言"
+      GAtitle="page read: 桃園 前言"
       @emitOnloadGA="updateOnloadGATitle"
     >
       <MainVideo
-        city="台北"
-        description="在新與舊的碰撞中前進"
+        city="桃園"
+        description="城市的樣貌不該只有一種"
         :mainColor="mainColor"
-        :videoPC="require('../../assets/Taipei/video/Taipei_video_web.mp4')"
-        :videoMob="require('../../assets/Taipei/video/Taipei_videp_mob.mp4')"
+        :videoPC="require('../../assets/Taoyuan/video/Taoyuan_video_web.mp4')"
+        :videoMob="require('../../assets/Taoyuan/video/Taoyuan_video_mob.mp4')"
       />
-      <TaipeiData />
+      <TaoyuanData :mainColor="mainColor" />
     </OnloadAnchorFrame>
     <FeaturesPage
       @emitActive="updateActive"
@@ -28,19 +28,19 @@
       :active="active"
       :features="features"
       :mainColor="mainColor"
-      rootUrl="/Taipei"
+      rootUrl="/Taoyuan"
     />
     <PageFooterV1>
       <OnloadAnchorFrame
-        GAtitle="page read: 台北 我台北我驕傲"
+        GAtitle="page read: 桃園 我桃園我驕傲"
         @emitOnloadGA="updateOnloadGATitle"
       >
-        <ShareTaipeiProud />
+        <ShareTaoyuanProud />
       </OnloadAnchorFrame>
       <SixCitiesEditor />
-      <CityBottomTitle :mainColor="mainColor" city="台北" />
+      <CityBottomTitle :mainColor="mainColor" city="桃園" />
       <OnloadAnchorFrame
-        GAtitle="page read: 台北 臉書留言區"
+        GAtitle="page read: 桃園 臉書留言區"
         @emitOnloadGA="updateOnloadGATitle"
       >
         <FooterFbComment />
@@ -60,18 +60,19 @@ import PageBackTop from '@/components/common/ui/PageBackTop.vue'
 import PageFooterV1 from '@/components/common/footer/PageFooterV1.vue'
 
 import FeaturesPage from '../FeaturesPage'
+// import FeatureContent from './FeatureContent'
 import SixCitiesEditor from '@/components/SixCitiesEditor.vue'
-import CityBottomTitle from '@/components/CityBottomTitle'
-import ShareTaipeiProud from '@/components/Taipei/ShareTaipeiProud.vue'
-import TaipeiData from '@/components/Taipei/TaipeiData.vue'
+import CityBottomTitle from '@/components/CityBottomTitle.vue'
+import ShareTaoyuanProud from './ShareTaoyuanProud'
+import TaoyuanData from './TaoyuanData'
 import MainVideo from '../MainVideo'
 import OnloadAnchorFrame from '@/components/OnloadAnchorFrame.vue'
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
 
-import articleContent from '../../data/data-taipei'
+import articleContent from '../../data/data-taoyuan'
 
 export default {
-  name: 'Taipei',
+  name: 'Taoyuan',
   mixins: [sendGaMethods],
   components: {
     FooterFbComment,
@@ -79,10 +80,11 @@ export default {
     PageBackTop,
     PageFooterV1,
     FeaturesPage,
+    // FeatureContent,
     SixCitiesEditor,
     CityBottomTitle,
-    ShareTaipeiProud,
-    TaipeiData,
+    ShareTaoyuanProud,
+    TaoyuanData,
     MainVideo,
     OnloadAnchorFrame
   },
@@ -93,7 +95,7 @@ export default {
       isInside: false,
       onloadGATitle: null,
       folderRoute: 'test/cities',
-      mainColor: '#ff2300'
+      mainColor: '#00edff'
     }
   },
   methods: {

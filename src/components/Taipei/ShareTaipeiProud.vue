@@ -2,22 +2,20 @@
   <div class="share-proud">
     <picture class="proud-side-title">
       <source
-        :srcset="
-          require('../../assets/New-Taipei/SVG words/New_Taipei_proud_mob.svg')
-        "
+        :srcset="require('../../assets/Taipei/SVG words/Taipei_proud_mob.svg')"
         media="(max-width: 767.8px)"
       />
       <img
-        :src="require('../../assets/New-Taipei/SVG words/New_Taipei_proud.svg')"
+        :src="require('../../assets/Taipei/SVG words/Taipei_proud.svg')"
         alt
       />
     </picture>
     <ArticleContainer backgroundColor="transparent">
       <div class="proud-title" v-if="isMob">
-        <h2 style="margin:0">分享新北市讓你</h2>
+        <h2 style="margin:0">分享台北市讓你</h2>
         <h2>驕傲的地方</h2>
       </div>
-      <h2 class="proud-title" v-else>分享新北市讓你驕傲的地方</h2>
+      <h2 class="proud-title" v-else>分享台北市讓你驕傲的地方</h2>
       <div class="btn-wrapper">
         <button
           v-for="(meta, i) in metas"
@@ -48,10 +46,10 @@
         </a>
         <router-link
           class="link-next link-lg"
-          to="./Taoyuan"
+          to="./New-Taipei"
           target="_blank"
           @click="goToNext"
-          >下一篇：桃園市
+          >下一篇：新北市
         </router-link>
       </div>
     </ArticleContainer>
@@ -63,35 +61,47 @@ import ArticleContainer from '../common/ui/ArticleContainer'
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
 
 export default {
-  name: 'ShareProud',
+  name: 'ShareTaipeiProud',
   mixins: [sendGaMethods],
   components: { ArticleContainer },
   data() {
     return {
       metas: [
         {
-          text: '老城市面貌',
-          url: '/sharing/old-city',
-          id: 'new-taipei-meta-1',
-          img: require('../../assets/New-Taipei/share/New_Taipei_sharing_old_city.jpg')
+          text: '獨立書店',
+          url: '/sharing/independent-bookstore',
+          id: 'taipei-meta-1',
+          img: require('../../assets/Taipei/share/Taipei_sharing_independent_bookstore.jpg')
         },
         {
-          text: '在地文化',
-          url: '/sharing/local-culture',
-          id: 'new-taipei-meta-2',
-          img: require('../../assets/New-Taipei/share/New_Taipei_sharing_local_culture.jpg')
+          text: '同志文化',
+          url: '/sharing/LGBT-culture',
+          id: 'taipei-meta-2',
+          img: require('../../assets/Taipei/share/Taipei_sharing_LGBT_culture.jpg')
         },
         {
-          text: '通勤日常',
-          url: '/sharing/commuter',
-          id: 'new-taipei-meta-3',
-          img: require('../../assets/New-Taipei/share/New_Taipei_sharing_commuter.jpg')
+          text: '國際化',
+          url: '/sharing/globalization',
+          id: 'taipei-meta-3',
+          img: require('../../assets/Taipei/share/Taipei_sharing_globalization.jpg')
         },
         {
-          text: '返鄉小日子',
-          url: '/sharing/young-farmer-returning',
-          id: 'new-taipei-meta-4',
-          img: require('../../assets/New-Taipei/share/New_Taipeisharing_young_farmer_returning.jpg')
+          text: '特色酒吧',
+          url: '/sharing/bars',
+          id: 'taipei-meta-4',
+          img: require('../../assets/Taipei/share/Taipei_sharing_bars.jpg')
+        },
+        {
+          text: '藝文風氣',
+          url: '/sharing/art-and-cuture',
+          id: 'taipei-meta-5',
+          img: require('../../assets/Taipei/share/Taipei_sharing_art_and_cuture.jpg')
+        },
+        {
+          text: '凱達格蘭大道',
+          url: '/sharing/ketagalan-blvd',
+          id: 'taipei-meta-6',
+          img: require('../../assets/Taipei/share/Taipei_sharing_ketagalan_blvd.jpg')
         }
       ],
       active: 0
@@ -112,7 +122,7 @@ export default {
       this.sendGA({
         category: 'furtherreading',
         action: 'click',
-        label: 'furtherreading_桃園市'
+        label: 'furtherreading_新北市'
       })
     }
   },
@@ -181,7 +191,7 @@ h2 {
   text-align: center;
 }
 .btn-wrapper {
-  width: 300px;
+  width: 450px;
   margin: 3px auto 19px;
   @media screen and(max-width: 576px) {
     max-width: 300px;

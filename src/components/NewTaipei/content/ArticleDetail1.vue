@@ -87,7 +87,7 @@ import ArticleContainer from '../../common/ui/ArticleContainer'
 import ArticleColumnOne from '../../common/ui/ArticleColumnOne'
 
 export default {
-  name: 'ArticleDetail0',
+  name: 'ArticleDetail1',
   props: {
     isHide: {
       type: Boolean

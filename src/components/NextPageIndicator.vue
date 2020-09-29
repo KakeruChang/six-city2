@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import NmdArrow from '../common/accessories/NmdArrow'
+import NmdArrow from '@/components/common/accessories/NmdArrow'
 
 export default {
   name: 'NextPageIndicator',
