@@ -7,7 +7,8 @@
       :isInside="isInside"
       metaMainDescription="桃園為擺脫工業城市印象，正亟欲發展新的城市面貌，卻很少有人靜下來思考，桃園要的到底是甚麼？桃園已經有什麼？《聯合報》團隊從各種角度看桃園，帶領讀者更清楚看見這座城市的脈動。"
       metaMainTitle="桃園市：城市的樣貌不該只有一種| 專題 | 聯合報"
-    ></HeaderTypeA1>
+      ><HeaderLinks
+    /></HeaderTypeA1>
     <OnloadAnchorFrame
       GAtitle="page read: 桃園 前言"
       @emitOnloadGA="updateOnloadGATitle"
@@ -56,11 +57,10 @@
 import FooterEditor from '@/components/common/footer/FooterEditor.vue'
 import FooterFbComment from '@/components/common/footer/FooterFbComment.vue'
 import HeaderTypeA1 from '@/components/common/header/HeaderTypeA1.vue'
+import HeaderLinks from '../HeaderLinks'
 import PageBackTop from '@/components/common/ui/PageBackTop.vue'
 import PageFooterV1 from '@/components/common/footer/PageFooterV1.vue'
-
 import FeaturesPage from '../FeaturesPage'
-// import FeatureContent from './FeatureContent'
 import SixCitiesEditor from '@/components/SixCitiesEditor.vue'
 import CityBottomTitle from '@/components/CityBottomTitle.vue'
 import ShareTaoyuanProud from './ShareTaoyuanProud'
@@ -68,7 +68,6 @@ import TaoyuanData from './TaoyuanData'
 import MainVideo from '../MainVideo'
 import OnloadAnchorFrame from '@/components/OnloadAnchorFrame.vue'
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
-
 import articleContent from '../../data/data-taoyuan'
 
 export default {
@@ -80,13 +79,13 @@ export default {
     PageBackTop,
     PageFooterV1,
     FeaturesPage,
-    // FeatureContent,
     SixCitiesEditor,
     CityBottomTitle,
     ShareTaoyuanProud,
     TaoyuanData,
     MainVideo,
-    OnloadAnchorFrame
+    OnloadAnchorFrame,
+    HeaderLinks
   },
   data() {
     return {

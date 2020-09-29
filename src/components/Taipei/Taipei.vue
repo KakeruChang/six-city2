@@ -7,7 +7,8 @@
       :isInside="isInside"
       metaMainDescription="台北市不斷向前滾動，城市面貌也持續翻新，這座城市在這20年來有什麼改變？台北有什麼矛盾與衝突？《聯合報》團隊從各種角度看台北，希望帶領讀者更清楚看見這座城市的脈動。"
       metaMainTitle="台北市：在新與舊的碰撞中前進 | 專題 | 聯合報"
-    ></HeaderTypeA1>
+      ><HeaderLinks
+    /></HeaderTypeA1>
     <OnloadAnchorFrame
       GAtitle="page read: 台北 前言"
       @emitOnloadGA="updateOnloadGATitle"
@@ -56,9 +57,9 @@
 import FooterEditor from '@/components/common/footer/FooterEditor.vue'
 import FooterFbComment from '@/components/common/footer/FooterFbComment.vue'
 import HeaderTypeA1 from '@/components/common/header/HeaderTypeA1.vue'
+import HeaderLinks from '../HeaderLinks'
 import PageBackTop from '@/components/common/ui/PageBackTop.vue'
 import PageFooterV1 from '@/components/common/footer/PageFooterV1.vue'
-
 import FeaturesPage from '../FeaturesPage'
 import SixCitiesEditor from '@/components/SixCitiesEditor.vue'
 import CityBottomTitle from '@/components/CityBottomTitle'
@@ -67,7 +68,6 @@ import TaipeiData from '@/components/Taipei/TaipeiData.vue'
 import MainVideo from '../MainVideo'
 import OnloadAnchorFrame from '@/components/OnloadAnchorFrame.vue'
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
-
 import articleContent from '../../data/data-taipei'
 
 export default {
@@ -84,7 +84,8 @@ export default {
     ShareTaipeiProud,
     TaipeiData,
     MainVideo,
-    OnloadAnchorFrame
+    OnloadAnchorFrame,
+    HeaderLinks
   },
   data() {
     return {

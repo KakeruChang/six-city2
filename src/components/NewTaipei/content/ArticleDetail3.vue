@@ -102,38 +102,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.title {
-  font-family: source-han-serif-tc, sans-serif;
-  font-size: 36px;
-  font-weight: bold;
-  line-height: 1.4;
-  color: #eeeeee;
-  @media screen and (max-width: 1024.98px) {
-    font-size: 28px;
-  }
-  @media screen and (max-width: 413.98px) {
-    font-size: 25px;
-  }
-}
-.content-1 {
-  font-size: 20px;
-  line-height: 1.7;
-  color: #eeeeee;
-}
-.content-2 {
-  font-size: 20px;
-  line-height: 1.7;
-  color: #171717;
-}
-.voice-wrapper {
-  border-top: solid 1px rgb(62, 62, 62);
-  border-bottom: solid 1px rgb(62, 62, 62);
-  padding: 20px 0;
-  margin-bottom: 48.5px;
-}
+@import '@/style/city.scss';
+@import '@/style/voice.scss';
+
 .voice-text {
-  font-size: 20px;
-  line-height: 1.7;
   color: #00f0d8;
 }
 </style>

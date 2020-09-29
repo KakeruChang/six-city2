@@ -114,7 +114,6 @@
               @click="goToPage(features[active])"
               v-if="features[active].titleOut"
             >
-              <!-- transform: translate(-300%, 300%); -->
               <span :class="{ jump: !isInside }">
                 {{ !isInside ? '￫' : '￩' }}
               </span>
@@ -173,13 +172,6 @@ export default {
       nextTrigger: false,
       oldScrollingPosition: 0,
       isSideTitleChanged: false
-    }
-  },
-  methods: {
-    preventNav(event) {
-      if (!this.isEditing) return
-      event.preventDefault()
-      event.returnValue = ''
     }
   },
   methods: {

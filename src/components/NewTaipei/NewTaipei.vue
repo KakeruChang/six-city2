@@ -7,7 +7,8 @@
       :isInside="isInside"
       metaMainDescription="對許多新北人來說，他們的生活圈都在台北，「家，只是回家睡覺的地方」。這20年來，新北市歷經了什麼改變？新北人如何加深與家鄉的連結？《聯合報》團隊從各種角度看新北，希望帶領讀者更清楚看見這座城市的脈動。"
       metaMainTitle="新北市：不只是「回家睡覺的地方」 | 專題 | 聯合報"
-    ></HeaderTypeA1>
+      ><HeaderLinks
+    /></HeaderTypeA1>
     <OnloadAnchorFrame
       GAtitle="page read: 新北 前言"
       @emitOnloadGA="updateOnloadGATitle"
@@ -60,9 +61,9 @@
 import FooterEditor from '@/components/common/footer/FooterEditor.vue'
 import FooterFbComment from '@/components/common/footer/FooterFbComment.vue'
 import HeaderTypeA1 from '@/components/common/header/HeaderTypeA1.vue'
+import HeaderLinks from '../HeaderLinks'
 import PageBackTop from '@/components/common/ui/PageBackTop.vue'
 import PageFooterV1 from '@/components/common/footer/PageFooterV1.vue'
-
 import FeaturesPage from '../FeaturesPage'
 import SixCitiesEditor from '@/components/SixCitiesEditor.vue'
 import CityBottomTitle from '@/components/CityBottomTitle.vue'
@@ -71,7 +72,6 @@ import NewTaipeiData from './NewTaipeiData'
 import MainVideo from '../MainVideo'
 import OnloadAnchorFrame from '@/components/OnloadAnchorFrame.vue'
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
-
 import articleContent from '../../data/data-new-taipei'
 
 export default {
@@ -88,7 +88,8 @@ export default {
     ShareNewTaipeiProud,
     NewTaipeiData,
     MainVideo,
-    OnloadAnchorFrame
+    OnloadAnchorFrame,
+    HeaderLinks
   },
   data() {
     return {

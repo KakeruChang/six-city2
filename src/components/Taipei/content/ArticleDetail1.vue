@@ -95,27 +95,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.title {
-  font-family: source-han-serif-tc, sans-serif;
-  font-size: 36px;
-  font-weight: bold;
-  line-height: 1.4;
-  color: #eeeeee;
-  @media screen and (max-width: 1024.98px) {
-    font-size: 28px;
-  }
-  @media screen and (max-width: 413.98px) {
-    font-size: 25px;
-  }
-}
-.content-1 {
-  font-size: 20px;
-  line-height: 1.7;
-  color: #eeeeee;
-}
-.content-2 {
-  font-size: 20px;
-  line-height: 1.7;
-  color: #171717;
-}
+@import '@/style/city.scss';
 </style>
