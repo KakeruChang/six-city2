@@ -29,6 +29,7 @@
       :active="active"
       :features="features"
       :mainColor="mainColor"
+      :arrowImg="require('../../assets/Taoyuan/arrow_Taoyuan.svg')"
       rootUrl="/Taoyuan"
     />
     <PageFooterV1>
@@ -38,7 +39,7 @@
       >
         <ShareTaoyuanProud />
       </OnloadAnchorFrame>
-      <SixCitiesEditor />
+      <SixCitiesEditor :image="['葉信菉、林澔一、鄭超文、', '報系資料庫']" />
       <CityBottomTitle :mainColor="mainColor" city="桃園" />
       <OnloadAnchorFrame
         GAtitle="page read: 桃園 臉書留言區"

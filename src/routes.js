@@ -12,6 +12,10 @@ const routes = [
     component: Taipei
   },
   {
+    path: '/Taipei/*',
+    redirect: '/Taipei'
+  },
+  {
     path: '/New-Taipei',
     component: NewTaipei
   },
@@ -20,12 +24,20 @@ const routes = [
     component: NewTaipei
   },
   {
+    path: '/New-Taipei/*',
+    redirect: '/New-Taipei'
+  },
+  {
     path: '/Taoyuan',
     component: Taoyuan
   },
   {
     path: '/Taoyuan/:id',
     component: Taoyuan
+  },
+  {
+    path: '/Taoyuan/*',
+    redirect: '/Taoyuan'
   },
   {
     path: '*',

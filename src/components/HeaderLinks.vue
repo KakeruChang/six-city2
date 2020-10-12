@@ -19,19 +19,19 @@ export default {
     return {
       links: [
         {
-          url: './#Taipei',
+          url: './Taipei',
           mark: 'Taipei',
           text: '台北',
           id: 'HeaderLink-Taipei'
         },
         {
-          url: './#New-Taipei',
+          url: './New-Taipei',
           mark: 'New-Taipei',
           text: '新北',
           id: 'HeaderLink-New-Taipei'
         },
         {
-          url: './#Taoyuan',
+          url: './Taoyuan',
           mark: 'Taoyuan',
           text: '桃園',
           id: 'HeaderLink-Taoyuan'

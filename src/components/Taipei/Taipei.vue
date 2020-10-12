@@ -29,6 +29,7 @@
       :active="active"
       :features="features"
       :mainColor="mainColor"
+      :arrowImg="require('../../assets/Taipei/arrow_Taipei.svg')"
       rootUrl="/Taipei"
     />
     <PageFooterV1>
@@ -38,7 +39,9 @@
       >
         <ShareTaipeiProud />
       </OnloadAnchorFrame>
-      <SixCitiesEditor />
+      <SixCitiesEditor
+        :image="['林俊良、徐兆玄、杜建重、余承翰、', '蘇健忠、報系資料庫']"
+      />
       <CityBottomTitle :mainColor="mainColor" city="台北" />
       <OnloadAnchorFrame
         GAtitle="page read: 台北 臉書留言區"

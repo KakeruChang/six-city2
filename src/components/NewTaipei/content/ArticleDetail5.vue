@@ -1,5 +1,5 @@
 <template>
-  <div style="width:100%;">
+  <div style="width: 100%">
     <ArticleContainer
       backgroundColor="transparent"
       :cssProperty="{
@@ -109,6 +109,9 @@ export default {
   color: #171717;
   &.title {
     font-size: 24px;
+    margin-top: 32px;
+    font-family: source-han-sans-cjk-tc, 'Noto Sans TC', 'Microsoft JhengHei',
+      Roboto, sans-serif;
     font-weight: bold;
     line-height: 1.5;
     color: #121212;

@@ -1,7 +1,9 @@
 <template>
   <div class="video-wrapper">
     <div class="video-text" :class="{ hide: titleIsHide }">
-      <div class="city" :style="{ color: mainColor }">{{ cityName[0] }}</div>
+      <div class="city" :style="{ color: mainColor }">
+        {{ cityName[0] }}
+      </div>
       <div class="description">
         <span>{{ description }}</span>
       </div>
@@ -126,7 +128,7 @@ export default {
       }
 
       const callback = (entries, observer) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             this.continueVideo()
           } else {

@@ -25,7 +25,7 @@ h1 {
   font-family: source-han-serif-tc, serif;
   font-size: 60px;
   font-weight: 900;
-  line-height: 1.83;
+  line-height: 1.3;
   color: #afafaf;
   margin: 0 !important;
 }

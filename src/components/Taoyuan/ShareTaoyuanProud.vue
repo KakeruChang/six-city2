@@ -71,13 +71,13 @@ export default {
       metas: [
         {
           text: '老城市面貌',
-          url: '/sharing/old-city',
+          url: '/sharing/ancient-city',
           id: 'taoyuan-meta-1',
           img: require('../../assets/Taoyuan/share/Taoyuan_sharing_old_city.jpg')
         },
         {
           text: '多元族群',
-          url: '/sharing/multiculture',
+          url: '/sharing/different_culture',
           id: 'taoyuan-meta-2',
           img: require('../../assets/Taoyuan/share/Taoyuan_sharing_multiculture.jpg')
         },

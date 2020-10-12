@@ -108,14 +108,15 @@
                 transform: isInside
                   ? `translate(-${arrowBaseDisplacement.x}%,calc( ${
                       arrowBaseDisplacement.y
-                    }% + ${displacementInside * 100}vh))`
-                  : 'translate(0, 0)'
+                    }% + ${displacementInside * 100}vh)) rotate(180deg)`
+                  : 'translate(0, 0) rotate(0deg)'
               }"
               @click="goToPage(features[active])"
               v-if="features[active].titleOut"
             >
               <span :class="{ jump: !isInside }">
-                {{ !isInside ? '￫' : '￩' }}
+                <!-- {{ !isInside ? '￫' : '￩' }} -->
+                <img :src="arrowImg" alt="" />
               </span>
             </span>
           </router-link>
@@ -149,7 +150,8 @@ export default {
     active: { type: Number, default: 0 },
     features: { type: Array },
     mainColor: { type: String },
-    rootUrl: { type: String }
+    rootUrl: { type: String },
+    arrowImg: { type: String }
   },
   components: {
     Progress,
@@ -314,19 +316,28 @@ export default {
     },
     checkPath() {
       if (Object.keys(this.$route.params).length !== 0) {
-        this.isInside = true
-        setTimeout(() => {
-          this.isHide = false
-        }, 500)
-        this.$emit('emitIsInside', true)
-
         const urlId = this.$route.params.id
-        console.log('urlId:', urlId)
+        let trigger = false
         for (let i = 0; i < this.features.length; i += 1) {
-          // if (this.features[i].url === urlId) {
-          console.log(i)
-          console.log(this.features[i])
-          if (this.features[i].url?.indexOf(urlId) !== -1) {
+          if (
+            this.features[i].url &&
+            this.features[i].url?.indexOf(urlId) !== -1
+          ) {
+            trigger = true
+            this.isInside = true
+            setTimeout(() => {
+              this.isHide = false
+            }, 500)
+            this.$emit('emitIsInside', true)
+
+            this.constructObserver()
+            window.addEventListener('scroll', this.countProgressInside, false)
+            window.removeEventListener(
+              'scroll',
+              this.countActiveByHeight,
+              false
+            )
+
             this.$nextTick(() => {
               window.scrollTo({
                 top: this.$refs[`target${i}`][0].offsetTop
@@ -336,10 +347,9 @@ export default {
             break
           }
         }
-
-        this.constructObserver()
-        window.addEventListener('scroll', this.countProgressInside, false)
-        window.removeEventListener('scroll', this.countActiveByHeight, false)
+        if (!trigger) {
+          this.$router.push({ path: '/' })
+        }
       }
     },
     countActiveByHeight() {
@@ -499,8 +509,8 @@ export default {
       const { innerWidth } = window
 
       if (innerWidth > 768) return { x: 300, y: 300 }
-      else if (innerWidth < 375) return { x: 100, y: 450 }
-      else if (innerWidth >= 375 && innerWidth < 576) return { x: 150, y: 500 }
+      else if (innerWidth < 375) return { x: 100, y: 350 }
+      else if (innerWidth >= 375 && innerWidth < 576) return { x: 150, y: 400 }
       // 576~768
       return { x: 200, y: 200 }
     }
@@ -635,7 +645,7 @@ export default {
   font-family: source-han-serif-tc, sans-serif;
   font-size: 36px;
   font-weight: bold;
-  line-height: 1;
+  line-height: 1.5;
   color: #eeeeee;
   @media screen and (max-width: 1024.98px) {
     font-size: 28px;
@@ -709,18 +719,16 @@ export default {
   text-decoration: none;
   display: flex;
   justify-content: center;
-  font-size: 30px;
   line-height: 80%;
   width: 48px;
   height: 48px;
-  border-radius: 50%;
   padding: 10px;
-  background-color: #000;
   border: 1px solid #fff;
+  padding: 15.5px;
+  border-radius: 50%;
   &:focus {
     outline-style: none;
   }
-  transform: translate(0, 0);
   transition: all 0.25s ease-out;
   &.inside {
     transform: translate(-300%, 300%);
