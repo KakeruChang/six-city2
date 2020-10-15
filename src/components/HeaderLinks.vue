@@ -35,6 +35,12 @@ export default {
           mark: 'Taoyuan',
           text: '桃園',
           id: 'HeaderLink-Taoyuan'
+        },
+        {
+          url: './Tainan',
+          mark: 'Tainan',
+          text: '台南',
+          id: 'HeaderLink-Tainan'
         }
       ]
     }
@@ -46,6 +52,9 @@ export default {
       }
       if (this.$route.path.indexOf('New-Taipei') !== -1) {
         return 'New-Taipei'
+      }
+      if (this.$route.path.indexOf('Tainan') !== -1) {
+        return 'Tainan'
       }
       return 'Taipei'
     }

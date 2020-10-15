@@ -22,7 +22,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, _from, next) => {
-  console.log(to)
   if (to.query.fbclid) {
     next(to.path)
   } else {

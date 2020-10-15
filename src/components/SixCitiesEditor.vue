@@ -2,8 +2,9 @@
   <div class="six-cities-editor">
     <FooterEditor>
       <div>
-        <p>製作人</p>
-        <p>謝汶均</p>
+        <p v-if="producer.length <= 3">製作人</p>
+        <p v-else>統籌製作</p>
+        <p>{{ producer }}</p>
       </div>
       <div>
         <p>網頁設計</p>
@@ -54,6 +55,10 @@ export default {
   props: {
     image: {
       type: Array
+    },
+    producer: {
+      type: String,
+      default: '謝汶均'
     }
   },
   components: { FooterEditor, FooterQuestionnaire, FooterShare }

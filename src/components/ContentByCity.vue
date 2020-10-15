@@ -6,6 +6,9 @@
     <template v-if="city === 'New-Taipei'">
       <NewTaipeiContent :isHide="isHide" :active="active" />
     </template>
+    <template v-if="city === 'Tainan'">
+      <TainanContent :isHide="isHide" :active="active" />
+    </template>
     <template v-if="city === 'Taipei'">
       <TaipeiContent :isHide="isHide" :active="active" />
     </template>
@@ -16,6 +19,7 @@
 import TaoyuanContent from './Taoyuan/TaoyuanContent'
 import NewTaipeiContent from './NewTaipei/NewTaipeiContent'
 import TaipeiContent from './Taipei/TaipeiContent'
+import TainanContent from './Tainan/TainanContent'
 
 export default {
   name: 'ContentByCity',
@@ -30,7 +34,8 @@ export default {
   components: {
     TaoyuanContent,
     NewTaipeiContent,
-    TaipeiContent
+    TaipeiContent,
+    TainanContent
   },
   computed: {
     city() {
@@ -39,6 +44,9 @@ export default {
       }
       if (this.$route.path.indexOf('New-Taipei') !== -1) {
         return 'New-Taipei'
+      }
+      if (this.$route.path.indexOf('Tainan') !== -1) {
+        return 'Tainan'
       }
       return 'Taipei'
     }

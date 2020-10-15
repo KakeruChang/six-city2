@@ -33,7 +33,7 @@
               v-if="feature.titleOut"
             >
               <span :class="{ jump: !isInside }">
-                {{ !isInside ? '￫' : '￩' }}
+                <img :src="arrowImg" alt="" />
               </span>
             </span>
           </router-link>
@@ -114,6 +114,35 @@
               @click="goToPage(features[active])"
               v-if="features[active].titleOut"
             >
+              <!-- <span
+                :style="{
+                  color: mainColor,
+                  transform: isInside ? `rotate(180deg)` : 'rotate(0deg)'
+                }"
+                >{{
+                  Math.floor(
+                    parseInt(
+                      displayAreaStyle.transform
+                        .replace('vh)', '')
+                        .replace('translateY(', ''),
+                      10
+                    ),
+                    10
+                  )
+                }}{{ detectingIOS() }}</span
+              > -->
+              <!-- <span
+                style="color:white"
+                :style="{
+                  transform: isInside ? `rotate(180deg)` : 'rotate(0deg)'
+                }"
+                >{{
+                  Math.floor(
+                    parseInt(displayAreaStyle.transform.replace('vh', ''), 10) *
+                      100
+                  ) / 100
+                }}</span
+              > -->
               <span :class="{ jump: !isInside }">
                 <!-- {{ !isInside ? '￫' : '￩' }} -->
                 <img :src="arrowImg" alt="" />
@@ -190,7 +219,7 @@ export default {
               top:
                 this.$refs.featureContainer.offsetTop +
                 this.$refs.featureContainer.offsetHeight -
-                window.innerHeight
+                this.innerHeight
             })
           }
           this.displayAreaFromTop = 0
@@ -233,16 +262,18 @@ export default {
     },
     countProgressInside() {
       this.$nextTick(() => {
-        const { pageYOffset, innerHeight } = window
+        const { pageYOffset } = window
         const targetTop = this.$refs[`target${this.active}`][0].offsetTop
         const targetHeight = this.$refs[`target${this.active}`][0].offsetHeight
         this.progressInside =
-          (pageYOffset - targetTop) / (targetHeight - innerHeight)
+          (pageYOffset - targetTop) / (targetHeight - this.innerHeight)
 
         // count the replacement of inside part
         if (this.progressInside < 0) {
           this.displacementInside =
-            0 * (1 - innerHeight / targetHeight) * (targetHeight / innerHeight)
+            0 *
+            (1 - this.innerHeight / targetHeight) *
+            (targetHeight / this.innerHeight)
 
           if (this.features[this.active].url) {
             window.scrollTo({
@@ -251,12 +282,14 @@ export default {
           }
         } else if (this.progressInside > 1) {
           this.displacementInside =
-            1 * (1 - innerHeight / targetHeight) * (targetHeight / innerHeight)
+            1 *
+            (1 - this.innerHeight / targetHeight) *
+            (targetHeight / this.innerHeight)
         } else {
           this.displacementInside =
             this.progressInside *
-            (1 - innerHeight / targetHeight) *
-            (targetHeight / innerHeight)
+            (1 - this.innerHeight / targetHeight) *
+            (targetHeight / this.innerHeight)
         }
 
         // count : progressToNextPage
@@ -267,7 +300,7 @@ export default {
           const result =
             -(
               pageYOffset +
-              0.5 * innerHeight -
+              0.5 * this.innerHeight -
               (this.$refs[`target${this.active}`][0].offsetTop +
                 this.$refs[`target${this.active}`][0].offsetHeight)
             ) /
@@ -309,10 +342,26 @@ export default {
           window.scrollTo({ top: containerTop })
         }
         // down
-        if (pageYOffset + innerHeight > containerTop + containerHeight) {
-          window.scrollTo({ top: containerTop + containerHeight - innerHeight })
+        if (pageYOffset + this.innerHeight > containerTop + containerHeight) {
+          window.scrollTo({
+            top: containerTop + containerHeight - this.innerHeight
+          })
         }
       })
+    },
+    detectingIOS() {
+      return (
+        [
+          'iPad Simulator',
+          'iPhone Simulator',
+          'iPod Simulator',
+          'iPad',
+          'iPhone',
+          'iPod'
+        ].includes(navigator.platform) ||
+        // iPad on iOS 13 detection
+        (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
+      )
     },
     checkPath() {
       if (Object.keys(this.$route.params).length !== 0) {
@@ -353,7 +402,7 @@ export default {
       }
     },
     countActiveByHeight() {
-      const { innerHeight, pageYOffset } = window
+      const { pageYOffset } = window
       const containerTop = this.$refs.featureContainer.offsetTop
       const containerHeight = this.$refs.featureContainer.offsetHeight
 
@@ -366,10 +415,13 @@ export default {
 
       if (pageYOffset < containerTop) {
         this.displayAreaFromTop = containerTop - pageYOffset
-      } else if (pageYOffset + innerHeight > containerTop + containerHeight) {
+      } else if (
+        pageYOffset + this.innerHeight >
+        containerTop + containerHeight
+      ) {
         this.displayAreaFromTop = -(
           pageYOffset +
-          innerHeight -
+          this.innerHeight -
           (containerTop + containerHeight)
         )
         this.$emit('emitActive', this.features.length - 1)
@@ -377,7 +429,7 @@ export default {
         this.displayAreaFromTop = 0
 
         const activeIndex = Math.round(
-          (pageYOffset - containerTop) / innerHeight
+          (pageYOffset - containerTop) / this.innerHeight
         )
         if (activeIndex < this.features.length) {
           this.$emit('emitActive', activeIndex)
@@ -487,7 +539,7 @@ export default {
     },
     progressBeClicked(i) {
       window.scrollTo({
-        top: this.$refs.featureContainer.offsetTop + innerHeight * i
+        top: this.$refs.featureContainer.offsetTop + this.innerHeight * i
       })
       this.$emit('emitActive', i)
     }
@@ -513,6 +565,13 @@ export default {
       else if (innerWidth >= 375 && innerWidth < 576) return { x: 150, y: 400 }
       // 576~768
       return { x: 200, y: 200 }
+    },
+    innerHeight() {
+      // if (this.detectingIOS()) {
+      //   return document.documentElement.clientHeight
+      // }
+
+      return window.innerHeight
     }
   },
   watch: {
@@ -559,16 +618,17 @@ export default {
       }
     },
     isInside: function() {
-      const { innerHeight } = window
+      // const { innerHeight } = window
 
       if (!this.isInside) {
         setTimeout(() => {
           this.displacementInside = 0
           console.log('this.active:', this.active)
-          console.log('innerHeight:', innerHeight)
+          console.log('innerHeight:', this.innerHeight)
           window.scrollTo({
             top:
-              this.$refs.featureContainer.offsetTop + innerHeight * this.active
+              this.$refs.featureContainer.offsetTop +
+              this.innerHeight * this.active
           })
 
           window.addEventListener('scroll', this.countActiveByHeight, false)
@@ -725,6 +785,7 @@ export default {
   padding: 10px;
   border: 1px solid #fff;
   padding: 15.5px;
+  background-color: rgb(23, 23, 23);
   border-radius: 50%;
   &:focus {
     outline-style: none;

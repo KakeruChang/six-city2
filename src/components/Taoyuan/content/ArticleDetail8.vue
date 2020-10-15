@@ -61,19 +61,6 @@
           require('../../../assets/Taoyuan/web/8_Taoyuan_new-color_pic1.jpg')
         "
         alt="為了讓桃園有更多元的面貌，藝術家出身的蔡奕勳在老城區打造一塊結合咖啡廳和藝文展覽空間的綠洲，「只是光影」獨立咖啡廳的牆面上擺滿歷年展覽作品。"
-      ></ArticleColumnOne>
-      <ArticleColumnOne
-        v-if="!isHide"
-        :srcMob="
-          require('../../../assets/Taoyuan/mob/8_Taoyuan_new-color_pic2_mob.jpg')
-        "
-        :srcPad="
-          require('../../../assets/Taoyuan/pad/8_Taoyuan_new-color_pic2.jpg')
-        "
-        :srcPc="
-          require('../../../assets/Taoyuan/web/8_Taoyuan_new-color_pic2.jpg')
-        "
-        alt="為了讓桃園有更多元的面貌，藝術家出身的蔡奕勳在老城區打造一塊結合咖啡廳和藝文展覽空間的綠洲，「只是光影」獨立咖啡廳的牆面上擺滿歷年展覽作品。"
         >為了讓桃園有更多元的面貌，藝術家出身的蔡奕勳在老城區打造一塊結合咖啡廳和藝文展覽空間的綠洲，「只是光影」獨立咖啡廳的牆面上擺滿歷年展覽作品。記者謝汶均／攝影</ArticleColumnOne
       >
 
