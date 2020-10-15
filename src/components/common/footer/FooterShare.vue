@@ -125,7 +125,7 @@ export default {
 .footer-share {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-start;
   padding-bottom: 104px;
 }
 .footer-share__share-fb {

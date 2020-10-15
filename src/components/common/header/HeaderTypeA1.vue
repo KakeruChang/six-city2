@@ -1,32 +1,50 @@
 <template>
-  <header :class="{
+  <header
+    :class="{
       'header-bar': true,
-      'header-bar--hide': !activeFlag,
-    }">
+      'header-bar--hide': !activeFlag
+    }"
+  >
     <!-- <header :class="{
       'header-bar': true,
       'header-bar--hide': !activeFlag,
     }">-->
-    <HeaderMenu :menuActiveFlag="menuActiveFlag" :simplified="true" :outlink="outlink">
+    <HeaderMenu
+      :menuActiveFlag="menuActiveFlag"
+      :simplified="true"
+      :outlink="outlink"
+    >
       <slot />
     </HeaderMenu>
     <div
       class="header-bar__nav__container"
-      :class="{'header-bar__nav__container_dark':theme==='dark',
-               'header-bar__nav__container_light':theme==='light'}"
+      :class="{
+        'header-bar__nav__container_dark': theme === 'dark',
+        'header-bar__nav__container_light': theme === 'light'
+      }"
     >
       <!-- <nav class="header-bar__nav" v-if="activeFlag"> -->
       <div style="display:flex">
         <!-- <nav class="header-bar__nav header-bar-logo" :class="{'header-bar-logo-hide':!activeFlag}"> -->
         <nav
           class="header-bar__nav header-bar-logo"
-          :class="{ 'header-bar-logo-hide': !isAtTop,
-        'header-bar-logo-dark':theme==='dark',
-        'header-bar-logo-light':theme==='light'
-         }"
+          :class="{
+            'header-bar-logo-hide': !isAtTop,
+            'header-bar-logo-dark': theme === 'dark',
+            'header-bar-logo-light': theme === 'light'
+          }"
         >
-          <div class="header-bar__logo" @click="sendGA(formatGA('HeaderUdnLogo'))">
-            <a :href="href" target="_blank" rel="noopener" aria-label="聯logo" name="聯logo">
+          <div
+            class="header-bar__logo"
+            @click="sendGA(formatGA('HeaderUdnLogo'))"
+          >
+            <a
+              :href="href"
+              target="_blank"
+              rel="noopener"
+              aria-label="聯logo"
+              name="聯logo"
+            >
               <UdnLogo :theme="theme" />
             </a>
           </div>
@@ -86,7 +104,12 @@
       <nav class="header-bar__nav">
         <div class="header-bar-share__container">
           <div class="header-bar-share__share-icon">
-            <ShareFb :theme="theme" :active="active" :rootCity="rootCity" :isInside="isInside" />
+            <ShareFb
+              :theme="theme"
+              :active="active"
+              :rootCity="rootCity"
+              :isInside="isInside"
+            />
           </div>
           <div class="header-bar-share__share-icon">
             <ShareLine
@@ -147,7 +170,7 @@ export default {
     },
     href: {
       type: String,
-      default: 'https://bit.ly/34ea7d9'
+      default: 'https://vip.udn.com/vip/index'
       // default: document.querySelector('meta[property="og:url"]').content,
     },
     outlink: {
@@ -201,7 +224,7 @@ export default {
       else this.sendGA(this.formatGA('HeaderMenuClose'))
     },
     handleScroll: _debounce(
-      function () {
+      function() {
         if (!this.ticking) {
           window.requestAnimationFrame(() => {
             // activeFlag

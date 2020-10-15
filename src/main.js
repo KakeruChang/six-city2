@@ -21,30 +21,17 @@ const router = new VueRouter({
   // mode: 'history'
 })
 
-// router.afterEach(async (to, from, next) => {
-//   if (from.path.indexOf('Taipei') === -1) {
-//     console.log('after')
-//   }
-// })
-
-// router.beforeEach(async (to, from, next) => {
-//   console.log(from)
-
-//   if (from.path.indexOf('Taipei') == -1) {
-//     router.push('Taipei')
-//   }
-
-//   // if (from.name === null &&
-//   //   to.name !== 'Login' &&
-//   //   (route.app.$store === undefined ||
-//   //    route.app.$store.getters.token.length === 0)) {
-//   //      route.push('/')
-//   // }
-//   //...
-// })
+router.beforeEach((to, _from, next) => {
+  if (to.query.fbclid) {
+    next(to.path)
+  } else {
+    next()
+  }
+})
 
 Vue.config.productionTip = false
 Vue.prototype.$anchorList = []
+// Vue.prototype.fbq = window.fbq
 
 new Vue({
   store,

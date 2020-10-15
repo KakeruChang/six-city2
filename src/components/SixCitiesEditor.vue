@@ -1,9 +1,10 @@
 <template>
-  <div class="six-cities-editor ">
+  <div class="six-cities-editor">
     <FooterEditor>
       <div>
-        <p>製作人</p>
-        <p>謝汶均</p>
+        <p v-if="producer.length <= 3">製作人</p>
+        <p v-else>統籌製作</p>
+        <p>{{ producer }}</p>
       </div>
       <div>
         <p>網頁設計</p>
@@ -11,13 +12,14 @@
       </div>
       <div>
         <p>網頁製作</p>
-        <p>張庭瑋</p>
+        <p>張庭瑋、周融聖</p>
       </div>
       <div>
         <p>影像</p>
-        <p style="max-width:275px;">
-          林俊良、徐兆玄、杜建重、余承翰、
-          <br />蘇健忠、報系資料庫
+        <p style="max-width: 275px">
+          <span v-for="(item, i) in image" :key="item"
+            >{{ image[i] }}<br
+          /></span>
         </p>
       </div>
       <div>
@@ -50,6 +52,15 @@ import FooterShare from '@/components/common/footer/FooterShare.vue'
 
 export default {
   name: 'SixCitiesEditor',
+  props: {
+    image: {
+      type: Array
+    },
+    producer: {
+      type: String,
+      default: '謝汶均'
+    }
+  },
   components: { FooterEditor, FooterQuestionnaire, FooterShare }
 }
 </script>

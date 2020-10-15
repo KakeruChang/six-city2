@@ -26,6 +26,8 @@ import Utils from '@/utils/udn-newmedia-utils'
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
 import taipeiData from '../../../data/data-taipei'
 import newTaipeiData from '../../../data/data-new-taipei'
+import taoyuanData from '../../../data/data-taoyuan'
+import tainanData from '../../../data/data-tainan'
 
 const isMobile = Utils.detectMob()
 const isInApp = Utils.isFacebookApp(148) || Utils.isLineApp()
@@ -50,8 +52,14 @@ export default {
   },
   computed: {
     content() {
+      if (this.$route.path.indexOf('Taoyuan') !== -1) {
+        return taoyuanData
+      }
       if (this.$route.path.indexOf('New-Taipei') !== -1) {
         return newTaipeiData
+      }
+      if (this.$route.path.indexOf('Tainan') !== -1) {
+        return tainanData
       }
       // Taipei
       return taipeiData
