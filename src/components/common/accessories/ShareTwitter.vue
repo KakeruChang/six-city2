@@ -67,7 +67,9 @@ export default {
         sharedUrl = `${window.location.origin}/${this.rootCity}/${
           this.content[this.active].url
         }`
-        shareContent = this.content[this.active].meta.description
+        shareContent = this.content[this.active].meta
+          ? this.content[this.active].meta.description
+          : ''
       } else {
         sharedUrl = `${window.location.origin}/${this.rootCity}`
         shareContent = this.metaMainDescription

@@ -27,9 +27,8 @@
         原本差差要帶採訪團隊去拍攝花磚老屋，也在拍攝前夕被拆空，改變與破壞每天都在發生。「改變已經沒有辦法挽回，只能放任它持續下去，把我們過去曾有的生活痕跡都抹滅掉，到最後一點痕跡都不見了，真的讓人感到蠻無力的」。
       </p>
     </ArticleContainer>
-
     <ArticleYoutube
-      src="https://www.youtube.com/embed/NBqGyQFABsY"
+      src="https://www.youtube.com/embed/8ECoRjeZsrc"
       :articleMargin="false"
     />
 

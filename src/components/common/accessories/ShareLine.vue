@@ -99,8 +99,12 @@ export default {
         sharedUrl = `${window.location.origin}/${this.rootCity}/${
           this.content[this.active].url
         }`
-        sharedContent = this.content[this.active].meta.description
-        sharedText = this.content[this.active].meta.title
+        sharedContent = this.content[this.active].meta
+          ? this.content[this.active].meta.description
+          : ''
+        sharedText = this.content[this.active].meta
+          ? this.content[this.active].meta.title
+          : ''
       } else {
         sharedUrl = `${window.location.origin}/${this.rootCity}`
         sharedContent = this.metaMainDescription

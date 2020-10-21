@@ -2,8 +2,8 @@
   <button
     :class="buttonClassAttr"
     :style="{
-      'border-color': theme === 'contained' ?  'transparent' : bgColor,
-      'background-color': theme === 'contained' ? bgColor : 'transparent',
+      'border-color': theme === 'contained' ? 'transparent' : bgColor,
+      'background-color': theme === 'contained' ? bgColor : 'transparent'
     }"
     :ariaLabel="ariaLabel"
     :name="name"
@@ -13,7 +13,7 @@
   >
     <div :class="rippleClassAttr"></div>
     <div class="nmd-button__text">
-      <p class="small" :style="{ 'color': textColor }">
+      <p class="small" :style="{ color: textColor }">
         <slot />
       </p>
     </div>
@@ -58,7 +58,7 @@ export default {
     },
     clickEvent: {
       type: Function,
-      default: function () {}
+      default: function() {}
     }
   },
   data() {
@@ -105,7 +105,6 @@ export default {
   overflow: hidden;
   position: relative;
   height: 35px;
-  padding: 0 64px;
   @include clean-btn;
   border-style: solid;
   border-width: 1px;
@@ -113,6 +112,9 @@ export default {
   white-space: nowrap;
   @media screen and(max-width: 576px) {
     width: 287px;
+  }
+  @media screen and(min-width: 576px) {
+    padding: 0 64px;
   }
 
   &.nmd-button--contained {

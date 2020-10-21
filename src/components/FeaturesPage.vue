@@ -10,10 +10,10 @@
     <!-- data-area -->
     <div v-for="(feature, i) in features" :key="feature.id">
       <div v-if="!isInside" class="target outside" :data-target="i">
-        <div class="side-title">
+        <div class="side-title" style="opacity:0">
           <img :src="features[active].sideTitleImg" alt />
         </div>
-        <div class="outside-area">
+        <div class="outside-area" style="opacity:0">
           <div class="title-outside">{{ feature.titleOut }}</div>
           <p
             class="text-outside"
@@ -46,11 +46,13 @@
         :data-target="i"
         style="background: rgb(23, 23, 23)"
       >
-        <div style="height: 54.4vh" />
+        <!-- <div style="height: 54.4vh" /> -->
+        <div :style="{ height: `${0.544 * innerHeight}px` }" />
         <FeatureContent
           :active="i"
           :isHide="false"
           :opacity="0"
+          :innerHeight="innerHeight"
           :features="features"
         />
       </div>
@@ -108,43 +110,28 @@
                 transform: isInside
                   ? `translate(-${arrowBaseDisplacement.x}%,calc( ${
                       arrowBaseDisplacement.y
-                    }% + ${displacementInside * 100}vh)) rotate(180deg)`
+                    }% + ${displacementInside *
+                      this.innerHeight}px)) rotate(180deg)`
                   : 'translate(0, 0) rotate(0deg)'
               }"
               @click="goToPage(features[active])"
               v-if="features[active].titleOut"
             >
               <!-- <span
-                :style="{
-                  color: mainColor,
-                  transform: isInside ? `rotate(180deg)` : 'rotate(0deg)'
-                }"
-                >{{
-                  Math.floor(
-                    parseInt(
-                      displayAreaStyle.transform
-                        .replace('vh)', '')
-                        .replace('translateY(', ''),
-                      10
-                    ),
-                    10
-                  )
-                }}{{ detectingIOS() }}</span
-              > -->
-              <!-- <span
-                style="color:white"
-                :style="{
-                  transform: isInside ? `rotate(180deg)` : 'rotate(0deg)'
-                }"
-                >{{
-                  Math.floor(
-                    parseInt(displayAreaStyle.transform.replace('vh', ''), 10) *
-                      100
-                  ) / 100
-                }}</span
-              > -->
+              class="btn-arrow"
+              :class="{ inside: isInside }"
+              :style="{
+                color: mainColor,
+                transform: isInside
+                  ? `translate(-${arrowBaseDisplacement.x}%,calc( ${
+                      arrowBaseDisplacement.y
+                    }% + ${displacementInside * 100}vh)) rotate(180deg)`
+                  : 'translate(0, 0) rotate(0deg)'
+              }"
+              @click="goToPage(features[active])"
+              v-if="features[active].titleOut"
+            > -->
               <span :class="{ jump: !isInside }">
-                <!-- {{ !isInside ? '￫' : '￩' }} -->
                 <img :src="arrowImg" alt="" />
               </span>
             </span>
@@ -157,6 +144,7 @@
               :active="active"
               :features="features"
               :mainColor="mainColor"
+              :innerHeight="innerHeight"
               @scrollToNext="scrollToNext"
               :progressToNextPage="progressToNextPage"
             />
@@ -202,7 +190,8 @@ export default {
       displayAreaFromTop: 0,
       nextTrigger: false,
       oldScrollingPosition: 0,
-      isSideTitleChanged: false
+      isSideTitleChanged: false,
+      innerHeight: window.innerHeight
     }
   },
   methods: {
@@ -542,14 +531,30 @@ export default {
         top: this.$refs.featureContainer.offsetTop + this.innerHeight * i
       })
       this.$emit('emitActive', i)
+    },
+    handleResize() {
+      // if (this.detectingIOS()) {
+      //   this.innerHeight = document.documentElement.clientHeight
+      // } else {
+      //   this.innerHeight = window.innerHeight
+      // }
+      const innerHeight = require('ios-inner-height')
+
+      this.innerHeight = innerHeight()
     }
   },
   computed: {
     displayAreaStyle() {
+      // let areaStyle = {
+      //   top: `${this.displayAreaFromTop}px`,
+      //   height: !this.isInside && '100vh',
+      //   transform: `translateY(-${this.displacementInside * 100}vh)`
+      // }
       let areaStyle = {
         top: `${this.displayAreaFromTop}px`,
-        height: !this.isInside && '100vh',
-        transform: `translateY(-${this.displacementInside * 100}vh)`
+        height: !this.isInside && `${this.innerHeight}px`,
+        transform: `translateY(-${this.displacementInside *
+          this.innerHeight}px)`
       }
       if (!this.isInside) {
         areaStyle = { ...areaStyle, overflow: 'hidden' }
@@ -565,14 +570,14 @@ export default {
       else if (innerWidth >= 375 && innerWidth < 576) return { x: 150, y: 400 }
       // 576~768
       return { x: 200, y: 200 }
-    },
-    innerHeight() {
-      // if (this.detectingIOS()) {
-      //   return document.documentElement.clientHeight
-      // }
-
-      return window.innerHeight
     }
+    // innerHeight() {
+    //   if (this.detectingIOS()) {
+    //     return document.documentElement.clientHeight
+    //   }
+
+    //   return window.innerHeight
+    // }
   },
   watch: {
     active: function() {
@@ -632,14 +637,16 @@ export default {
           })
 
           window.addEventListener('scroll', this.countActiveByHeight, false)
-        }, 0)
+        }, 300)
       }
     }
   },
   mounted() {
+    this.handleResize()
     this.countActiveByHeight()
     window.addEventListener('scroll', this.countActiveByHeight, false)
     window.addEventListener('popstate', this.handlePopState, false)
+    window.addEventListener('resize', this.handleResize, false)
     this.checkPath()
   },
   destroyed() {
@@ -803,6 +810,9 @@ export default {
   &.active {
     opacity: 1;
     transform: translateY(0);
+    @media screen and (min-aspect-ratio: 3/4) {
+      transform: translateY(-100px);
+    }
   }
   &.no-img {
     @media screen and (max-width: 1024.98px) {

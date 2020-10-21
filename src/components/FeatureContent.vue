@@ -13,7 +13,10 @@
           @scrollToNext="scrollToNext"
         />
       </ArticleContainer>
-      <div class="safe-area" v-if="active !== features.length - 1" />
+      <div
+        :style="{ marginBottom: `${this.innerHeight / 2}px` }"
+        v-if="active !== features.length - 1"
+      />
     </template>
   </div>
 </template>
@@ -40,7 +43,10 @@ export default {
       type: Number
     },
     features: { type: Array },
-    mainColor: { type: String }
+    mainColor: { type: String },
+    innerHeight: {
+      type: Number
+    }
   },
   components: {
     NextPageIndicator,
@@ -67,8 +73,5 @@ export default {
 <style lang="scss" scoped>
 .detail-container {
   width: 100%;
-}
-.safe-area {
-  margin-bottom: 50vh;
 }
 </style>
