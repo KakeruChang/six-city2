@@ -2,8 +2,7 @@
   <div class="six-cities-editor">
     <FooterEditor>
       <div>
-        <p v-if="producer.length <= 3">製作人</p>
-        <p v-else>統籌製作</p>
+        <p>統籌製作</p>
         <p>{{ producer }}</p>
       </div>
       <div>

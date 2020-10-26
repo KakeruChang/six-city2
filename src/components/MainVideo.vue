@@ -5,9 +5,16 @@
         {{ cityName[0] }}
       </div>
       <div class="description">
-        <span>{{ description }}</span>
+        <span>
+          {{ description }}
+          <span class="arrow-wrapper">
+            <NmdArrow />
+          </span>
+        </span>
       </div>
-      <div class="city" :style="{ color: mainColor }">{{ cityName[1] }}</div>
+      <div class="city" :style="{ color: mainColor }">
+        {{ cityName[1] }}
+      </div>
     </div>
     <div class="video">
       <video
@@ -28,9 +35,11 @@
 
 <script>
 import { rwdMethods, sendGaMethods } from '@/mixins/masterBuilder.js'
+import NmdArrow from '../components/common/accessories/NmdArrow'
 
 export default {
   name: 'MainVideo',
+  components: { NmdArrow },
   props: {
     city: {
       type: String
@@ -68,7 +77,6 @@ export default {
       return this.videoPC
     }
   },
-  components: {},
   data() {
     return {
       titleIsHide: false,
@@ -128,7 +136,7 @@ export default {
       }
 
       const callback = (entries, observer) => {
-        entries.forEach((entry) => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             this.continueVideo()
           } else {
@@ -204,7 +212,7 @@ export default {
   }
   .description {
     display: flex;
-    align-items: center;
+    // align-items: center;
     & > span {
       width: 45px;
       font-family: source-han-serif-tc, serif;
@@ -212,6 +220,7 @@ export default {
       font-weight: bold;
       line-height: 1.13;
       color: #eeeeee;
+      text-align: center;
       @media screen and (max-width: 650px) {
         width: 35px;
         font-size: 32px;
@@ -224,6 +233,12 @@ export default {
     //   margin-top: 50px;
     // }
   }
+}
+.arrow-wrapper {
+  width: 100%;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
 }
 .video {
   z-index: 0;

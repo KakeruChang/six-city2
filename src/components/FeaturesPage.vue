@@ -545,11 +545,6 @@ export default {
   },
   computed: {
     displayAreaStyle() {
-      // let areaStyle = {
-      //   top: `${this.displayAreaFromTop}px`,
-      //   height: !this.isInside && '100vh',
-      //   transform: `translateY(-${this.displacementInside * 100}vh)`
-      // }
       let areaStyle = {
         top: `${this.displayAreaFromTop}px`,
         height: !this.isInside && `${this.innerHeight}px`,
@@ -571,13 +566,6 @@ export default {
       // 576~768
       return { x: 200, y: 200 }
     }
-    // innerHeight() {
-    //   if (this.detectingIOS()) {
-    //     return document.documentElement.clientHeight
-    //   }
-
-    //   return window.innerHeight
-    // }
   },
   watch: {
     active: function() {
@@ -810,7 +798,7 @@ export default {
   &.active {
     opacity: 1;
     transform: translateY(0);
-    @media screen and (min-aspect-ratio: 3/4) {
+    @media screen and (max-aspect-ratio: 3/4) and (min-width: 576px) {
       transform: translateY(-100px);
     }
   }
