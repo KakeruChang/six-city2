@@ -28,6 +28,7 @@ import taipeiData from '../../../data/data-taipei'
 import newTaipeiData from '../../../data/data-new-taipei'
 import taoyuanData from '../../../data/data-taoyuan'
 import tainanData from '../../../data/data-tainan'
+import kaohsiungData from '../../../data/data-kaohsiung'
 
 const isMobile = Utils.detectMob()
 const isInApp = Utils.isFacebookApp(148) || Utils.isLineApp()
@@ -61,6 +62,12 @@ export default {
       if (this.$route.path.indexOf('Tainan') !== -1) {
         return tainanData
       }
+      if (this.$route.path.indexOf('Kaohsiung') !== -1) {
+        return kaohsiungData
+      }
+      // if (this.$route.path.indexOf('Taichung') !== -1) {
+      //   return taichungData
+      // }
       // Taipei
       return taipeiData
     },

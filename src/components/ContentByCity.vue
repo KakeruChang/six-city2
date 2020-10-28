@@ -9,6 +9,9 @@
     <template v-if="city === 'Tainan'">
       <TainanContent :isHide="isHide" :active="active" />
     </template>
+    <template v-if="city === 'Kaohsiung'">
+      <KaohsiungContent :isHide="isHide" :active="active" />
+    </template>
     <template v-if="city === 'Taipei'">
       <TaipeiContent :isHide="isHide" :active="active" />
     </template>
@@ -20,6 +23,7 @@ import TaoyuanContent from './Taoyuan/TaoyuanContent'
 import NewTaipeiContent from './NewTaipei/NewTaipeiContent'
 import TaipeiContent from './Taipei/TaipeiContent'
 import TainanContent from './Tainan/TainanContent'
+import KaohsiungContent from './Kaohsiung/KaohsiungContent'
 
 export default {
   name: 'ContentByCity',
@@ -35,7 +39,8 @@ export default {
     TaoyuanContent,
     NewTaipeiContent,
     TaipeiContent,
-    TainanContent
+    TainanContent,
+    KaohsiungContent
   },
   computed: {
     city() {
@@ -47,6 +52,9 @@ export default {
       }
       if (this.$route.path.indexOf('Tainan') !== -1) {
         return 'Tainan'
+      }
+      if (this.$route.path.indexOf('Kaohsiung') !== -1) {
+        return 'Kaohsiung'
       }
       return 'Taipei'
     }

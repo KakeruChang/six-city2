@@ -41,6 +41,18 @@ export default {
           mark: 'Tainan',
           text: '台南',
           id: 'HeaderLink-Tainan'
+        },
+        {
+          url: './Kaohsiung',
+          mark: 'Kaohsiung',
+          text: '高雄',
+          id: 'HeaderLink-Kaohsiung'
+        },
+        {
+          url: './Taichung',
+          mark: 'Taichung',
+          text: '台中',
+          id: 'HeaderLink-Taichung'
         }
       ]
     }
@@ -55,6 +67,12 @@ export default {
       }
       if (this.$route.path.indexOf('Tainan') !== -1) {
         return 'Tainan'
+      }
+      if (this.$route.path.indexOf('Kaohsiung') !== -1) {
+        return 'Kaohsiung'
+      }
+      if (this.$route.path.indexOf('Taichung') !== -1) {
+        return 'Taichung'
       }
       return 'Taipei'
     }

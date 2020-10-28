@@ -214,6 +214,7 @@ export default {
     display: flex;
     // align-items: center;
     & > span {
+      padding-top: 50px;
       width: 45px;
       font-family: source-han-serif-tc, serif;
       font-size: 40px;
@@ -222,6 +223,7 @@ export default {
       color: #eeeeee;
       text-align: center;
       @media screen and (max-width: 650px) {
+        padding-top: 0;
         width: 35px;
         font-size: 32px;
       }
