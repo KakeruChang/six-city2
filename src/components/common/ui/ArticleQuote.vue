@@ -11,12 +11,13 @@
         <img :src="img" :alt="text" />
       </div>
       <div v-if="text" class="article-quote__text">
-        <p>{{ text }}</p>
+        <p :style="{ color }">{{ text }}</p>
       </div>
     </div>
+    <slot />
     <div v-if="refer" class="article-quote__down-section">
       <div class="article-quote__refer">
-        <p class="small">—— {{ refer }}</p>
+        <p class="small" :style="{ color }">—— {{ refer }}</p>
       </div>
     </div>
   </div>

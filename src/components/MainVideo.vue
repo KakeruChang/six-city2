@@ -6,7 +6,14 @@
       </div>
       <div class="description">
         <span>
-          {{ description }}
+          <template v-if="typeof description === 'string'">{{
+            description
+          }}</template>
+          <template v-else>
+            <div v-for="(item, i) in description" :key="i">
+              {{ item }}
+            </div>
+          </template>
           <span class="arrow-wrapper">
             <NmdArrow />
           </span>
@@ -45,7 +52,7 @@ export default {
       type: String
     },
     description: {
-      type: String
+      type: [String, Array]
     },
     videoPC: {
       type: String

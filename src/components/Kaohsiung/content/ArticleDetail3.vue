@@ -23,20 +23,6 @@
       <p class="content-1">
         是什麼原因改變了高雄人對這座城市的認同感？我們訪問了獨立書店三餘書店負責人謝一麟，請他談談這幾年來，高雄人怎麼看自己的城市。
       </p>
-      <!-- <ArticleColumnOne
-        v-if="!isHide"
-        :srcMob="
-          require('../../../assets/Tainan/mob/5_Tainan_migrate_pic1_mob.jpg')
-        "
-        :srcPad="
-          require('../../../assets/Tainan/pad/5_Tainan_migrate_pic1_web.jpg')
-        "
-        :srcPc="
-          require('../../../assets/Tainan/web/5_Tainan_migrate_pic1_web.jpg')
-        "
-        alt="從台北移居到台南6年多的Cina(右)與先生，目前在台南經營「兜台南」老屋民宿品牌，希望為台南保留更多老房子。"
-        >從台北移居到台南6年多的Cina(右)與先生，目前在台南經營「兜台南」老屋民宿品牌，希望為台南保留更多老房子。記者許瑋琳／攝影</ArticleColumnOne
-      > -->
       <ArticleQuote
         borderColor="transparent"
         color="#eeeeee"

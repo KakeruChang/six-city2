@@ -7,7 +7,7 @@ import cityBgWebImg0 from '../assets/Kaohsiung/web/1_Kaohsiung_Datung_bg_web.jpg
 import cityBgWebImg1 from '../assets/Kaohsiung/web/2_Kaohsiung_Old_Yencheng_bg_web.jpg'
 import cityBgWebImg2 from '../assets/Kaohsiung/web/3_Kaohsiung_Qishan_bg_web.jpg'
 import cityBgWebImg3 from '../assets/Kaohsiung/web/4_Kaohsiung_Rooted_bg_web.jpg'
-import cityBgWebImg4 from '../assets/Kaohsiung/web/4_Kaohsiung_Rooted_bg_web.jpg'
+import cityBgWebImg4 from '../assets/Kaohsiung/web/5_Kaohsiung_Stay_Hometown_bg_web.jpg'
 import cityBgWebImg5 from '../assets/Kaohsiung/web/6_Kaohsiung_Kezailia_bg_web.jpg'
 import cityBgWebImg7 from '../assets/Kaohsiung/web/7_Kaohsiung_20_Years_Later_bg_web.jpg'
 
@@ -15,7 +15,7 @@ import cityBgPadImg0 from '../assets/Kaohsiung/pad/1_Kaohsiung_Datung_bg_mob.jpg
 import cityBgPadImg1 from '../assets/Kaohsiung/pad/2_Kaohsiung_Old_Yencheng_bg_mob.jpg'
 import cityBgPadImg2 from '../assets/Kaohsiung/pad/3_Kaohsiung_Qishan_bg_mob.jpg'
 import cityBgPadImg3 from '../assets/Kaohsiung/pad/4_Kaohsiung_Rooted_bg_mob.jpg'
-import cityBgPadImg4 from '../assets/Kaohsiung/pad/4_Kaohsiung_Rooted_bg_mob.jpg'
+import cityBgPadImg4 from '../assets/Kaohsiung/pad/5_Kaohsiung_Stay_Hometown_bg_mob.jpg'
 import cityBgPadImg5 from '../assets/Kaohsiung/pad/6_Kaohsiung_Kezailia_bg_mob.jpg'
 import cityBgPadImg7 from '../assets/Kaohsiung/pad/7_Kaohsiung_20_Years_Later_bg_mob.jpg'
 
@@ -23,7 +23,7 @@ import cityBgMobImg0 from '../assets/Kaohsiung/mob/1_Kaohsiung_Datung_bg_mob.jpg
 import cityBgMobImg1 from '../assets/Kaohsiung/mob/2_Kaohsiung_Old_Yencheng_bg_mob.jpg'
 import cityBgMobImg2 from '../assets/Kaohsiung/mob/3_Kaohsiung_Qishan_bg_mob.jpg'
 import cityBgMobImg3 from '../assets/Kaohsiung/mob/4_Kaohsiung_Rooted_bg_mob.jpg'
-import cityBgMobImg4 from '../assets/Kaohsiung/mob/4_Kaohsiung_Rooted_bg_mob.jpg'
+import cityBgMobImg4 from '../assets/Kaohsiung/mob/5_Kaohsiung_Stay_Hometown_bg_mob.jpg'
 import cityBgMobImg5 from '../assets/Kaohsiung/mob/6_Kaohsiung_Kezailia_bg_mob.jpg'
 import cityBgMobImg7 from '../assets/Kaohsiung/mob/7_Kaohsiung_20_Years_Later_bg_mob.jpg'
 

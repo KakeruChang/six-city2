@@ -2,20 +2,17 @@
   <div class="share-proud">
     <picture class="proud-side-title">
       <source
-        :srcset="require('../../assets/Kaohsiung/SVG/Kaohsiung_proud_mob.svg')"
+        :srcset="require('../../assets/Taichung/SVG/Taichung_proud_mob.svg')"
         media="(max-width: 767.8px)"
       />
-      <img
-        :src="require('../../assets/Kaohsiung/SVG/Kaohsiung_proud.svg')"
-        alt
-      />
+      <img :src="require('../../assets/Taichung/SVG/Taichung_proud.svg')" alt />
     </picture>
     <ArticleContainer backgroundColor="transparent">
       <div class="proud-title" v-if="isMob">
-        <h2 style="margin: 0">分享高雄市讓你</h2>
+        <h2 style="margin: 0">分享台中市讓你</h2>
         <h2>驕傲的地方</h2>
       </div>
-      <h2 class="proud-title" v-else>分享高雄市讓你驕傲的地方</h2>
+      <h2 class="proud-title" v-else>分享台中市讓你驕傲的地方</h2>
       <div class="btn-wrapper">
         <button
           v-for="(meta, i) in metas"
@@ -46,10 +43,10 @@
         </a>
         <router-link
           class="link-next link-lg"
-          to="./Taipei"
+          to="./Tainan"
           target="_blank"
           @click="goToNext"
-          >下一篇：台北市
+          >下一篇：台南市
         </router-link>
       </div>
     </ArticleContainer>
@@ -61,35 +58,35 @@ import ArticleContainer from '../common/ui/ArticleContainer'
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
 
 export default {
-  name: 'ShareTainanProud',
+  name: 'ShareTaichungProud',
   mixins: [sendGaMethods],
   components: { ArticleContainer },
   data() {
     return {
       metas: [
         {
-          text: '音樂祭',
-          url: '/sharing/Music_Festival',
-          id: 'kaohsiung-meta-1',
-          img: require('../../assets/Kaohsiung/share/Kaohsiung_sharing_Music_Festival.jpg')
+          text: '陽光好天氣',
+          url: '/sharing/sunshine',
+          id: 'taichung-meta-1',
+          img: require('../../assets/Taichung/share/Taichung_sharing_sunshine.jpg')
         },
         {
-          text: '港都文化',
-          url: '/sharing/Harbor_Culture',
-          id: 'kaohsiung-meta-2',
-          img: require('../../assets/Kaohsiung/share/Kaohsiung_sharing_Harbor_Culture.jpg')
+          text: '創意小吃',
+          url: '/sharing/creativecuisine',
+          id: 'taichung-meta-2',
+          img: require('../../assets/Taichung/share/Taichung_sharing_creativecuisine.jpg')
         },
         {
-          text: '農村生活',
-          url: '/sharing/Countryside',
-          id: 'kaohsiung-meta-3',
-          img: require('../../assets/Kaohsiung/share/Kaohsiung_sharing_Countryside.jpg')
+          text: '網美景點',
+          url: '/sharing/hotspot',
+          id: 'taichung-meta-3',
+          img: require('../../assets/Taichung/share/Taichung_sharing_hotspot.jpg')
         },
         {
-          text: '老鹽埕面貌',
-          url: '/sharing/Yencheng',
-          id: 'kaohsiung-meta-4',
-          img: require('../../assets/Kaohsiung/share/Kaohsiung_sharing_Yencheng.jpg')
+          text: '宗教時尚',
+          url: '/sharing/religion',
+          id: 'taichung-meta-4',
+          img: require('../../assets/Taichung/share/Taichung_sharing_religion.jpg')
         }
       ],
       active: 0
@@ -110,7 +107,7 @@ export default {
       this.sendGA({
         category: 'furtherreading',
         action: 'click',
-        label: 'furtherreading_台北市'
+        label: 'furtherreading_台南市'
       })
     }
   },

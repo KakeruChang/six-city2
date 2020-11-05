@@ -38,11 +38,11 @@
       <p class="content-1">
         每個人都在懷疑自己的時候，這個地方就會失去原本的樣貌。地方還是需要有對於自己地方認同的共識，這個共識是什麼，其實我們就是用香蕉來找答案。
       </p>
-      <ArticleYoutube
-        src="https://www.youtube.com/embed/8ECoRjeZsrc"
-        :articleMargin="false"
-      />
     </ArticleContainer>
+    <ArticleYoutube
+      src="https://www.youtube.com/embed/FzelSegS3pA"
+      :articleMargin="false"
+    />
     <ArticleContainer v-if="!isHide">
       <p class="content-2">
         這10年來，大家在思考，怎麼重新面對這個地方的香蕉產業跟文化。產業需要被改變，這邊的人需要被留住，有很多不同的地方文化是需要被延續。

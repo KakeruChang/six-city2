@@ -2,7 +2,7 @@
   <div>
     <div class="link-wrapper" v-for="link in links" :key="link.id">
       <a
-        class="link"
+        class="link theme-light"
         :class="{ 'active-link': activeCity === link.mark }"
         :href="activeCity === link.mark ? 'javascript:void(0)' : link.url"
         :target="activeCity !== link.mark && '_blank'"
@@ -85,15 +85,36 @@ export default {
   justify-content: center;
 }
 .link {
-  color: #000;
   margin: 30px 0;
-  font-size: 30px;
+  font-size: 20px;
+  line-height: 1.82;
+  @media screen and (max-width: 374.99px) {
+    font-size: 18px;
+  }
+  @media screen and (min-width: 1025px) {
+    font-size: 24px;
+    line-height: 1.52;
+  }
   text-decoration: none;
+  font-weight: 400;
+  opacity: 0.7;
 }
 .active-link {
   cursor: auto;
-  font-weight: 900;
+  font-weight: 500;
   text-decoration: underline;
-  font-size: 50px;
+  opacity: 1;
+}
+.theme-light {
+  color: #333333;
+  &:hover {
+    color: #000;
+  }
+}
+.theme-dark {
+  color: #eeeeee;
+  &:hover {
+    color: #fff;
+  }
 }
 </style>

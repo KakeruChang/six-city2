@@ -6,10 +6,22 @@
       name="play-button"
       @click="handleButtonClick"
     >
-      <img class="voice-story-play__play-button__icon" v-if="isPlay" :src="imgStop" alt />
-      <img class="voice-story-play__play-button__icon" v-else :src="imgPlay" alt />
+      <img
+        class="voice-story-play__play-button__icon"
+        :class="{ light: mode === 'light' }"
+        v-if="isPlay"
+        :src="imgStop"
+        alt
+      />
+      <img
+        class="voice-story-play__play-button__icon"
+        :class="{ light: mode === 'light' }"
+        v-else
+        :src="imgPlay"
+        alt
+      />
     </button>
-    <VoiceStoryWave :isPlay="isPlay" :progress="soundProgress" />
+    <VoiceStoryWave :isPlay="isPlay" :progress="soundProgress" :mode="mode" />
   </div>
 </template>
 
@@ -43,6 +55,10 @@ export default {
     },
     imgStop: {
       type: String
+    },
+    mode: {
+      type: String,
+      default: 'dark'
     }
   },
   data() {
@@ -88,7 +104,7 @@ export default {
       }
 
       const callback = (entries, observer) => {
-        entries.forEach((entry) => {
+        entries.forEach(entry => {
           if (!entry.isIntersecting) {
             if (this.isPlay) {
               this.theSound.pause()
@@ -104,7 +120,7 @@ export default {
   },
   mounted() {
     this.theSound = new Audio(this.voiceSrc)
-    this.theSound.ontimeupdate = (e) => {
+    this.theSound.ontimeupdate = e => {
       // send GA
       if (!this.stopGATrigger && this.isPlay) {
         const baseNumber = 3
@@ -165,6 +181,9 @@ export default {
       width: 100%;
       height: 100%;
       background-color: rgb(23, 23, 23);
+      &.light {
+        background-color: #ffffff;
+      }
     }
   }
 }
