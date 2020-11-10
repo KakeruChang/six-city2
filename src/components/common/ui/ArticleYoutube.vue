@@ -1,5 +1,5 @@
 <template>
-  <div class="article-youtube" :class="{'article-margin ':articleMargin}">
+  <div class="article-youtube" :class="{ 'article-margin ': articleMargin }">
     <iframe
       class="article-youtube__responsive-item"
       :src="youtubeSrc"
@@ -49,7 +49,7 @@ export default {
       return (
         this.src +
         '?playsinline=1&rel=0&controls=' +
-        (this.controlsValue === 'yes' ? 1 : 0) +
+        (this.controls === 'yes' ? 1 : 0) +
         '&showinfo=' +
         (this.showinfoValue === 'yes' ? 1 : 0) +
         '&autoplay=' +

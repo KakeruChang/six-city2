@@ -165,7 +165,7 @@ export default {
 @import '@/style/voice.scss';
 
 .voice-text {
-  color: #e2d157;
+  color: #dfd486;
 }
 h2 {
   font-size: 24px;

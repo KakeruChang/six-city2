@@ -18,7 +18,7 @@
         <span class="data-text unit" :style="{ color: mainColor }">萬</span>
         <span class="number" :style="{ color: mainColor }">7933</span>
         <span class="data-text unit" :style="{ color: mainColor }">公噸</span>
-        <div class="data-text">空氣汙染物（2016），六都第二高。</div>
+        <div class="data-text">空氣汙染物（2016年），六都第二高。</div>
       </div>
       <p class="data-source">
         資料來源：中華民國統計資訊網、交通部氣象局、交通部觀光局、台中市主計處
@@ -66,19 +66,19 @@ export default {
         {
           number: '1932',
           unit: '小時',
-          text: '全年日照時數（2019）。',
+          text: '全年日照時數（2019年）。',
           id: 'Number1'
         },
         {
           number: 6992,
           unit: '家',
-          text: '商業登記新設家數（2019），六都第二多。',
+          text: '商業登記新設家數（2019年），六都第二多。',
           id: 'Number2'
         },
         {
           number: '12.8',
           unit: '%',
-          text: '國人到台中旅遊比率（2018），六都最高。',
+          text: '國人到台中旅遊比率（2018年），六都最高。',
           id: 'Number3'
         }
       ]

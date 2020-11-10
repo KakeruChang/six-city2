@@ -12,6 +12,8 @@
           <template v-else>
             <div v-for="(item, i) in description" :key="i">
               {{ item }}
+
+              <div v-if="i !== description.length - 1" style="height:10px;" />
             </div>
           </template>
           <span class="arrow-wrapper">
@@ -233,6 +235,9 @@ export default {
         padding-top: 0;
         width: 35px;
         font-size: 32px;
+      }
+      @media screen and (max-width: 374.98px) {
+        font-size: 25px;
       }
     }
     @media screen and (max-width: 1150px) {

@@ -15,7 +15,7 @@
     >
       <MainVideo
         city="高雄"
-        description="從離鄉到回鄉 高雄讓我驕傲"
+        :description="['從離鄉到回鄉', '高雄讓我驕傲']"
         :mainColor="mainColor"
         :videoPC="
           require('../../assets/Kaohsiung/video/Kaohsiung_video_web.mp4')

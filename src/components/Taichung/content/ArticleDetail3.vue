@@ -8,7 +8,7 @@
         paddingBottom: '10px'
       }"
     >
-      <h1 class="title">清水的故事，我們的身世：</h1>
+      <h1 class="title">清水的故事 我們的身世：</h1>
       <h1 class="title">找回世代與土地的鏈結</h1>
     </ArticleContainer>
     <ArticleContainer

@@ -54,7 +54,7 @@
         alt="在平交道前等待火車通過，是台中市民過去習慣的日常。圖為2005年、台中大慶車站附近的平交道。"
         >在平交道前等待火車通過，是台中市民過去習慣的日常。圖為2005年、台中大慶車站附近的平交道。報系資料照</ArticleColumnOne
       >
-      <div style="height:1px;background-color:#707070" />
+      <div style="height:1px;background-color:#707070;margin-top:50px" />
       <ArticleQuote
         borderColor="transparent"
         color="#e1cc38"

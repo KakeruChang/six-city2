@@ -37,6 +37,12 @@ export default {
           id: 'HeaderLink-Taoyuan'
         },
         {
+          url: './Taichung',
+          mark: 'Taichung',
+          text: '台中',
+          id: 'HeaderLink-Taichung'
+        },
+        {
           url: './Tainan',
           mark: 'Tainan',
           text: '台南',
@@ -47,12 +53,6 @@ export default {
           mark: 'Kaohsiung',
           text: '高雄',
           id: 'HeaderLink-Kaohsiung'
-        },
-        {
-          url: './Taichung',
-          mark: 'Taichung',
-          text: '台中',
-          id: 'HeaderLink-Taichung'
         }
       ]
     }
@@ -85,7 +85,7 @@ export default {
   justify-content: center;
 }
 .link {
-  margin: 30px 0;
+  margin: 15px 0;
   font-size: 20px;
   line-height: 1.82;
   @media screen and (max-width: 374.99px) {
@@ -116,5 +116,11 @@ export default {
   &:hover {
     color: #fff;
   }
+}
+</style>
+<style lang="scss">
+.header-menu-simplified .header-menu__content {
+  justify-content: flex-start !important;
+  align-items: center !important;
 }
 </style>

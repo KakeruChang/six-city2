@@ -32,7 +32,8 @@ export default {
   },
   computed: {
     top() {
-      const { innerWidth } = window
+      // const { innerWidth } = window
+      const innerHeight = require('ios-inner-height')
       let adjustment = 0
 
       if (innerWidth >= 1025) {

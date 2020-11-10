@@ -26,14 +26,15 @@
       <ul class="timeline-list">
         <li
           class="timeline-list-li"
-          v-for="item in timeline"
+          v-for="(item, i) in timeline"
           :key="item.content"
         >
           <div class="timeline-list-wrapper">
             <div>
-              <span class="timeline-time">{{ item.time }}</span
-              ><span class="timeline-content">{{ item.content }}</span>
+              <span class="timeline-time">{{ item.time }}</span>
+              <span class="timeline-content">{{ item.content }}</span>
             </div>
+            <br v-if="i === timeline.length - 1" />
             <div class="timeline-content" style="font-size:20px">
               {{ item.note }}
             </div>
@@ -226,7 +227,7 @@ h2 {
   line-height: 1.5;
 }
 .timeline-title {
-  color: #fff4a8;
+  color: #dfd486;
   margin: 80px 0 23px !important;
 }
 .timeline-list {
@@ -260,7 +261,7 @@ h2 {
 
 .timeline-time {
   margin-bottom: 10px;
-  color: #fff4a8;
+  color: #dfd486;
   font-size: 24px;
 }
 .timeline-content {

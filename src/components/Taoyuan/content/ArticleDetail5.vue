@@ -26,7 +26,7 @@
     </ArticleContainer>
 
     <ArticleYoutube
-      src="https://www.youtube.com/embed/oIZoOGTWIo8"
+      src="https://www.youtube.com/embed/Z69aPjaVEjU"
       :articleMargin="false"
     />
 

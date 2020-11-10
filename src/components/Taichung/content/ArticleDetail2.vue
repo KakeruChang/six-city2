@@ -19,10 +19,9 @@
         走進位於台中市舊城區的陳彫刻處，第一眼就看到在角落的陳文才。他一個人窩在自己的小小工作台前，在昏黃的燈光下，一刀一刀刻著手中的木製品，專注且安靜，只聽到木材刨落的刷刷聲。
       </p>
       <div class="video">
-        <h1>{{ muted }}</h1>
         <video
-          id="video"
-          ref="video"
+          id="TaichungVideo2"
+          ref="TaichungVideo2"
           controls
           preload
           loop
@@ -139,7 +138,7 @@ export default {
   },
   mixins: [sendGaMethods],
   data() {
-    return { muted: false }
+    return { muted: false, observer: {} }
   },
   methods: {
     volumeHandler() {
@@ -156,8 +155,19 @@ export default {
         label: 'play'
       })
     }
+    // scrollHandler() {
+    //   console.log(this.$refs.TaichungVideo2.offsetHeight)
+    //   console.log(this.$refs.TaichungVideo2.offsetTop)
+    //   console.log(window.pageYOffset)
+    // }
   },
   components: { ArticleContainer, ArticleColumnOne },
+  // mounted() {
+  //   window.addEventListener('scroll', this.scrollHandler, false)
+  // },
+  // destroyed() {
+  //   window.removeEventListener('scroll', this.scrollHandler, false)
+  // },
   computed: {
     paddingTopArt0() {
       const { innerWidth } = window
@@ -187,5 +197,8 @@ export default {
     height: 100%;
     object-fit: cover;
   }
+}
+video {
+  outline: none;
 }
 </style>

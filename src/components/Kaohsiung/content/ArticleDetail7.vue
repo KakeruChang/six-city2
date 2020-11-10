@@ -16,12 +16,7 @@
     >
       <p class="content-1">
         <span style="font-weight:bolder"
-          >編者按：2020年高雄市長補選前，清華大學人文社會學院學士班大二生張穗風曾以「<a
-            href="https://opinion.cw.com.tw/blog/profile/52/article/9790"
-            class="future-link"
-            target="_blank"
-            >給未來的高雄市長：請聽聽高雄囝仔想要的高雄</a
-          >」一文投書天下獨立評論，身為北漂的高雄青年，張穗風渴求未來的高雄市長在市政規劃納入重工業轉型、正視空汙課題，讓高雄的產業布局和生活品質煥然一新。</span
+          >編者按：2020年高雄市長補選前，清華大學人文社會學院學士班大二生張穗風曾以「給未來的高雄市長：請聽聽高雄囝仔想要的高雄」一文投書天下獨立評論，身為北漂的高雄青年，張穗風渴求未來的高雄市長在市政規劃納入重工業轉型、正視空汙課題，讓高雄的產業布局和生活品質煥然一新。</span
         >
       </p>
       <p class="content-1">
@@ -194,5 +189,6 @@ h2 {
 }
 .future-link {
   color: #4a96f9;
+  text-decoration: underline;
 }
 </style>

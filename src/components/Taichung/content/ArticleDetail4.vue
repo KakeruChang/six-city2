@@ -8,7 +8,7 @@
         paddingBottom: '10px'
       }"
     >
-      <h1 class="title">年輕人最潮休閒：跟著媽祖遶境去</h1>
+      <h1 class="title">年輕人瘋大甲媽祖遶境</h1>
     </ArticleContainer>
     <ArticleContainer
       backgroundColor="transparent"
@@ -31,7 +31,7 @@
       </p>
     </ArticleContainer>
     <ArticleYoutube
-      src="https://www.youtube.com/embed/niGQPakYb7g"
+      src="https://www.youtube.com/embed/RwHbS3GAGzk"
       :articleMargin="false"
     />
     <ArticleContainer v-if="!isHide">

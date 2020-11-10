@@ -98,7 +98,7 @@ export default {
       isInside: false,
       onloadGATitle: null,
       folderRoute: 'test/cities',
-      mainColor: '#fff4a8'
+      mainColor: '#DFD486'
     }
   },
   methods: {

@@ -159,10 +159,11 @@
 import FeatureContent from './FeatureContent'
 import Progress from './Progress.vue'
 import { rwdMethods, sendGaMethods } from '@/mixins/masterBuilder.js'
+import { fbBrowserResize } from '@/mixins/fbBrowserResize.js'
 
 export default {
   name: 'FeaturesPage',
-  mixins: [rwdMethods, sendGaMethods],
+  mixins: [rwdMethods, sendGaMethods, fbBrowserResize],
   props: {
     active: { type: Number, default: 0 },
     features: { type: Array },
@@ -710,6 +711,9 @@ export default {
     font-size: 25px;
     // width: 250px;
   }
+  @media screen and (max-width: 374.98px) {
+    font-size: 22px;
+  }
 }
 .text-outside {
   width: 95%;
@@ -724,6 +728,9 @@ export default {
   }
   @media screen and (max-width: 413.98px) {
     font-size: 18px;
+  }
+  @media screen and (max-width: 374.98px) {
+    font-size: 14px;
   }
   font-size: 20px;
   line-height: 1.7;

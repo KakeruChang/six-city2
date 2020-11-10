@@ -220,7 +220,7 @@ export default {
   &.voice-story-wave__bar--active {
     background-color: #ffffff;
     &.light {
-      background-color: #000000;
+      background-color: #e2d157;
     }
   }
 }

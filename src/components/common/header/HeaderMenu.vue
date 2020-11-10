@@ -24,7 +24,8 @@
         :ariaLabel="item.title"
         :name="item.title"
         :class="{ active: item.active }"
-      >{{ item.title }}</a>
+        >{{ item.title }}</a
+      >
     </div>
     <div
       v-else
@@ -61,7 +62,8 @@
         :ariaLabel="item.title"
         :name="item.title"
         :class="{ active: item.active }"
-      >{{ item.title }}</a>
+        >{{ item.title }}</a
+      >
     </div>
     <div
       v-else
@@ -99,7 +101,7 @@ export default {
     }
   },
   watch: {
-    menuActiveFlag: function (value) {
+    menuActiveFlag: function(value) {
       if (value)
         document.getElementsByTagName('body')[0].style.overflow = 'hidden'
       else document.getElementsByTagName('body')[0].style.overflow = 'auto'

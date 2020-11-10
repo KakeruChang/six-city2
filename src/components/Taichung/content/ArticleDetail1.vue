@@ -40,7 +40,7 @@
       </p>
     </ArticleContainer>
     <ArticleYoutube
-      src="https://www.youtube.com/embed/-jnNEam0w1M"
+      src="https://www.youtube.com/embed/PrksaOq4S48"
       :articleMargin="false"
     />
     <ArticleContainer v-if="!isHide">
