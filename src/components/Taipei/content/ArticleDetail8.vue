@@ -22,10 +22,10 @@
       </p>
     </ArticleContainer>
 
-    <ArticleYoutube
+    <!-- <ArticleYoutube
       src="https://www.youtube.com/embed/O3lhkd8fIJk"
       :articleMargin="false"
-    />
+    /> -->
 
     <ArticleContainer v-if="!isHide">
       <p class="content-2">
@@ -67,7 +67,7 @@
 <script>
 import ArticleContainer from '../../common/ui/ArticleContainer'
 import ArticleColumnOne from '../../common/ui/ArticleColumnOne'
-import ArticleYoutube from '../../common/ui/ArticleYoutube'
+// import ArticleYoutube from '../../common/ui/ArticleYoutube'
 
 export default {
   name: 'ArticleDetail8',
@@ -76,7 +76,11 @@ export default {
       type: Boolean
     }
   },
-  components: { ArticleContainer, ArticleColumnOne, ArticleYoutube },
+  components: {
+    ArticleContainer,
+    ArticleColumnOne
+    // ArticleYoutube
+  },
   computed: {
     paddingTopArt0() {
       const { innerWidth } = window

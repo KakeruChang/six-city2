@@ -2,6 +2,8 @@ import Taipei from './components/Taipei/Taipei'
 import NewTaipei from './components/NewTaipei/NewTaipei.vue'
 import Taoyuan from './components/Taoyuan/Taoyuan.vue'
 import Tainan from './components/Tainan/Tainan.vue'
+import Kaohsiung from './components/Kaohsiung/Kaohsiung.vue'
+import Taichung from './components/Taichung/Taichung.vue'
 
 const routes = [
   {
@@ -51,6 +53,30 @@ const routes = [
   {
     path: '/Tainan/*',
     redirect: '/Tainan'
+  },
+  {
+    path: '/Kaohsiung',
+    component: Kaohsiung
+  },
+  {
+    path: '/Kaohsiung/:id',
+    component: Kaohsiung
+  },
+  {
+    path: '/Kaohsiung/*',
+    redirect: '/Kaohsiung'
+  },
+  {
+    path: '/Taichung',
+    component: Taichung
+  },
+  {
+    path: '/Taichung/:id',
+    component: Taichung
+  },
+  {
+    path: '/Taichung/*',
+    redirect: '/Taichung'
   },
   {
     path: '*',

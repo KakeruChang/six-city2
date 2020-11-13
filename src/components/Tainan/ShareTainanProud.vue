@@ -83,7 +83,7 @@ export default {
           img: require('../../assets/Tainan/share/Tainan_sharing_lane.jpg')
         },
         {
-          text: '老屋新生',
+          text: '老宅新生',
           url: '/sharing/old-house',
           id: 'tainan-meta-4',
           img: require('../../assets/Tainan/share/Tainan_sharing_old-house.jpg')

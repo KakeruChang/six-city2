@@ -27,6 +27,8 @@ import taipeiData from '../../../data/data-taipei'
 import newTaipeiData from '../../../data/data-new-taipei'
 import taoyuanData from '../../../data/data-taoyuan'
 import tainanData from '../../../data/data-tainan'
+import kaohsiungData from '../../../data/data-kaohsiung'
+import taichungData from '../../../data/data-taichung'
 
 export default {
   name: 'ShareTwitter',
@@ -56,6 +58,12 @@ export default {
       if (this.$route.path.indexOf('Tainan') !== -1) {
         return tainanData
       }
+      if (this.$route.path.indexOf('Kaohsiung') !== -1) {
+        return kaohsiungData
+      }
+      if (this.$route.path.indexOf('Taichung') !== -1) {
+        return taichungData
+      }
       // Taipei
       return taipeiData
     },
@@ -67,7 +75,9 @@ export default {
         sharedUrl = `${window.location.origin}/${this.rootCity}/${
           this.content[this.active].url
         }`
-        shareContent = this.content[this.active].meta.description
+        shareContent = this.content[this.active].meta
+          ? this.content[this.active].meta.description
+          : ''
       } else {
         sharedUrl = `${window.location.origin}/${this.rootCity}`
         shareContent = this.metaMainDescription
@@ -76,10 +86,6 @@ export default {
       return `https://twitter.com/intent/tweet?text=${encodeURIComponent(
         shareContent
       )}%0D%0A%0D%0A${encodeURIComponent(sharedUrl)}`
-
-      // return `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-      //   document.querySelector('meta[property="og:description"]').content
-      // )}%0D%0A%0D%0A${encodeURIComponent(this.href)}`
     }
   }
 }

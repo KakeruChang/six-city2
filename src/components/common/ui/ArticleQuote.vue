@@ -1,5 +1,6 @@
 <template>
-  <div class="article-quote"
+  <div
+    class="article-quote"
     :style="{
       borderTopColor: borderColor,
       borderBottomColor: borderColor
@@ -7,15 +8,16 @@
   >
     <div class="article-quote__upper-section">
       <div v-if="img" class="article-quote__profile">
-        <img :src="img" :alt="text">
+        <img :src="img" :alt="text" />
       </div>
       <div v-if="text" class="article-quote__text">
-        <p>{{text}}</p>
+        <p :style="{ color }">{{ text }}</p>
       </div>
     </div>
+    <slot />
     <div v-if="refer" class="article-quote__down-section">
       <div class="article-quote__refer">
-        <p class="small">—— {{refer}}</p>
+        <p class="small" :style="{ color }">—— {{ refer }}</p>
       </div>
     </div>
   </div>
@@ -27,7 +29,7 @@ export default {
   props: {
     borderColor: {
       type: String,
-      default: '#dcdddd',
+      default: '#dcdddd'
     },
     img: {
       type: String
@@ -41,7 +43,7 @@ export default {
     color: {
       type: String
     }
-  },
+  }
 }
 </script>
 
@@ -97,6 +99,10 @@ export default {
       p {
         margin: 0;
         color: #888888;
+        font-size: 32px;
+        @media screen and (max-width: 414px) {
+          font-size: 24px;
+        }
       }
     }
   }
@@ -108,6 +114,16 @@ export default {
         margin: 0;
         color: #888888;
         text-align: right;
+        font-size: 15px;
+      }
+    }
+  }
+  @media screen and (max-width: 414px) {
+    .article-quote__down-section {
+      .article-quote__refer {
+        p {
+          font-size: 14px;
+        }
       }
     }
   }

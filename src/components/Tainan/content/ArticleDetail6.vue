@@ -30,7 +30,7 @@
     </ArticleContainer>
     <ArticleContainer v-if="!isHide">
       <p class="content-2">
-        2004年，杜昭賢從大家熟知的海安路街道復興計畫開始，用藝術翻轉了在都市計畫下殘破的海安路，到近年一路將「藝術」的概念延伸鹽水月津港，她找來當地年輕的藝術家一同策展，讓長久沒落、人口外移的鹽水古鎮蛻變成了大型藝廊，成為每年台灣最盛大的燈節，更重新建立鹽水居民的地方認同，幫鹽水人找回過去的榮耀感。
+        2004年，杜昭賢從大家熟知的海安路街道復興計畫開始，用藝術翻轉了在都市計畫下殘破的海安路，到近年一路將「藝術」的概念延伸到鹽水月津港，她找來當地年輕的藝術家一同策展，讓長久沒落、人口外移的鹽水老鎮蛻變成每年台灣最盛大的燈節，重新建立鹽水居民的地方認同，找回過去鹽水人的榮耀感。
       </p>
       <p class="content-2">
         從一條街區的重生，到復興曾經繁華的小鎮，過去幾年來，杜昭賢和團隊走遍台南大街小巷，不斷聆聽居民的需求，讓藝術在無形中融入這座城市，更帶動居民守護老街區，希望用藝術讓不僅是在地人、甚至是外地人走進台南的地方，重新看見地方的好。
@@ -38,12 +38,14 @@
       <ArticleColumnOne
         v-if="!isHide"
         :srcMob="
-          require('../../../assets/Taoyuan/mob/7_Taoyuan_hakka_pic1_mob.jpg')
+          require('../../../assets/Tainan/mob/6_Tainan_new-era_pic1_mob.jpg')
         "
         :srcPad="
-          require('../../../assets/Taoyuan/pad/7_Taoyuan_hakka_pic1.jpg')
+          require('../../../assets/Tainan/pad/6_Tainan_new-era_pic1_web.jpg')
         "
-        :srcPc="require('../../../assets/Taoyuan/web/7_Taoyuan_hakka_pic1.jpg')"
+        :srcPc="
+          require('../../../assets/Tainan/web/6_Tainan_new-era_pic1_web.jpg')
+        "
         alt="在杜昭賢和在地藝術家的努力下，讓曾經沒落的鹽水月津港蛻變成每年全台最盛大的燈節，也讓鹽水人找回過去的榮耀感。"
         >在杜昭賢和在地藝術家的努力下，讓曾經沒落的鹽水月津港蛻變成每年全台最盛大的燈節，也讓鹽水人找回過去的榮耀感。圖／聯合報系資料照</ArticleColumnOne
       >

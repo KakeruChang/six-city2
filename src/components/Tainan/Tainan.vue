@@ -15,7 +15,7 @@
     >
       <MainVideo
         city="台南"
-        description="走出傳統 台南混血新美學"
+        :description="['走出傳統', '台南混血新美學']"
         :mainColor="mainColor"
         :videoPC="require('../../assets/Tainan/video/Tainan_video_web.mp4')"
         :videoMob="require('../../assets/Tainan/video/Tainan_video_mob.mp4')"

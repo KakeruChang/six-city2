@@ -7,7 +7,8 @@
       :class="{
         'voice-story-wave__bar--default': !isPlay,
         'voice-story-wave__bar--play': isPlay,
-        'voice-story-wave__bar--active': !isPlay || +progress >= +item
+        'voice-story-wave__bar--active': !isPlay || +progress >= +item,
+        light: mode === 'light'
       }"
     />
   </div>
@@ -24,6 +25,10 @@ export default {
     progress: {
       type: Number,
       default: 0
+    },
+    mode: {
+      type: String,
+      default: 'dark'
     }
   }
 }
@@ -214,6 +219,9 @@ export default {
   }
   &.voice-story-wave__bar--active {
     background-color: #ffffff;
+    &.light {
+      background-color: #e2d157;
+    }
   }
 }
 @keyframes wave {

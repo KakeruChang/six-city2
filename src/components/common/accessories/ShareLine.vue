@@ -28,6 +28,8 @@ import taipeiData from '../../../data/data-taipei'
 import newTaipeiData from '../../../data/data-new-taipei'
 import taoyuanData from '../../../data/data-taoyuan'
 import tainanData from '../../../data/data-tainan'
+import kaohsiungData from '../../../data/data-kaohsiung'
+import taichungData from '../../../data/data-taichung'
 
 const isMobile = Utils.detectMob()
 const isInApp = Utils.isFacebookApp(148) || Utils.isLineApp()
@@ -61,36 +63,16 @@ export default {
       if (this.$route.path.indexOf('Tainan') !== -1) {
         return tainanData
       }
+      if (this.$route.path.indexOf('Kaohsiung') !== -1) {
+        return kaohsiungData
+      }
+      if (this.$route.path.indexOf('Taichung') !== -1) {
+        return taichungData
+      }
       // Taipei
       return taipeiData
     },
     shareUrl() {
-      // const sharedText = document.querySelector('title').innerHTML
-      // const shareContent = document.querySelector(
-      //   'meta[property="og:description"]'
-      // ).content
-      // // desktop
-      // if (!isMobile) {
-      //   return `https://social-plugins.line.me/lineit/share?text=${encodeURIComponent(
-      //     sharedText
-      //   )}%0D%0A%0D%0A${encodeURIComponent(
-      //     shareContent
-      //   )}&url=${encodeURIComponent(this.href)}`
-      // }
-      // // mobile
-      // if (!isInApp) {
-      //   return `https://line.naver.jp/R/msg/text/?${encodeURIComponent(
-      //     sharedText
-      //   )}%0D%0A%0D%0A${encodeURIComponent(
-      //     shareContent
-      //   )}%0D%0A%0D%0A${encodeURIComponent(this.href)}`
-      // }
-      // // mobile in-app webview
-      // return `https://line.naver.jp/R/msg/text/?${encodeURIComponent(
-      //   sharedText
-      // )}%0D%0A%0D%0A${encodeURIComponent(
-      //   shareContent
-      // )}%0D%0A%0D%0A${encodeURIComponent(this.href)}`
       let sharedUrl
       let sharedText
       let sharedContent
@@ -99,8 +81,12 @@ export default {
         sharedUrl = `${window.location.origin}/${this.rootCity}/${
           this.content[this.active].url
         }`
-        sharedContent = this.content[this.active].meta.description
-        sharedText = this.content[this.active].meta.title
+        sharedContent = this.content[this.active].meta
+          ? this.content[this.active].meta.description
+          : ''
+        sharedText = this.content[this.active].meta
+          ? this.content[this.active].meta.title
+          : ''
       } else {
         sharedUrl = `${window.location.origin}/${this.rootCity}`
         sharedContent = this.metaMainDescription

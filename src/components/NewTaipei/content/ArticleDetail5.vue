@@ -29,12 +29,13 @@
     </ArticleContainer>
 
     <ArticleYoutube
-      src="https://www.youtube.com/embed/2gNa-T6cto8"
+      src="https://www.youtube.com/embed/FB_REAoi50Y"
       :articleMargin="false"
     />
 
     <ArticleContainer v-if="!isHide">
       <p class="content-2 title">幫新北市平反 找回草根力量</p>
+      <br />
       <p class="content-2">
         大台北生活圈形成後，新北市和台北市之間的距離變得更緊密，新北人也開始會拿台北市與自己的家鄉比較，「新北市常給人一種悶悶的、台台的印象，好像沒有很高級」，梁勝欽表示，很多人覺得新北市很悶、沒有什麼好玩的，被問到來自哪裡時，有些新北人甚至會回答「我是台北人」，因為「怕別人會覺得新北市比較落後」。
       </p>

@@ -5,9 +5,25 @@
         {{ cityName[0] }}
       </div>
       <div class="description">
-        <span>{{ description }}</span>
+        <span>
+          <template v-if="typeof description === 'string'">{{
+            description
+          }}</template>
+          <template v-else>
+            <div v-for="(item, i) in description" :key="i">
+              {{ item }}
+
+              <div v-if="i !== description.length - 1" style="height:10px;" />
+            </div>
+          </template>
+          <span class="arrow-wrapper">
+            <NmdArrow />
+          </span>
+        </span>
       </div>
-      <div class="city" :style="{ color: mainColor }">{{ cityName[1] }}</div>
+      <div class="city" :style="{ color: mainColor }">
+        {{ cityName[1] }}
+      </div>
     </div>
     <div class="video">
       <video
@@ -28,15 +44,17 @@
 
 <script>
 import { rwdMethods, sendGaMethods } from '@/mixins/masterBuilder.js'
+import NmdArrow from '../components/common/accessories/NmdArrow'
 
 export default {
   name: 'MainVideo',
+  components: { NmdArrow },
   props: {
     city: {
       type: String
     },
     description: {
-      type: String
+      type: [String, Array]
     },
     videoPC: {
       type: String
@@ -68,7 +86,6 @@ export default {
       return this.videoPC
     }
   },
-  components: {},
   data() {
     return {
       titleIsHide: false,
@@ -128,7 +145,7 @@ export default {
       }
 
       const callback = (entries, observer) => {
-        entries.forEach((entry) => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             this.continueVideo()
           } else {
@@ -204,17 +221,23 @@ export default {
   }
   .description {
     display: flex;
-    align-items: center;
+    // align-items: center;
     & > span {
+      padding-top: 50px;
       width: 45px;
       font-family: source-han-serif-tc, serif;
       font-size: 40px;
       font-weight: bold;
       line-height: 1.13;
       color: #eeeeee;
+      text-align: center;
       @media screen and (max-width: 650px) {
+        padding-top: 0;
         width: 35px;
         font-size: 32px;
+      }
+      @media screen and (max-width: 374.98px) {
+        font-size: 25px;
       }
     }
     @media screen and (max-width: 1150px) {
@@ -224,6 +247,12 @@ export default {
     //   margin-top: 50px;
     // }
   }
+}
+.arrow-wrapper {
+  width: 100%;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
 }
 .video {
   z-index: 0;
