@@ -56,10 +56,10 @@ const articleContent = [
     titleOut: '中區活歷史',
     GATitle: 'page read: 中區活歷史',
     textOut: [
-      '在第二市場開業97年的慶周青果行，曾是歷任總統到台中買水果的首選，客人絡繹不絕，陪著中區從繁榮到沒落。'
+      '在第二市場開業第98年的慶周青果行，曾是歷任總統到台中買水果的首選，客人絡繹不絕，陪著中區從繁榮到沒落。'
     ],
     inside: {
-      title: ['中區活歷史', '開業97年的慶周青果行']
+      title: ['中區活歷史', '開業第98年的慶周青果行']
     },
     url: 'market',
     id: 'market',
@@ -68,9 +68,9 @@ const articleContent = [
       bg: { web: cityBgWebImg1, pad: cityBgPadImg1, mob: cityBgMobImg1 }
     },
     meta: {
-      title: '歷任總統都來買 97年老青果行寫台中歷史 | 專題 | 聯合報',
+      title: '歷任總統都來買 98年老青果行寫台中歷史 | 專題 | 聯合報',
       description:
-        '在第二市場開業97年的慶周青果行，曾是歷任總統到台中買水果的首選，客人絡繹不絕，陪著台中市中區從繁榮到沒落。'
+        '在第二市場開業第98年的慶周青果行，曾是歷任總統到台中買水果的首選，客人絡繹不絕，陪著台中市中區從繁榮到沒落。'
     }
   },
   {
@@ -80,7 +80,7 @@ const articleContent = [
       '刻過太陽堂等老餅舖的餅模，也刻出全台名勝的匾額，三代經營的陳彫刻處是台中產業和生活樣貌變遷的見證者。'
     ],
     inside: {
-      title: ['94歲陳彫刻處：', '老職人、新靈魂']
+      title: ['95歲陳彫刻處：', '老職人、新靈魂']
     },
     url: 'woodcarving',
     id: 'woodcarving',
@@ -89,7 +89,7 @@ const articleContent = [
       bg: { web: cityBgWebImg2, pad: cityBgPadImg2, mob: cityBgMobImg2 }
     },
     meta: {
-      title: '94歲陳彫刻處：老職人、新靈魂 | 專題 | 聯合報',
+      title: '95歲陳彫刻處：老職人、新靈魂 | 專題 | 聯合報',
       description:
         '刻過太陽堂等老餅舖的餅模，也刻出全台名勝的匾額，三代經營的陳彫刻處是台中產業和生活樣貌變遷的見證者。'
     }

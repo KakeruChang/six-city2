@@ -33,7 +33,7 @@ export default {
   computed: {
     top() {
       // const { innerWidth } = window
-      const innerHeight = require('ios-inner-height')
+      const innerHeight = require('ios-inner-height')()
       let adjustment = 0
 
       if (innerWidth >= 1025) {
@@ -56,6 +56,10 @@ export default {
         }
       } else if (innerWidth < 335) {
         adjustment = innerWidth * 0.75
+      }
+
+      if (innerHeight < 500) {
+        adjustment = innerWidth * 0.55
       }
 
       return this.displayAreaFromTop + adjustment

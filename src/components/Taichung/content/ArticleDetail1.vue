@@ -9,7 +9,7 @@
       }"
     >
       <h1 class="title">中區活歷史</h1>
-      <h1 class="title">開業97年的慶周青果行</h1>
+      <h1 class="title">三代老店慶周青果行</h1>
     </ArticleContainer>
     <ArticleContainer
       backgroundColor="transparent"
@@ -36,7 +36,7 @@
         >慶周青果行老闆陳金樹每天早上4點準時出門到台中果菜市場，進最新鮮的水果到店內販賣。記者黃仲裕／攝影</ArticleColumnOne
       >
       <p class="content-1">
-        回到慶周青果行所在的第二市場，陳金樹卸貨後習慣到市場中央找吃習慣的老店家，以一碗控肉飯開啟新的一天。早上9點，慶周青果行準時開張，招牌在台中市中區第二市場亮了97年，全年無休，日復一日從未間斷。
+        回到慶周青果行所在的第二市場，陳金樹卸貨後習慣到市場中央找吃習慣的老店家，以一碗控肉飯開啟新的一天。早上9點，慶周青果行準時開張，招牌在台中市中區第二市場亮了98年，全年無休，日復一日從未間斷。
       </p>
     </ArticleContainer>
     <ArticleYoutube

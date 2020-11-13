@@ -1,10 +1,12 @@
 <template>
-  <div>
+  <div class="header-links">
     <div class="link-wrapper" v-for="link in links" :key="link.id">
       <a
         class="link theme-light"
         :class="{ 'active-link': activeCity === link.mark }"
-        :href="activeCity === link.mark ? 'javascript:void(0)' : link.url"
+        :href="
+          activeCity === link.mark ? 'javascript:void(0)' : `${root}${link.url}`
+        "
         :target="activeCity !== link.mark && '_blank'"
         >{{ link.text }}</a
       >
@@ -17,39 +19,40 @@ export default {
   name: 'HeaderLinks',
   data() {
     return {
+      root: 'http://nmdap.udn.com.tw/test/cities',
       links: [
         {
-          url: './Taipei',
+          url: '/Taipei',
           mark: 'Taipei',
           text: '台北',
           id: 'HeaderLink-Taipei'
         },
         {
-          url: './New-Taipei',
+          url: '/New-Taipei',
           mark: 'New-Taipei',
           text: '新北',
           id: 'HeaderLink-New-Taipei'
         },
         {
-          url: './Taoyuan',
+          url: '/Taoyuan',
           mark: 'Taoyuan',
           text: '桃園',
           id: 'HeaderLink-Taoyuan'
         },
         {
-          url: './Taichung',
+          url: '/Taichung',
           mark: 'Taichung',
           text: '台中',
           id: 'HeaderLink-Taichung'
         },
         {
-          url: './Tainan',
+          url: '/Tainan',
           mark: 'Tainan',
           text: '台南',
           id: 'HeaderLink-Tainan'
         },
         {
-          url: './Kaohsiung',
+          url: '/Kaohsiung',
           mark: 'Kaohsiung',
           text: '高雄',
           id: 'HeaderLink-Kaohsiung'
@@ -80,6 +83,10 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.header-links {
+  margin-top: auto;
+  margin-bottom: auto;
+}
 .link-wrapper {
   display: flex;
   justify-content: center;

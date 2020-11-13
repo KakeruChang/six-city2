@@ -8,12 +8,13 @@
         paddingBottom: '10px'
       }"
     >
-      <h1 class="title">94歲陳彫刻處：</h1>
+      <h1 class="title">95歲陳彫刻處：</h1>
       <h1 class="title">老職人、新靈魂</h1>
     </ArticleContainer>
     <ArticleContainer
       backgroundColor="transparent"
       :cssProperty="{ paddingTop: 0 }"
+      ref="TaichungArticle2Wrapper"
     >
       <p class="content-1">
         走進位於台中市舊城區的陳彫刻處，第一眼就看到在角落的陳文才。他一個人窩在自己的小小工作台前，在昏黃的燈光下，一刀一刀刻著手中的木製品，專注且安靜，只聽到木材刨落的刷刷聲。
@@ -138,7 +139,7 @@ export default {
   },
   mixins: [sendGaMethods],
   data() {
-    return { muted: false, observer: {} }
+    return { muted: true, observer: {} }
   },
   methods: {
     volumeHandler() {
@@ -154,20 +155,47 @@ export default {
         action: 'click',
         label: 'play'
       })
+    },
+    intersectionObserver() {
+      const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: [0]
+      }
+
+      const callback = (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.$refs.TaichungVideo2.play()
+          } else {
+            if (this.$refs.TaichungVideo2) {
+              this.$refs.TaichungVideo2.pause()
+            }
+          }
+        })
+      }
+
+      const observer = new IntersectionObserver(callback, options)
+      return observer
+    },
+    constructObserver() {
+      this.observer = this.intersectionObserver()
+      this.observer.observe(this.$refs.TaichungVideo2)
+    },
+    destroyObserver() {
+      if (this.$refs.TaichungVideo2) {
+        this.observer.unobserve(this.$refs.TaichungVideo2)
+        this.observer = {}
+      }
     }
-    // scrollHandler() {
-    //   console.log(this.$refs.TaichungVideo2.offsetHeight)
-    //   console.log(this.$refs.TaichungVideo2.offsetTop)
-    //   console.log(window.pageYOffset)
-    // }
   },
   components: { ArticleContainer, ArticleColumnOne },
-  // mounted() {
-  //   window.addEventListener('scroll', this.scrollHandler, false)
-  // },
-  // destroyed() {
-  //   window.removeEventListener('scroll', this.scrollHandler, false)
-  // },
+  mounted() {
+    this.constructObserver()
+  },
+  destroyed() {
+    this.destroyObserver()
+  },
   computed: {
     paddingTopArt0() {
       const { innerWidth } = window
