@@ -17,12 +17,8 @@
         city="高雄"
         :description="['從離鄉到回鄉', '高雄讓我驕傲']"
         :mainColor="mainColor"
-        :videoPC="
-          require('../../assets/Kaohsiung/video/Kaohsiung_video_web.mp4')
-        "
-        :videoMob="
-          require('../../assets/Kaohsiung/video/Kaohsiung_video_mob.mp4')
-        "
+        videoPC="https://p3.udn.com.tw/cities/Kaohsiung/video/Kaohsiung_video_web.mp4"
+        videoMob="https://p3.udn.com.tw/cities/Kaohsiung/video/Kaohsiung_video_mob.mp4"
       />
       <KaohsiungData :mainColor="mainColor" />
     </OnloadAnchorFrame>

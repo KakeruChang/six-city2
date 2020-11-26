@@ -69,8 +69,10 @@ export default {
       if (this.$route.path.indexOf('Taichung') !== -1) {
         return taichungData
       }
-      // Taipei
-      return taipeiData
+      if (this.$route.path.indexOf('Taipei') !== -1) {
+        return taipeiData
+      }
+      return null
     },
     shareUrl() {
       let sharedUrl

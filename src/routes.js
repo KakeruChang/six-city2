@@ -4,6 +4,7 @@ import Taoyuan from './components/Taoyuan/Taoyuan.vue'
 import Tainan from './components/Tainan/Tainan.vue'
 import Kaohsiung from './components/Kaohsiung/Kaohsiung.vue'
 import Taichung from './components/Taichung/Taichung.vue'
+import AllCities from './components/All/AllCities.vue'
 
 const routes = [
   {
@@ -79,8 +80,12 @@ const routes = [
     redirect: '/Taichung'
   },
   {
+    path: '/',
+    component: AllCities
+  },
+  {
     path: '*',
-    redirect: '/Taipei'
+    redirect: '/'
   }
 ]
 

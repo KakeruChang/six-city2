@@ -17,8 +17,8 @@
         city="台北"
         description="在新與舊的碰撞中前進"
         :mainColor="mainColor"
-        :videoPC="require('../../assets/Taipei/video/Taipei_video_web.mp4')"
-        :videoMob="require('../../assets/Taipei/video/Taipei_videp_mob.mp4')"
+        videoPC="https://p3.udn.com.tw/cities/Taipei/video/Taipei_video_web.mp4"
+        videoMob="https://p3.udn.com.tw/cities/Taipei/video/Taipei_videp_mob.mp4"
       />
       <TaipeiData />
     </OnloadAnchorFrame>

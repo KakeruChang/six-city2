@@ -17,8 +17,8 @@
         city="桃園"
         description="城市的樣貌不該只有一種"
         :mainColor="mainColor"
-        :videoPC="require('../../assets/Taoyuan/video/Taoyuan_video_web.mp4')"
-        :videoMob="require('../../assets/Taoyuan/video/Taoyuan_video_mob.mp4')"
+        videoPC="https://p3.udn.com.tw/cities/Taoyuan/video/Taoyuan_video_web.mp4"
+        videoMob="https://p3.udn.com.tw/cities/Taoyuan/video/Taoyuan_video_mob.mp4"
       />
       <TaoyuanData :mainColor="mainColor" />
     </OnloadAnchorFrame>

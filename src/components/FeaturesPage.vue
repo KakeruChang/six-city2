@@ -117,20 +117,6 @@
               @click="goToPage(features[active])"
               v-if="features[active].titleOut"
             >
-              <!-- <span
-              class="btn-arrow"
-              :class="{ inside: isInside }"
-              :style="{
-                color: mainColor,
-                transform: isInside
-                  ? `translate(-${arrowBaseDisplacement.x}%,calc( ${
-                      arrowBaseDisplacement.y
-                    }% + ${displacementInside * 100}vh)) rotate(180deg)`
-                  : 'translate(0, 0) rotate(0deg)'
-              }"
-              @click="goToPage(features[active])"
-              v-if="features[active].titleOut"
-            > -->
               <span :class="{ jump: !isInside }">
                 <img :src="arrowImg" alt="" />
               </span>
@@ -378,9 +364,10 @@ export default {
             )
 
             this.$nextTick(() => {
-              window.scrollTo({
-                top: this.$refs[`target${i}`][0].offsetTop
-              })
+              // window.scrollTo({
+              //   top: this.$refs[`target${i}`][0].offsetTop
+              // })
+              this.$refs[`target${i}`][0].scrollIntoView()
               this.displayAreaFromTop = 0
             })
             break
@@ -647,7 +634,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .outside {
   height: 100vh;
   width: 100vw;

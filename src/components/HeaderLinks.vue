@@ -4,6 +4,7 @@
       <a
         class="link theme-light"
         :class="{ 'active-link': activeCity === link.mark }"
+        @click="clickHandler(link.text, activeCity === link.mark)"
         :href="
           activeCity === link.mark ? 'javascript:void(0)' : `${root}${link.url}`
         "
@@ -15,8 +16,11 @@
 </template>
 
 <script>
+import { sendGaMethods } from '@/mixins/masterBuilder.js'
+
 export default {
   name: 'HeaderLinks',
+  mixins: [sendGaMethods],
   data() {
     return {
       root: 'http://nmdap.udn.com.tw/test/cities',
@@ -60,6 +64,17 @@ export default {
       ]
     }
   },
+  methods: {
+    clickHandler(city, isActive) {
+      if (!isActive) {
+        this.sendGA({
+          category: 'menu',
+          action: 'click',
+          label: `menu_${city}`
+        })
+      }
+    }
+  },
   computed: {
     activeCity() {
       if (this.$route.path.indexOf('Taoyuan') !== -1) {
@@ -77,7 +92,10 @@ export default {
       if (this.$route.path.indexOf('Taichung') !== -1) {
         return 'Taichung'
       }
-      return 'Taipei'
+      if (this.$route.path.indexOf('Taipei') !== -1) {
+        return 'Taipei'
+      }
+      return ''
     }
   }
 }

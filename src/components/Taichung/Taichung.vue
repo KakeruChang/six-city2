@@ -17,10 +17,8 @@
         city="台中"
         :description="['空污', '、', '網美', '、', '大甲媽']"
         :mainColor="mainColor"
-        :videoPC="require('../../assets/Taichung/video/Taichung_video_web.mp4')"
-        :videoMob="
-          require('../../assets/Taichung/video/Taichung_video_mob.mp4')
-        "
+        videoPC="https://p3.udn.com.tw/cities/Taichung/video/Taichung_video_web.mp4"
+        videoMob="https://p3.udn.com.tw/cities/Taichung/video/Taichung_video_mob.mp4"
       />
       <TaichungData :mainColor="mainColor" />
     </OnloadAnchorFrame>

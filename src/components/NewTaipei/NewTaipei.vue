@@ -17,12 +17,8 @@
         city="新北"
         description="不只是回家睡覺的地方"
         :mainColor="mainColor"
-        :videoPC="
-          require('../../assets/New-Taipei/video/New_Taipei_video_web.mp4')
-        "
-        :videoMob="
-          require('../../assets/New-Taipei/video/New_Taipei_video_mob.mp4')
-        "
+        videoPC="https://p3.udn.com.tw/cities/New-Taipei/video/New_Taipei_video_web.mp4"
+        videoMob="https://p3.udn.com.tw/cities/New-Taipei/video/New_Taipei_video_mob.mp4"
       />
       <NewTaipeiData :mainColor="mainColor" />
     </OnloadAnchorFrame>

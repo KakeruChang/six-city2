@@ -84,7 +84,10 @@ export default {
         return taichungData
       }
       // Taipei
-      return taipeiData
+      if (this.$route.path.indexOf('Taipei') !== -1) {
+        return taipeiData
+      }
+      return null
     }
   }
 }

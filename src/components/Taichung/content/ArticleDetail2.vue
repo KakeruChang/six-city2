@@ -35,8 +35,8 @@
           <source
             :src="
               device === 'mob'
-                ? require('../../../assets/Taichung/mob/3_Taichung_woodcarving_video_mob.mp4')
-                : require('../../../assets/Taichung/web/3_Taichung_woodcarving_video_web.mp4')
+                ? 'https://p3.udn.com.tw/cities/Taichung/mob/3_Taichung_woodcarving_video_mob.mp4'
+                : 'https://p3.udn.com.tw/cities/Taichung/web/3_Taichung_woodcarving_video_web.mp4'
             "
             type="video/mp4"
           />

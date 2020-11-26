@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import BasePicture from '@/components/common/accessories/BasePicture.vue';
+import BasePicture from '@/components/common/accessories/BasePicture.vue'
 
 export default {
   name: 'ArticleColumnTwo',
@@ -55,14 +55,14 @@ export default {
     },
     alt_1: {
       type: String,
-      default: document.querySelector('title').innerHTML,
+      default: document.querySelector('title').innerHTML
     },
     alt_2: {
       type: String,
-      default: document.querySelector('title').innerHTML,
-    },
-  },
-};
+      default: document.querySelector('title').innerHTML
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
