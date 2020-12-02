@@ -8,11 +8,14 @@
       allowfullscreen
       name="youtube-video"
       title="youtube-video"
+      ref="YoutubePlayer"
     />
   </div>
 </template>
 
 <script>
+import { sendFbPixel } from '@/mixins/fbPixel'
+
 export default {
   name: 'ArticleYoutube',
   props: {

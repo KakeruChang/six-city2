@@ -1,6 +1,9 @@
 <template>
   <div class="impression-wrapper">
-    <ArticleContainer backgroundColor="transparent">
+    <ArticleContainer
+      backgroundColor="transparent"
+      :cssProperty="{ paddingTop: p, paddingBottom: p }"
+    >
       <p>
         「台北就是天龍國啊！」<br />
         「新北只是我『回家睡覺的地方』。」<br />
@@ -28,7 +31,15 @@ import ArticleContainer from '@/components/common/ui/ArticleContainer'
 
 export default {
   name: 'Impression',
-  components: { ArticleContainer }
+  components: { ArticleContainer },
+  computed: {
+    p() {
+      if (window.innerWidth < 768) {
+        return '60px'
+      }
+      return '72px'
+    }
+  }
 }
 </script>
 

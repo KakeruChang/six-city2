@@ -26,6 +26,12 @@ export default {
       root: 'http://nmdap.udn.com.tw/test/cities',
       links: [
         {
+          url: '/',
+          mark: 'HomePage',
+          text: '首頁',
+          id: 'HeaderLink-HomePage'
+        },
+        {
           url: '/Taipei',
           mark: 'Taipei',
           text: '台北',
@@ -95,7 +101,7 @@ export default {
       if (this.$route.path.indexOf('Taipei') !== -1) {
         return 'Taipei'
       }
-      return ''
+      return 'HomePage'
     }
   }
 }

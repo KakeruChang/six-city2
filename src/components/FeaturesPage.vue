@@ -146,6 +146,7 @@ import FeatureContent from './FeatureContent'
 import Progress from './Progress.vue'
 import { rwdMethods, sendGaMethods } from '@/mixins/masterBuilder.js'
 import { fbBrowserResize } from '@/mixins/fbBrowserResize.js'
+import { sendFbPixel } from '@/mixins/fbPixel'
 
 export default {
   name: 'FeaturesPage',
@@ -216,6 +217,7 @@ export default {
           action: 'click',
           label: `article_${this.features[this.active].titleOut}`
         })
+        sendFbPixel('閱讀下一頁')
       } else {
         this.destroyObserver()
         window.removeEventListener('scroll', this.countProgressInside, false)
@@ -465,11 +467,6 @@ export default {
                   this.nextTrigger = false
                 }
 
-                console.log(
-                  `next_${action}_${
-                    this.features[entry.target.dataset.target].titleOut
-                  }`
-                )
                 this.sendGA({
                   category: 'next',
                   action,
@@ -477,6 +474,7 @@ export default {
                     this.features[entry.target.dataset.target].titleOut
                   }`
                 })
+                sendFbPixel('閱讀下一頁')
               }
             }
             if (this.direction === 'up') {

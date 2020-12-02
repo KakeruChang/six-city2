@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { sendFbPixel } from '@/mixins/fbPixel'
+
 export default {
   name: 'OnloadAnchorFrame',
   props: { GAtitle: { type: String } },
@@ -17,10 +19,13 @@ export default {
       }
 
       const callback = (entries, observer) => {
-        entries.forEach((entry) => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             // onload
             this.$emit('emitOnloadGA', this.GAtitle)
+            if (this.GAtitle.indexOf('臉書留言區' !== -1)) {
+              sendFbPixel('閱讀進度100%')
+            }
           }
         })
       }

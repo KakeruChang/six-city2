@@ -6,7 +6,7 @@
       rel="noopener"
       aria-label="share-fb"
       title="share-fb"
-      @click="sendGA(formatGA('HeaderShareFb'))"
+      @click="clickHandler"
     >
       <button aria-label="share" name="share-fb">
         <i
@@ -29,6 +29,7 @@ import taoyuanData from '../../../data/data-taoyuan'
 import tainanData from '../../../data/data-tainan'
 import kaohsiungData from '../../../data/data-kaohsiung'
 import taichungData from '../../../data/data-taichung'
+import { sendFbPixel } from '@/mixins/fbPixel'
 
 export default {
   name: 'ShareFb',
@@ -88,6 +89,12 @@ export default {
         return taipeiData
       }
       return null
+    }
+  },
+  methods: {
+    clickHandler() {
+      this.sendGA(this.formatGA('HeaderShareFb'))
+      sendFbPixel('山頭社群分享臉書')
     }
   }
 }

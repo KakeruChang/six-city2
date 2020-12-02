@@ -46,12 +46,8 @@
             分享圖片
           </span>
         </a>
-        <router-link
-          class="link-next link-lg"
-          to="./Taichung"
-          target="_blank"
-          @click="goToNext"
-          >下一篇：台中市
+        <router-link class="link-next link-lg" to="./Taichung" target="_blank">
+          <span @click="goToNext">下一篇：台中市</span>
         </router-link>
       </div>
     </ArticleContainer>
@@ -61,6 +57,7 @@
 <script>
 import ArticleContainer from '../common/ui/ArticleContainer'
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
+import { sendFbPixel } from '@/mixins/fbPixel'
 
 export default {
   name: 'ShareTaoyuanProud',
@@ -107,13 +104,16 @@ export default {
         action: 'click',
         label: `fb_${this.metas[this.active].text}`
       })
+      sendFbPixel('頁尾社群臉書按讚')
     },
     goToNext() {
+      console.log('gotonext')
       this.sendGA({
         category: 'furtherreading',
         action: 'click',
         label: 'furtherreading_台中市'
       })
+      sendFbPixel('閱讀下一頁')
     }
   },
   computed: {

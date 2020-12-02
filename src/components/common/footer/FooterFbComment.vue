@@ -5,20 +5,28 @@
       :data-href="href"
       data-numposts="5"
       data-width="100%"
+      @click="clickHandler"
       data-order-by="reverse_time"
     />
   </article>
 </template>
 
 <script>
+import { sendFbPixel } from '@/mixins/fbPixel'
+
 export default {
   props: {
     href: {
       type: String,
-      default: document.querySelector('meta[property="og:url"]').content,
-    },
+      default: document.querySelector('meta[property="og:url"]').content
+    }
   },
   name: 'FooterFbComment',
+  methods: {
+    clickHandler() {
+      sendFbPixel('頁尾留言互動')
+    }
+  }
 }
 </script>
 

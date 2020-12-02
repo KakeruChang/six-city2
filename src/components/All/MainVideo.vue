@@ -152,7 +152,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .video-wrapper {
-  background-color: rgb(0, 0, 0);
+  background-color: #171717;
   height: calc(100vh + 372px);
   position: relative;
   @media screen and (max-width: 768px) {
@@ -218,7 +218,9 @@ export default {
   video {
     width: 100%;
     height: 100%;
-    // object-fit: cover;
+    @media screen and (min-width: 1025px) {
+      object-fit: cover;
+    }
   }
 }
 </style>

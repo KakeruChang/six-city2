@@ -7,12 +7,7 @@
     name="next-article"
     @click="sendGA(formatGA('FooterQuestoinnaire'))"
   >
-    <NmdButton
-      :size="buttonStyle.size"
-      :theme="mode === 'light' && 'contained'"
-      bgColor="#fff"
-      >{{ text }}</NmdButton
-    >
+    <NmdButton :size="buttonStyle.size" bgColor="#fff">{{ text }}</NmdButton>
   </a>
 </template>
 

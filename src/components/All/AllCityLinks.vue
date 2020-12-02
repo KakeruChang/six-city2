@@ -1,9 +1,12 @@
 <template>
   <div class="city-wrapper">
     <div class="city" v-for="(city, i) in cities" :key="city.title">
-      <div
+      <a
         class="city-block"
         :class="{ left: i % 2 === 0, right: i % 2 !== 0 }"
+        :href="city.link"
+        target="_blank"
+        @click="clickHandler(city.name)"
       >
         <span class="city-name" :style="{ color: city.color }">
           {{ city.name }}
@@ -13,12 +16,7 @@
         </div>
         <h2 class="city-title">{{ city.title }}</h2>
         <p class="city-text">{{ city.text }}</p>
-        <a
-          class="city-link"
-          :href="city.link"
-          target="_blank"
-          @click="clickHandler(city.name)"
-        >
+        <span class="city-related">
           <span class="btn-arrow">
             <img
               class="jump"
@@ -27,16 +25,19 @@
             />
           </span>
           <span class="continue">
-            繼 續 閱 讀
+            <span>
+              繼 續 閱 讀
+            </span>
           </span>
-        </a>
-      </div>
+        </span>
+      </a>
     </div>
   </div>
 </template>
 
 <script>
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
+import { sendFbPixel } from '@/mixins/fbPixel'
 
 export default {
   name: 'AllCityLinks',
@@ -74,7 +75,7 @@ export default {
         {
           name: '台 中',
           img: require('../../assets/Cities/4_Taichung.png'),
-          title: '空污、網美、大甲媽  什麼是真台中',
+          title: '空汙、網美、大甲媽  什麼是真台中',
           text:
             '台中人常形容自己的城市很「中間」，但真的嗎？《聯合報》尋找台中的城市切面，紀錄高速發展下台中人正努力的日常。',
           link: './Taichung',
@@ -108,6 +109,7 @@ export default {
         action: 'click',
         label: `article_${city}`
       })
+      sendFbPixel('閱讀下一頁')
     }
   }
 }
@@ -133,6 +135,8 @@ $city-block-size-m: 360px;
 $city-block-size-s: 300px;
 $city-block-size-xs: 270px;
 .city-block {
+  display: block;
+  text-decoration: none;
   position: relative;
   width: $city-block-size-l;
   @media screen and (max-width: 1024.98px) and (min-width: 768px) {
@@ -237,9 +241,8 @@ $city-block-size-xs: 270px;
   line-height: 1.7;
   color: #171717;
 }
-.city-link {
+.city-related {
   display: flex;
-  text-decoration: none;
   width: 180px;
   margin-bottom: 130px;
   @media screen and (max-width: 767.98px) and (min-width: 414px) {
@@ -251,11 +254,13 @@ $city-block-size-xs: 270px;
 }
 .continue {
   width: 96px;
-  height: 26px;
+  height: 48px;
   margin-left: 13px;
   font-size: 18px;
   line-height: 1.89;
   color: #706f6f;
+  display: flex;
+  align-items: center;
 }
 
 .btn-arrow {

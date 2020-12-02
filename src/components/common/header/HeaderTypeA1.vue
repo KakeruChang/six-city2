@@ -34,10 +34,7 @@
             'header-bar-logo-light': theme === 'light'
           }"
         >
-          <div
-            class="header-bar__logo"
-            @click="sendGA(formatGA('HeaderUdnLogo'))"
-          >
+          <div class="header-bar__logo" @click="handleLogoClick">
             <a
               :href="href"
               target="_blank"
@@ -156,6 +153,7 @@ import ShareLine from '@/components/common/accessories/ShareLine.vue'
 import ShareTwitter from '@/components/common/accessories/ShareTwitter.vue'
 import HeaderAnchor from '@/components/common/header/HeaderAnchor.vue'
 import HeaderAnchorMob from '@/components/common/header/HeaderAnchorMob.vue'
+import { sendFbPixel } from '@/mixins/fbPixel'
 
 export default {
   name: 'HeaderTypeA1',
@@ -208,12 +206,15 @@ export default {
     }
   },
   methods: {
+    handleLogoClick() {
+      this.sendGA(this.formatGA('HeaderUdnLogo'))
+      sendFbPixel('山頭聯合報LOGO')
+    },
     handleHamburgerClick() {
       this.menuActiveFlag = !this.menuActiveFlag
-
+      sendFbPixel('山頭漢堡選單')
       if (this.menuActiveFlag) {
         this.sendGA(this.formatGA('HeaderMenuOpen'))
-
         // setTimeout(() => window.scrollTo({ top: 0 }), 600);
       } else this.sendGA(this.formatGA('HeaderMenuClose'))
     },

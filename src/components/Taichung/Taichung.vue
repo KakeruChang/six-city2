@@ -6,7 +6,7 @@
       :rootCity="`${folderRoute}/Taichung`"
       :isInside="isInside"
       metaMainDescription="台中人常形容自己的城市很「中間」，地理位置、物價房價都是。但在外地人眼中，台中日新月異、總是有新的打卡景點。《聯合報》尋找台中的城市切面，紀錄高速發展下台中人正努力的日常。"
-      metaMainTitle="空污、網美、大甲媽 什麼是真台中 | 專題 | 聯合報"
+      metaMainTitle="空汙、網美、大甲媽 什麼是真台中 | 專題 | 聯合報"
       ><HeaderLinks
     /></HeaderTypeA1>
     <OnloadAnchorFrame
@@ -15,7 +15,7 @@
     >
       <MainVideo
         city="台中"
-        :description="['空污', '、', '網美', '、', '大甲媽']"
+        :description="['空汙', '、', '網美', '、', '大甲媽']"
         :mainColor="mainColor"
         videoPC="https://p3.udn.com.tw/cities/Taichung/video/Taichung_video_web.mp4"
         videoMob="https://p3.udn.com.tw/cities/Taichung/video/Taichung_video_mob.mp4"
