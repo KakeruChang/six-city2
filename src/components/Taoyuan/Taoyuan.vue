@@ -32,22 +32,24 @@
       :arrowImg="require('../../assets/Taoyuan/arrow_Taoyuan.svg')"
       rootUrl="/Taoyuan"
     />
-    <PageFooterV1>
-      <OnloadAnchorFrame
-        GAtitle="page read: 桃園 我桃園我驕傲"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <ShareTaoyuanProud />
-      </OnloadAnchorFrame>
-      <SixCitiesEditor :image="['葉信菉、林澔一、鄭超文、', '報系資料庫']" />
-      <CityBottomTitle :mainColor="mainColor" city="桃園" />
-      <OnloadAnchorFrame
-        GAtitle="page read: 桃園 臉書留言區"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <FooterFbComment />
-      </OnloadAnchorFrame>
-    </PageFooterV1>
+    <transition name="fade">
+      <PageFooterV1 v-if="!isInside">
+        <OnloadAnchorFrame
+          GAtitle="page read: 桃園 我桃園我驕傲"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <ShareTaoyuanProud />
+        </OnloadAnchorFrame>
+        <SixCitiesEditor :image="['葉信菉、林澔一、鄭超文、', '報系資料庫']" />
+        <CityBottomTitle :mainColor="mainColor" city="桃園" />
+        <OnloadAnchorFrame
+          GAtitle="page read: 桃園 臉書留言區"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <FooterFbComment />
+        </OnloadAnchorFrame>
+      </PageFooterV1>
+    </transition>
     <template v-if="!isInside">
       <PageBackTop />
     </template>

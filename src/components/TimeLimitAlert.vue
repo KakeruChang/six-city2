@@ -93,12 +93,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.fade-leave-active {
-  transition: opacity 1s;
-}
-.fade-leave-to {
-  opacity: 0;
-}
 .time-limit-area {
   background-color: #fff;
   z-index: 5000;

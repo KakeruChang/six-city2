@@ -32,25 +32,27 @@
       :arrowImg="require('../../assets/Tainan/arrow_Tainan.svg')"
       rootUrl="/Tainan"
     />
-    <PageFooterV1>
-      <OnloadAnchorFrame
-        GAtitle="page read: 台南 我台南我驕傲"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <ShareTainanProud />
-      </OnloadAnchorFrame>
-      <SixCitiesEditor
-        producer="許瑋琳、謝汶均"
-        :image="['劉學聖、曾原信、報系資料庫']"
-      />
-      <CityBottomTitle :mainColor="mainColor" city="台南" />
-      <OnloadAnchorFrame
-        GAtitle="page read: 台南 臉書留言區"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <FooterFbComment />
-      </OnloadAnchorFrame>
-    </PageFooterV1>
+    <transition name="fade">
+      <PageFooterV1 v-if="!isInside">
+        <OnloadAnchorFrame
+          GAtitle="page read: 台南 我台南我驕傲"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <ShareTainanProud />
+        </OnloadAnchorFrame>
+        <SixCitiesEditor
+          producer="許瑋琳、謝汶均"
+          :image="['劉學聖、曾原信、報系資料庫']"
+        />
+        <CityBottomTitle :mainColor="mainColor" city="台南" />
+        <OnloadAnchorFrame
+          GAtitle="page read: 台南 臉書留言區"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <FooterFbComment />
+        </OnloadAnchorFrame>
+      </PageFooterV1>
+    </transition>
     <template v-if="!isInside">
       <PageBackTop />
     </template>

@@ -10,15 +10,16 @@ import routes from './routes'
 
 import '@/assets/style/main.scss'
 import '@/assets/style/font.scss'
+import '@/style/vue-transition.scss'
 
 Vue.use(VueYoutube)
 Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes,
-  base: '/'
-  // base: '/test/cities',
-  // mode: 'history'
+  // base: '/'
+  base: '/test/cities',
+  mode: 'history'
 })
 
 router.beforeEach((to, _from, next) => {

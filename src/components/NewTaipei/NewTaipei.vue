@@ -32,28 +32,30 @@
       :arrowImg="require('../../assets/New-Taipei/arrow_New-Taipei.svg')"
       rootUrl="/New-Taipei"
     />
-    <PageFooterV1>
-      <OnloadAnchorFrame
-        GAtitle="page read: 新北 我新北我驕傲"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <ShareNewTaipeiProud />
-      </OnloadAnchorFrame>
-      <SixCitiesEditor
-        :image="[
-          '許正宏、林澔一、杜建重、',
-          '曾原信、林伯東、胡經周、',
-          '報系資料庫'
-        ]"
-      />
-      <CityBottomTitle :mainColor="mainColor" city="新北" />
-      <OnloadAnchorFrame
-        GAtitle="page read: 新北 臉書留言區"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <FooterFbComment />
-      </OnloadAnchorFrame>
-    </PageFooterV1>
+    <transition name="fade">
+      <PageFooterV1 v-if="!isInside">
+        <OnloadAnchorFrame
+          GAtitle="page read: 新北 我新北我驕傲"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <ShareNewTaipeiProud />
+        </OnloadAnchorFrame>
+        <SixCitiesEditor
+          :image="[
+            '許正宏、林澔一、杜建重、',
+            '曾原信、林伯東、胡經周、',
+            '報系資料庫'
+          ]"
+        />
+        <CityBottomTitle :mainColor="mainColor" city="新北" />
+        <OnloadAnchorFrame
+          GAtitle="page read: 新北 臉書留言區"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <FooterFbComment />
+        </OnloadAnchorFrame>
+      </PageFooterV1>
+    </transition>
     <template v-if="!isInside">
       <PageBackTop />
     </template>

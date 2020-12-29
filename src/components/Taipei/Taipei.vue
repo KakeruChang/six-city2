@@ -32,24 +32,26 @@
       :arrowImg="require('../../assets/Taipei/arrow_Taipei.svg')"
       rootUrl="/Taipei"
     />
-    <PageFooterV1>
-      <OnloadAnchorFrame
-        GAtitle="page read: 台北 我台北我驕傲"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <ShareTaipeiProud />
-      </OnloadAnchorFrame>
-      <SixCitiesEditor
-        :image="['林俊良、徐兆玄、杜建重、余承翰、', '蘇健忠、報系資料庫']"
-      />
-      <CityBottomTitle :mainColor="mainColor" city="台北" />
-      <OnloadAnchorFrame
-        GAtitle="page read: 台北 臉書留言區"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <FooterFbComment />
-      </OnloadAnchorFrame>
-    </PageFooterV1>
+    <transition name="fade">
+      <PageFooterV1 v-if="!isInside">
+        <OnloadAnchorFrame
+          GAtitle="page read: 台北 我台北我驕傲"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <ShareTaipeiProud />
+        </OnloadAnchorFrame>
+        <SixCitiesEditor
+          :image="['林俊良、徐兆玄、杜建重、余承翰、', '蘇健忠、報系資料庫']"
+        />
+        <CityBottomTitle :mainColor="mainColor" city="台北" />
+        <OnloadAnchorFrame
+          GAtitle="page read: 台北 臉書留言區"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <FooterFbComment />
+        </OnloadAnchorFrame>
+      </PageFooterV1>
+    </transition>
     <template v-if="!isInside">
       <PageBackTop />
     </template>

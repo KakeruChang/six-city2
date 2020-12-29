@@ -32,22 +32,24 @@
       :arrowImg="require('../../assets/Kaohsiung/arrow_Kaohsiung.svg')"
       rootUrl="/Kaohsiung"
     />
-    <PageFooterV1>
-      <OnloadAnchorFrame
-        GAtitle="page read: 高雄 我高雄我驕傲"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <ShareKaohsiungProud />
-      </OnloadAnchorFrame>
-      <SixCitiesEditor producer="謝汶均" :image="['劉學聖、報系資料庫']" />
-      <CityBottomTitle :mainColor="mainColor" city="高雄" />
-      <OnloadAnchorFrame
-        GAtitle="page read: 高雄 臉書留言區"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <FooterFbComment />
-      </OnloadAnchorFrame>
-    </PageFooterV1>
+    <transition name="fade">
+      <PageFooterV1 v-if="!isInside">
+        <OnloadAnchorFrame
+          GAtitle="page read: 高雄 我高雄我驕傲"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <ShareKaohsiungProud />
+        </OnloadAnchorFrame>
+        <SixCitiesEditor producer="謝汶均" :image="['劉學聖、報系資料庫']" />
+        <CityBottomTitle :mainColor="mainColor" city="高雄" />
+        <OnloadAnchorFrame
+          GAtitle="page read: 高雄 臉書留言區"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <FooterFbComment />
+        </OnloadAnchorFrame>
+      </PageFooterV1>
+    </transition>
     <template v-if="!isInside">
       <PageBackTop />
     </template>

@@ -32,25 +32,26 @@
       :arrowImg="require('../../assets/Taichung/arrow_Taichung.svg')"
       rootUrl="/Taichung"
     />
-    <PageFooterV1>
-      <OnloadAnchorFrame
-        GAtitle="page read: 台中 我台中我驕傲"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <ShareTaichungProud />
-      </OnloadAnchorFrame>
-      <SixCitiesEditor producer="洪欣慈" :image="['黃仲裕、報系資料庫']" />
-      <CityBottomTitle :mainColor="mainColor" city="台中" />
-      <OnloadAnchorFrame
-        GAtitle="page read: 台中 臉書留言區"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <FooterFbComment />
-      </OnloadAnchorFrame>
-    </PageFooterV1>
-    <template v-if="!isInside">
-      <PageBackTop />
-    </template>
+    <transition name="fade">
+      <PageFooterV1 v-if="!isInside">
+        <OnloadAnchorFrame
+          GAtitle="page read: 台中 我台中我驕傲"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <ShareTaichungProud />
+        </OnloadAnchorFrame>
+        <SixCitiesEditor producer="洪欣慈" :image="['黃仲裕、報系資料庫']" />
+        <CityBottomTitle :mainColor="mainColor" city="台中" />
+        <OnloadAnchorFrame
+          GAtitle="page read: 台中 臉書留言區"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <FooterFbComment />
+        </OnloadAnchorFrame>
+      </PageFooterV1>
+    </transition>
+
+    <PageBackTop v-if="!isInside" />
   </div>
 </template>
 

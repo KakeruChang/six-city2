@@ -185,8 +185,7 @@ export default {
       nextTrigger: false,
       oldScrollingPosition: 0,
       isSideTitleChanged: false,
-      innerHeight: window.innerHeight,
-      backIndex: 0
+      innerHeight: window.innerHeight
     }
   },
   methods: {
@@ -228,12 +227,10 @@ export default {
       } else {
         this.destroyObserver()
         window.removeEventListener('scroll', this.countProgressInside, false)
-        // add scroll event listner is moved to watch part
 
         this.isInside = false
         this.isHide = true
         this.$emit('emitIsInside', false)
-        // this.insideContent = {}
         this.$router.back()
         this.displayAreaFromTop = 0
 
@@ -243,7 +240,15 @@ export default {
           label: 'back'
         })
 
-        this.backIndex = this.active
+        const top =
+          this.$refs.featureContainer.offsetTop + this.innerHeight * this.active
+        setTimeout(() => {
+          this.displacementInside = 0
+          window.scrollTo({
+            top
+          })
+        }, 0)
+        window.addEventListener('scroll', this.countActiveByHeight, false)
       }
     },
     countProgressInside() {
@@ -579,22 +584,6 @@ export default {
         setTimeout(() => {
           this.areaActive = true
         }, 250)
-      }
-    },
-    isInside: function() {
-      if (!this.isInside) {
-        const top =
-          this.$refs.featureContainer.offsetTop +
-          this.innerHeight * this.backIndex
-
-        setTimeout(() => {
-          this.displacementInside = 0
-          window.scrollTo({
-            top
-          })
-        }, 0)
-
-        window.addEventListener('scroll', this.countActiveByHeight, false)
       }
     }
   },
