@@ -28,7 +28,7 @@
       </p>
     </ArticleContainer>
     <ArticleYoutube
-      src="https://www.youtube.com/embed/MPqZilY1zpQ"
+      src="https://www.youtube.com/embed/mJLtrAdEpI8"
       :articleMargin="false"
     />
 

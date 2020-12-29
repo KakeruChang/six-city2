@@ -35,10 +35,10 @@
           require('../../../assets/Taipei/mob/4_Taipei_democracy_pic1_mob.jpg')
         "
         :srcPad="
-          require('../../../assets/Taipei/pad/4_Taipei_democracy_pic1.jpg')
+          require('../../../assets/Taipei/pad/4_Taipei_democracy_pic2.jpg')
         "
         :srcPc="
-          require('../../../assets/Taipei/web/4_Taipei_democracy_pic1.jpg')
+          require('../../../assets/Taipei/web/4_Taipei_democracy_pic2.jpg')
         "
         alt="2014年，反服貿團體走上凱道，並秀出手機亮光，共同合唱「島嶼天光」。"
         >2014年，反服貿團體走上凱道，並秀出手機亮光，共同合唱「島嶼天光」。圖／聯合報系資料照</ArticleColumnOne
@@ -59,10 +59,10 @@
           require('../../../assets/Taipei/mob/4_Taipei_democracy_pic2_mob.jpg')
         "
         :srcPad="
-          require('../../../assets/Taipei/pad/4_Taipei_democracy_pic2.jpg')
+          require('../../../assets/Taipei/pad/4_Taipei_democracy_pic1.jpg')
         "
         :srcPc="
-          require('../../../assets/Taipei/web/4_Taipei_democracy_pic2.jpg')
+          require('../../../assets/Taipei/web/4_Taipei_democracy_pic1.jpg')
         "
         alt="2012年，勞工團體發起「蛋洗總統府」抗議活動，在凱道上朝總統府丟擲雞蛋。"
         >2012年，勞工團體發起「蛋洗總統府」抗議活動，在凱道上朝總統府丟擲雞蛋。圖／聯合報系資料照</ArticleColumnOne

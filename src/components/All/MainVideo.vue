@@ -221,6 +221,9 @@ export default {
     @media screen and (min-width: 1025px) {
       object-fit: cover;
     }
+    @media screen and (max-aspect-ratio: 17/10) {
+      object-fit: contain;
+    }
   }
 }
 </style>

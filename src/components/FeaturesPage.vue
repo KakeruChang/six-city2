@@ -63,7 +63,10 @@
       <img
         class="display-area-bg"
         v-if="features[active].img"
-        :class="{ active: areaActive, inside: isInside }"
+        :class="{
+          active: areaActive,
+          inside: isInside
+        }"
         :src="features[active].img.bg[deviceType === 'pc' ? 'web' : deviceType]"
         alt
       />
@@ -138,12 +141,14 @@
         </div>
       </div>
     </div>
+    <TimeLimitAlert v-if="isInside && !$store.state.timeLimitTrigger" />
   </div>
 </template>
 
 <script>
 import FeatureContent from './FeatureContent'
 import Progress from './Progress.vue'
+import TimeLimitAlert from './TimeLimitAlert'
 import { rwdMethods, sendGaMethods } from '@/mixins/masterBuilder.js'
 import { fbBrowserResize } from '@/mixins/fbBrowserResize.js'
 import { sendFbPixel } from '@/mixins/fbPixel'
@@ -160,7 +165,8 @@ export default {
   },
   components: {
     Progress,
-    FeatureContent
+    FeatureContent,
+    TimeLimitAlert
   },
   data() {
     return {
@@ -179,7 +185,8 @@ export default {
       nextTrigger: false,
       oldScrollingPosition: 0,
       isSideTitleChanged: false,
-      innerHeight: window.innerHeight
+      innerHeight: window.innerHeight,
+      backIndex: 0
     }
   },
   methods: {
@@ -235,7 +242,8 @@ export default {
           action: 'click',
           label: 'back'
         })
-        console.log(this.active)
+
+        this.backIndex = this.active
       }
     },
     countProgressInside() {
@@ -327,20 +335,6 @@ export default {
         }
       })
     },
-    detectingIOS() {
-      return (
-        [
-          'iPad Simulator',
-          'iPhone Simulator',
-          'iPod Simulator',
-          'iPad',
-          'iPhone',
-          'iPod'
-        ].includes(navigator.platform) ||
-        // iPad on iOS 13 detection
-        (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
-      )
-    },
     checkPath() {
       if (Object.keys(this.$route.params).length !== 0) {
         const urlId = this.$route.params.id
@@ -365,10 +359,8 @@ export default {
               false
             )
 
+            this.$emit('emitActive', i)
             this.$nextTick(() => {
-              // window.scrollTo({
-              //   top: this.$refs[`target${i}`][0].offsetTop
-              // })
               this.$refs[`target${i}`][0].scrollIntoView()
               this.displayAreaFromTop = 0
             })
@@ -449,7 +441,7 @@ export default {
             } else {
               this.direction = 'stay'
             }
-            console.log(this.direction)
+
             if (this.direction === 'down') {
               this.$emit(
                 'emitActive',
@@ -506,7 +498,6 @@ export default {
       this.observer = {}
     },
     scrollToNext() {
-      console.log('scrolltonext')
       window.scrollTo({
         top: this.$refs[`target${this.active + 1}`][0].offsetTop
       })
@@ -519,11 +510,6 @@ export default {
       this.$emit('emitActive', i)
     },
     handleResize() {
-      // if (this.detectingIOS()) {
-      //   this.innerHeight = document.documentElement.clientHeight
-      // } else {
-      //   this.innerHeight = window.innerHeight
-      // }
       const innerHeight = require('ios-inner-height')
 
       this.innerHeight = innerHeight()
@@ -562,7 +548,6 @@ export default {
         this.$emit('emitOnloadGA', this.features[this.active].GATitle)
 
         if (!this.features[this.active].url) {
-          console.log('if:page not exist')
           this.$router.push({ path: this.rootUrl })
           this.$router.push({
             path: `${this.rootUrl}/${this.features[this.active + 1].url}`
@@ -597,21 +582,19 @@ export default {
       }
     },
     isInside: function() {
-      // const { innerHeight } = window
-
       if (!this.isInside) {
+        const top =
+          this.$refs.featureContainer.offsetTop +
+          this.innerHeight * this.backIndex
+
         setTimeout(() => {
           this.displacementInside = 0
-          console.log('this.active:', this.active)
-          console.log('innerHeight:', this.innerHeight)
           window.scrollTo({
-            top:
-              this.$refs.featureContainer.offsetTop +
-              this.innerHeight * this.active
+            top
           })
+        }, 0)
 
-          window.addEventListener('scroll', this.countActiveByHeight, false)
-        }, 300)
+        window.addEventListener('scroll', this.countActiveByHeight, false)
       }
     }
   },
@@ -731,24 +714,16 @@ export default {
   max-width: 100%;
   background-color: rgb(23, 23, 23);
   display: flex;
-  // transition: all 0.1s linear;
 }
 .display-area-bg {
   position: absolute;
   top: 0;
   right: 0;
-  // height: 100vh;
   width: 100vw;
   max-width: 100%;
   transition: all 0.5s ease-out;
-  // transform: translateX(100%);
   opacity: 0;
-  // @media screen and (max-width: 1025px) {
-  //   width: 110vw;
-  //   max-width: 110%;
-  // }
   &.inside {
-    // height: 80vh;
     width: 80vw;
     max-width: 80%;
     transition: all 0.25s ease-out;
@@ -759,7 +734,6 @@ export default {
   }
   &.active {
     opacity: 1;
-    // transform: translateX(0);
   }
 }
 .btn-arrow {
@@ -869,7 +843,6 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  // height: 100vh;
   width: 100vw;
   transition: all 0.5s;
   background-color: rgb(23, 23, 23);
