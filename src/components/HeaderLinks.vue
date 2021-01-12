@@ -23,7 +23,8 @@ export default {
   mixins: [sendGaMethods],
   data() {
     return {
-      root: 'http://nmdap.udn.com.tw/test/cities',
+      // root: 'http://nmdap.udn.com.tw/test/cities',
+      root: 'https://vip.udn.com/newmedia/2021/cities',
       links: [
         {
           url: '/',

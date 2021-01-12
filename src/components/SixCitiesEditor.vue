@@ -32,7 +32,7 @@
 
       <div>
         <p></p>
-        <p>2020.12.8</p>
+        <p>2021.1.25</p>
       </div>
     </FooterEditor>
     <div>

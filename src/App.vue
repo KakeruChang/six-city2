@@ -4,7 +4,10 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  mounted() {
+    window.scrollTo(0, 0)
+  }
 }
 </script>
 <style lang="scss">

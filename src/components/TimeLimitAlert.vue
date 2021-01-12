@@ -28,7 +28,6 @@ export default {
   data() {
     return {
       startTime: new Date(),
-      aim: new Date(2021, 0, 30, 6, 0, 0, 0),
       startHeight: 0,
       trigger: false,
       triggerHeight: false,
@@ -65,7 +64,10 @@ export default {
   },
   computed: {
     countdown() {
-      const difference = differenceInSeconds(this.aim, this.startTime)
+      const difference = differenceInSeconds(
+        this.$store.state.aim,
+        this.startTime
+      )
 
       const days = Math.floor(difference / (60 * 60 * 24))
       const hours = Math.floor(difference / (60 * 60) - days * 24)
@@ -75,7 +77,10 @@ export default {
       return { days, hours, minutes, seconds }
     },
     isOverTime() {
-      const difference = differenceInSeconds(this.aim, this.startTime)
+      const difference = differenceInSeconds(
+        this.$store.state.aim,
+        this.startTime
+      )
       if (difference < 0) {
         return true
       }

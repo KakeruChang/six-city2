@@ -96,7 +96,8 @@ export default {
       active: 0,
       isInside: false,
       onloadGATitle: null,
-      folderRoute: 'test/cities',
+      // folderRoute: 'test/cities',
+      folderRoute: '/newmedia/2021/cities/',
       mainColor: '#DFD486'
     }
   },
