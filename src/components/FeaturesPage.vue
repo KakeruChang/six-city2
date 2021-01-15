@@ -140,8 +140,12 @@
           </template>
         </div>
       </div>
+      <TimeLimitAlert
+        v-if="isInside && !this.$store.state.timeLimitTrigger"
+        :innerHeight="innerHeight"
+        :displacement="displacementInside * innerHeight"
+      />
     </div>
-    <TimeLimitAlert v-if="isInside && !$store.state.timeLimitTrigger" />
   </div>
 </template>
 
@@ -157,7 +161,7 @@ export default {
   name: 'FeaturesPage',
   mixins: [rwdMethods, sendGaMethods, fbBrowserResize],
   props: {
-    active: { type: Number, default: 0 },
+    active: { type: Number },
     features: { type: Array },
     mainColor: { type: String },
     rootUrl: { type: String },
@@ -258,7 +262,6 @@ export default {
         const targetHeight = this.$refs[`target${this.active}`][0].offsetHeight
         this.progressInside =
           (pageYOffset - targetTop) / (targetHeight - this.innerHeight)
-
         // count the replacement of inside part
         if (this.progressInside < 0) {
           this.displacementInside =
@@ -538,7 +541,7 @@ export default {
       const { innerWidth } = window
 
       if (innerWidth > 768) return { x: 300, y: 300 }
-      else if (innerWidth < 375) return { x: 100, y: 350 }
+      else if (innerWidth < 375) return { x: 100, y: 275 }
       else if (innerWidth >= 375 && innerWidth < 576) return { x: 150, y: 400 }
       // 576~768
       return { x: 200, y: 200 }

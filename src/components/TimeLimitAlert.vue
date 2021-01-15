@@ -1,6 +1,11 @@
 <template>
-  <transition name="fade">
-    <div v-if="!isOverTime && !hide" class="time-limit-area">
+  <transition name="vanishDown">
+    <div
+      v-if="isExist"
+      class="time-limit-area"
+      ref="timeLimitArea"
+      :style="{ top: `${areaTop}px` }"
+    >
       <div class="title">
         <h1>聯合報數位版</h1>
         <h1>限時免費試閱</h1>
@@ -25,13 +30,20 @@ import NmdArrow from './common/accessories/NmdArrow.vue'
 export default {
   name: 'TimeLimitAlert',
   components: { NmdArrow },
+  props: {
+    innerHeight: { type: Number },
+    displacement: { type: Number }
+  },
   data() {
     return {
       startTime: new Date(),
       startHeight: 0,
       trigger: false,
       triggerHeight: false,
-      hide: false
+      hide: false,
+      areaTop: 0,
+      removeTrigger: true,
+      isOver5Seconds: false
     }
   },
   methods: {
@@ -50,16 +62,32 @@ export default {
         if (!this.triggerMemo) {
           this.startHeight = window.pageYOffset
           this.triggerMemo = true
-        } else {
-          if (
-            window.pageYOffset - this.startHeight >
-            0.5 * window.innerHeight
-          ) {
-            this.hide = true
+        } else if (
+          window.pageYOffset - this.startHeight >
+          0.5 * window.innerHeight
+        ) {
+          this.hide = true
+          if (this.isOver5Seconds) {
             this.$store.dispatch('timeLimit')
           }
         }
       }
+    },
+    countAreaPosition() {
+      if (this.$refs.timeLimitArea) {
+        this.areaTop =
+          this.innerHeight -
+          this.$refs.timeLimitArea.offsetHeight +
+          this.displacement
+      } else if (!removeTrigger) {
+        window.removeEventListener('scroll', this.countAreaPosition, false)
+        this.removeTrigger = true
+      }
+    },
+    countTimeStart() {
+      setTimeout(() => {
+        this.isOver5Seconds = true
+      }, 5000)
     }
   },
   computed: {
@@ -85,14 +113,31 @@ export default {
         return true
       }
       return false
+    },
+    isExist() {
+      if (!this.isOverTime) {
+        if (this.isOver5Seconds) {
+          if (!this.hide) {
+            return true
+          }
+          return false
+        }
+        return true
+      }
+      return false
     }
   },
   mounted() {
     this.getServerTime()
     window.addEventListener('scroll', this.getHeight, false)
+    this.countAreaPosition()
+    window.addEventListener('scroll', this.countAreaPosition, false)
+
+    this.countTimeStart()
   },
   destroyed() {
     window.removeEventListener('scroll', this.getHeight, false)
+    window.removeEventListener('scroll', this.countAreaPosition, false)
   }
 }
 </script>
@@ -101,8 +146,7 @@ export default {
 .time-limit-area {
   background-color: #fff;
   z-index: 5000;
-  position: fixed;
-  bottom: 0;
+  position: absolute;
   left: 0;
   right: 0;
 }

@@ -40,24 +40,8 @@ export default {
   name: 'PayWall',
   computed: {
     isVisible() {
-      if (!this.$store.state.isFree) {
-        if (this.$store.state.memberIdentity === 2) {
-          return true
-        }
-        return false
-      }
-      return true
+      return this.$store.state.isVisible
     }
-  },
-  methods: {
-    checkIsVisible() {
-      if (!this.$store.state.checkIdentyTrigger) {
-        this.$store.dispatch('checkIdentity')
-      }
-    }
-  },
-  mounted() {
-    this.checkIsVisible()
   }
 }
 </script>

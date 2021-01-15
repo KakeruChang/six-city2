@@ -5,8 +5,16 @@
 <script>
 export default {
   name: 'App',
+  methods: {
+    checkIsVisible() {
+      if (!this.$store.state.checkIdentyTrigger) {
+        this.$store.dispatch('checkIdentity')
+      }
+    }
+  },
   mounted() {
     window.scrollTo(0, 0)
+    this.checkIsVisible()
   }
 }
 </script>

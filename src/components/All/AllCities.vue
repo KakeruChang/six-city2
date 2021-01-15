@@ -62,7 +62,12 @@ export default {
     AllCityLinks
   },
   data() {
-    return { mainColor: '#ff2300', folderRoute: 'test/cities' }
+    return { mainColor: '#ff2300' }
+  },
+  computed: {
+    folderRoute() {
+      return this.$store.state.folderRoute
+    }
   }
 }
 </script>

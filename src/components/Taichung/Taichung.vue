@@ -97,8 +97,12 @@ export default {
       isInside: false,
       onloadGATitle: null,
       // folderRoute: 'test/cities',
-      folderRoute: '/newmedia/2021/cities/',
       mainColor: '#DFD486'
+    }
+  },
+  computed: {
+    folderRoute() {
+      return this.$store.state.folderRoute
     }
   },
   methods: {

@@ -5,11 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    folderRoute: 'newmedia/2021/cities',
     timeLimitTrigger: false,
     aim: new Date(2021, 0, 30, 0, 0, 0, 0),
     checkIdentyTrigger: false,
     memberIdentity: 0,
-    isFree: false
+    isVisible: false
   },
   getters: {},
   mutations: {
@@ -17,11 +18,10 @@ export default new Vuex.Store({
       state.timeLimitTrigger = true
     },
     CHECK_IDENTITY(state, payload) {
-      console.log('CHECK_IDENTITY-payload:', payload)
       const { identity, isFree } = payload
 
       state.memberIdentity = identity
-      state.isFree = isFree
+      state.isVisible = isFree
     },
     TRIG_CHECK_IDENTITY(state) {
       state.checkIdentyTrigger = true
