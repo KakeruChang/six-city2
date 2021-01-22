@@ -246,6 +246,18 @@ export default {
 
         const top =
           this.$refs.featureContainer.offsetTop + this.innerHeight * this.active
+
+        // for safari
+        window.scrollTo({
+          top
+        })
+        this.$nextTick(() => {
+          window.scrollTo({
+            top
+          })
+        })
+
+        // for other
         setTimeout(() => {
           this.displacementInside = 0
           window.scrollTo({
@@ -573,14 +585,24 @@ export default {
         }
       } else {
         if (this.direction === 'up') {
-          this.isSideTitleChanged =
-            this.features[this.active].sideTitleImg !==
-            this.features[this.active + 1].sideTitleImg
+          if (
+            Object.keys(this.features[this.active]).length > 0 &&
+            Object.keys(this.features[this.active + 1]).length > 0
+          ) {
+            this.isSideTitleChanged =
+              this.features[this.active].sideTitleImg !==
+              this.features[this.active + 1].sideTitleImg
+          }
         }
         if (this.direction === 'down') {
-          this.isSideTitleChanged =
-            this.features[this.active].sideTitleImg !==
-            this.features[this.active - 1].sideTitleImg
+          if (
+            Object.keys(this.features[this.active]).length > 0 &&
+            Object.keys(this.features[this.active - 1]).length > 0
+          ) {
+            this.isSideTitleChanged =
+              this.features[this.active].sideTitleImg !==
+              this.features[this.active - 1].sideTitleImg
+          }
         }
 
         this.areaActive = false
@@ -743,11 +765,11 @@ export default {
   &:focus {
     outline-style: none;
   }
-  transition: all 0.25s ease-out;
-  &.inside {
+  // transition: all 0.25s ease-out;
+  /* &.inside {
     transform: translate(-300%, 300%);
     transition: none;
-  }
+  } */
 }
 .display-content {
   transform: translateY(100vh);
@@ -792,7 +814,7 @@ export default {
   position: relative;
   padding-left: 14.2%;
   padding-top: 0;
-  transition: all 0.25s ease-out;
+  // transition: all 0.25s ease-out;
   &.inactive {
     padding-top: 10%;
     padding-left: 20%;

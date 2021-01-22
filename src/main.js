@@ -18,7 +18,6 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   routes,
   // base: '/'
-  // base: '/test/cities',
   base: '/newmedia/2021/cities/',
   mode: 'history'
 })

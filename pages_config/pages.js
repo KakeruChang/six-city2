@@ -3,7 +3,7 @@ const contentGenerator = require('./utils/contentGenerator.js')
 /* seo內容文件 */
 const monitorCode = contentGenerator('../contents/monitor.html')
 const mainContent = contentGenerator('../contents/main.html')
-const noIndex = contentGenerator('../contents/noIndex.html')
+// const noIndex = contentGenerator('../contents/noIndex.html')
 
 /* 正式路徑 */
 const mainPage = 'https://vip.udn.com/newmedia/2021/cities'
@@ -36,8 +36,7 @@ module.exports = {
       CONTENT: mainContent,
       pageUrl: pathRoot,
       mainPage,
-      theme: '#ffffff',
-      noIndex
+      theme: '#ffffff'
     }
   }
 }
