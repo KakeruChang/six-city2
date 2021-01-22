@@ -17,8 +17,8 @@
         city="桃園"
         description="城市的樣貌不該只有一種"
         :mainColor="mainColor"
-        :videoPC="require('../../assets/Taoyuan/video/Taoyuan_video_web.mp4')"
-        :videoMob="require('../../assets/Taoyuan/video/Taoyuan_video_mob.mp4')"
+        videoPC="https://p3.udn.com.tw/cities/Taoyuan/video/Taoyuan_video_web.mp4"
+        videoMob="https://p3.udn.com.tw/cities/Taoyuan/video/Taoyuan_video_mob.mp4"
       />
       <TaoyuanData :mainColor="mainColor" />
     </OnloadAnchorFrame>
@@ -32,22 +32,24 @@
       :arrowImg="require('../../assets/Taoyuan/arrow_Taoyuan.svg')"
       rootUrl="/Taoyuan"
     />
-    <PageFooterV1>
-      <OnloadAnchorFrame
-        GAtitle="page read: 桃園 我桃園我驕傲"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <ShareTaoyuanProud />
-      </OnloadAnchorFrame>
-      <SixCitiesEditor :image="['葉信菉、林澔一、鄭超文、', '報系資料庫']" />
-      <CityBottomTitle :mainColor="mainColor" city="桃園" />
-      <OnloadAnchorFrame
-        GAtitle="page read: 桃園 臉書留言區"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <FooterFbComment />
-      </OnloadAnchorFrame>
-    </PageFooterV1>
+    <transition name="fade">
+      <PageFooterV1 v-if="!isInside">
+        <OnloadAnchorFrame
+          GAtitle="page read: 桃園 我桃園我驕傲"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <ShareTaoyuanProud />
+        </OnloadAnchorFrame>
+        <SixCitiesEditor :image="['葉信菉、林澔一、鄭超文、', '報系資料庫']" />
+        <CityBottomTitle :mainColor="mainColor" city="桃園" />
+        <OnloadAnchorFrame
+          GAtitle="page read: 桃園 臉書留言區"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <FooterFbComment />
+        </OnloadAnchorFrame>
+      </PageFooterV1>
+    </transition>
     <template v-if="!isInside">
       <PageBackTop />
     </template>
@@ -94,8 +96,13 @@ export default {
       active: 0,
       isInside: false,
       onloadGATitle: null,
-      folderRoute: 'test/cities',
+      // folderRoute: 'test/cities',
       mainColor: '#00edff'
+    }
+  },
+  computed: {
+    folderRoute() {
+      return this.$store.state.folderRoute
     }
   },
   methods: {

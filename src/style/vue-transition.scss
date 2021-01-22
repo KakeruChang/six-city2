@@ -1,0 +1,18 @@
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.vanishDown-enter-active,
+.vanishDown-leave-active {
+  transition: all 0.5s;
+}
+.vanishDown-enter,
+.vanishDown-leave-to {
+  opacity: 0;
+  transform: translateY(300%);
+}

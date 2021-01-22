@@ -17,12 +17,8 @@
         city="高雄"
         :description="['從離鄉到回鄉', '高雄讓我驕傲']"
         :mainColor="mainColor"
-        :videoPC="
-          require('../../assets/Kaohsiung/video/Kaohsiung_video_web.mp4')
-        "
-        :videoMob="
-          require('../../assets/Kaohsiung/video/Kaohsiung_video_mob.mp4')
-        "
+        videoPC="https://p3.udn.com.tw/cities/Kaohsiung/video/Kaohsiung_video_web.mp4"
+        videoMob="https://p3.udn.com.tw/cities/Kaohsiung/video/Kaohsiung_video_mob.mp4"
       />
       <KaohsiungData :mainColor="mainColor" />
     </OnloadAnchorFrame>
@@ -36,22 +32,24 @@
       :arrowImg="require('../../assets/Kaohsiung/arrow_Kaohsiung.svg')"
       rootUrl="/Kaohsiung"
     />
-    <PageFooterV1>
-      <OnloadAnchorFrame
-        GAtitle="page read: 高雄 我高雄我驕傲"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <ShareKaohsiungProud />
-      </OnloadAnchorFrame>
-      <SixCitiesEditor producer="謝汶均" :image="['劉學聖、報系資料庫']" />
-      <CityBottomTitle :mainColor="mainColor" city="高雄" />
-      <OnloadAnchorFrame
-        GAtitle="page read: 高雄 臉書留言區"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <FooterFbComment />
-      </OnloadAnchorFrame>
-    </PageFooterV1>
+    <transition name="fade">
+      <PageFooterV1 v-if="!isInside">
+        <OnloadAnchorFrame
+          GAtitle="page read: 高雄 我高雄我驕傲"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <ShareKaohsiungProud />
+        </OnloadAnchorFrame>
+        <SixCitiesEditor producer="謝汶均" :image="['劉學聖、報系資料庫']" />
+        <CityBottomTitle :mainColor="mainColor" city="高雄" />
+        <OnloadAnchorFrame
+          GAtitle="page read: 高雄 臉書留言區"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <FooterFbComment />
+        </OnloadAnchorFrame>
+      </PageFooterV1>
+    </transition>
     <template v-if="!isInside">
       <PageBackTop />
     </template>
@@ -99,8 +97,13 @@ export default {
       active: 0,
       isInside: false,
       onloadGATitle: null,
-      folderRoute: 'test/cities',
+      // folderRoute: 'test/cities',
       mainColor: '#2e95fb'
+    }
+  },
+  computed: {
+    folderRoute() {
+      return this.$store.state.folderRoute
     }
   },
   methods: {

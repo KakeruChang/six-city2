@@ -17,12 +17,8 @@
         city="新北"
         description="不只是回家睡覺的地方"
         :mainColor="mainColor"
-        :videoPC="
-          require('../../assets/New-Taipei/video/New_Taipei_video_web.mp4')
-        "
-        :videoMob="
-          require('../../assets/New-Taipei/video/New_Taipei_video_mob.mp4')
-        "
+        videoPC="https://p3.udn.com.tw/cities/New-Taipei/video/New_Taipei_video_web.mp4"
+        videoMob="https://p3.udn.com.tw/cities/New-Taipei/video/New_Taipei_video_mob.mp4"
       />
       <NewTaipeiData :mainColor="mainColor" />
     </OnloadAnchorFrame>
@@ -36,28 +32,30 @@
       :arrowImg="require('../../assets/New-Taipei/arrow_New-Taipei.svg')"
       rootUrl="/New-Taipei"
     />
-    <PageFooterV1>
-      <OnloadAnchorFrame
-        GAtitle="page read: 新北 我新北我驕傲"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <ShareNewTaipeiProud />
-      </OnloadAnchorFrame>
-      <SixCitiesEditor
-        :image="[
-          '許正宏、林澔一、杜建重、',
-          '曾原信、林伯東、胡經周、',
-          '報系資料庫'
-        ]"
-      />
-      <CityBottomTitle :mainColor="mainColor" city="新北" />
-      <OnloadAnchorFrame
-        GAtitle="page read: 新北 臉書留言區"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <FooterFbComment />
-      </OnloadAnchorFrame>
-    </PageFooterV1>
+    <transition name="fade">
+      <PageFooterV1 v-if="!isInside">
+        <OnloadAnchorFrame
+          GAtitle="page read: 新北 我新北我驕傲"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <ShareNewTaipeiProud />
+        </OnloadAnchorFrame>
+        <SixCitiesEditor
+          :image="[
+            '許正宏、林澔一、杜建重、',
+            '曾原信、林伯東、胡經周、',
+            '報系資料庫'
+          ]"
+        />
+        <CityBottomTitle :mainColor="mainColor" city="新北" />
+        <OnloadAnchorFrame
+          GAtitle="page read: 新北 臉書留言區"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <FooterFbComment />
+        </OnloadAnchorFrame>
+      </PageFooterV1>
+    </transition>
     <template v-if="!isInside">
       <PageBackTop />
     </template>
@@ -104,8 +102,13 @@ export default {
       active: 0,
       isInside: false,
       onloadGATitle: null,
-      folderRoute: 'test/cities',
+      // folderRoute: 'test/cities',
       mainColor: '#00f0d8'
+    }
+  },
+  computed: {
+    folderRoute() {
+      return this.$store.state.folderRoute
     }
   },
   methods: {

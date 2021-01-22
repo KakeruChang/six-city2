@@ -6,7 +6,7 @@
       rel="noopener"
       aria-label="share-twitter"
       name="share-twitter"
-      @click="sendGA(formatGA('HeaderShareTwitter'))"
+      @click="clickHandler"
     >
       <button aria-label="share" name="share-twitter">
         <i
@@ -29,6 +29,7 @@ import taoyuanData from '../../../data/data-taoyuan'
 import tainanData from '../../../data/data-tainan'
 import kaohsiungData from '../../../data/data-kaohsiung'
 import taichungData from '../../../data/data-taichung'
+import { sendFbPixel } from '@/mixins/fbPixel'
 
 export default {
   name: 'ShareTwitter',
@@ -64,8 +65,11 @@ export default {
       if (this.$route.path.indexOf('Taichung') !== -1) {
         return taichungData
       }
+      if (this.$route.path.indexOf('Taipei') !== -1) {
+        return taipeiData
+      }
       // Taipei
-      return taipeiData
+      return null
     },
     shareUrl() {
       let sharedUrl
@@ -86,6 +90,12 @@ export default {
       return `https://twitter.com/intent/tweet?text=${encodeURIComponent(
         shareContent
       )}%0D%0A%0D%0A${encodeURIComponent(sharedUrl)}`
+    }
+  },
+  methods: {
+    clickHandler() {
+      this.sendGA(this.formatGA('HeaderShareTwitter'))
+      sendFbPixel('山頭社群分享推特')
     }
   }
 }

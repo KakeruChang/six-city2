@@ -17,8 +17,8 @@
         city="台南"
         :description="['走出傳統', '台南混血新美學']"
         :mainColor="mainColor"
-        :videoPC="require('../../assets/Tainan/video/Tainan_video_web.mp4')"
-        :videoMob="require('../../assets/Tainan/video/Tainan_video_mob.mp4')"
+        videoPC="https://p3.udn.com.tw/cities/Tainan/video/Tainan_video_web.mp4"
+        videoMob="https://p3.udn.com.tw/cities/Tainan/video/Tainan_video_mob.mp4"
       />
       <TainanData :mainColor="mainColor" />
     </OnloadAnchorFrame>
@@ -32,25 +32,27 @@
       :arrowImg="require('../../assets/Tainan/arrow_Tainan.svg')"
       rootUrl="/Tainan"
     />
-    <PageFooterV1>
-      <OnloadAnchorFrame
-        GAtitle="page read: 台南 我台南我驕傲"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <ShareTainanProud />
-      </OnloadAnchorFrame>
-      <SixCitiesEditor
-        producer="許瑋琳、謝汶均"
-        :image="['劉學聖、曾原信、報系資料庫']"
-      />
-      <CityBottomTitle :mainColor="mainColor" city="台南" />
-      <OnloadAnchorFrame
-        GAtitle="page read: 台南 臉書留言區"
-        @emitOnloadGA="updateOnloadGATitle"
-      >
-        <FooterFbComment />
-      </OnloadAnchorFrame>
-    </PageFooterV1>
+    <transition name="fade">
+      <PageFooterV1 v-if="!isInside">
+        <OnloadAnchorFrame
+          GAtitle="page read: 台南 我台南我驕傲"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <ShareTainanProud />
+        </OnloadAnchorFrame>
+        <SixCitiesEditor
+          producer="許瑋琳、謝汶均"
+          :image="['劉學聖、曾原信、報系資料庫']"
+        />
+        <CityBottomTitle :mainColor="mainColor" city="台南" />
+        <OnloadAnchorFrame
+          GAtitle="page read: 台南 臉書留言區"
+          @emitOnloadGA="updateOnloadGATitle"
+        >
+          <FooterFbComment />
+        </OnloadAnchorFrame>
+      </PageFooterV1>
+    </transition>
     <template v-if="!isInside">
       <PageBackTop />
     </template>
@@ -97,8 +99,13 @@ export default {
       active: 0,
       isInside: false,
       onloadGATitle: null,
-      folderRoute: 'test/cities',
+      // folderRoute: 'test/cities',
       mainColor: '#dc4705'
+    }
+  },
+  computed: {
+    folderRoute() {
+      return this.$store.state.folderRoute
     }
   },
   methods: {

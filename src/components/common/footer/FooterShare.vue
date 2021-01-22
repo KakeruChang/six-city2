@@ -1,6 +1,6 @@
 <template>
   <article class="footer-share">
-    <div class="footer-share__share-fb">
+    <div class="footer-share__share-fb" @click="clickHandler('fb')">
       <div
         class="fb-like"
         :data-href="href"
@@ -11,10 +11,7 @@
         data-share="true"
       />
     </div>
-    <div
-      class="footer-share__share-line"
-      @click="sendGA(formatGA('ShareLineFooter'))"
-    >
+    <div class="footer-share__share-line" @click="clickHandler('line')">
       <a
         :href="shareLineUrl"
         :target="target"
@@ -38,13 +35,14 @@
         />-->
       </a>
     </div>
-    <div class="footer-share__share-twitter">
+    <div class="footer-share__share-twitter" @click="clickHandler('twitter')">
       <a
         :href="shareTwitterUrl"
         class="twitter-share-button"
         data-show-count="false"
         aria-label="share-twiier"
         name="share-twiier"
+        target="_blank"
       >
         <img
           :src="btnTWITTERImg"
@@ -63,6 +61,7 @@ import Utils from '@/utils/udn-newmedia-utils'
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
 import btnLINEImg from '@/assets/img/button/btn_LINE.svg'
 import btnTWITTERImg from '@/assets/img/button/btn_TWITTER.png'
+import { sendFbPixel } from '@/mixins/fbPixel'
 
 const isMobile = Utils.detectMob()
 const isInApp = Utils.isFacebookApp(148) || Utils.isLineApp()
@@ -116,6 +115,23 @@ export default {
     target() {
       if (!this.isMobile) return '_blank'
       return '_self'
+    }
+  },
+  methods: {
+    clickHandler(type) {
+      switch (type) {
+        case 'line':
+          sendFbPixel('頁尾社群分享LINE')
+          break
+        case 'twitter':
+          sendFbPixel('頁尾社群分享推特')
+          break
+        case 'fb':
+          sendFbPixel('頁尾社群分享臉書')
+          break
+        default:
+          break
+      }
     }
   }
 }

@@ -3,18 +3,21 @@ const contentGenerator = require('./utils/contentGenerator.js')
 /* seo內容文件 */
 const monitorCode = contentGenerator('../contents/monitor.html')
 const mainContent = contentGenerator('../contents/main.html')
-const noIndex = contentGenerator('../contents/noIndex.html')
+// const noIndex = contentGenerator('../contents/noIndex.html')
 
 /* 正式路徑 */
-// const mainPage = 'https://udn.com/newmedia/MAIN_PAGE/';
-// const pathRoot = process.env.NODE_ENV === 'production' ? 'https://udn.com/newmedia/MAIN_PAGE/SUB_PAGE/' : './';
-
-/* 測試路徑 */
-const mainPage = 'http://nmdap.udn.com.tw/test/cities'
+const mainPage = 'https://vip.udn.com/newmedia/2021/cities'
 const pathRoot =
   process.env.NODE_ENV === 'production'
-    ? 'http://nmdap.udn.com.tw/test/cities'
+    ? 'https://vip.udn.com/newmedia/2021/cities'
     : './'
+
+/* 測試路徑 */
+// const mainPage = 'http://nmdap.udn.com.tw/test/cities'
+// const pathRoot =
+//   process.env.NODE_ENV === 'production'
+//     ? 'http://nmdap.udn.com.tw/test/cities'
+//     : './'
 
 module.exports = {
   publicPath: pathRoot,
@@ -33,8 +36,7 @@ module.exports = {
       CONTENT: mainContent,
       pageUrl: pathRoot,
       mainPage,
-      theme: '#ffffff',
-      noIndex
+      theme: '#ffffff'
     }
   }
 }

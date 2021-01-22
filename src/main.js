@@ -10,6 +10,7 @@ import routes from './routes'
 
 import '@/assets/style/main.scss'
 import '@/assets/style/font.scss'
+import '@/style/vue-transition.scss'
 
 Vue.use(VueYoutube)
 Vue.use(VueRouter)
@@ -17,7 +18,7 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   routes,
   // base: '/'
-  base: '/test/cities',
+  base: '/newmedia/2021/cities/',
   mode: 'history'
 })
 

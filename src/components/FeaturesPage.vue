@@ -63,7 +63,10 @@
       <img
         class="display-area-bg"
         v-if="features[active].img"
-        :class="{ active: areaActive, inside: isInside }"
+        :class="{
+          active: areaActive,
+          inside: isInside
+        }"
         :src="features[active].img.bg[deviceType === 'pc' ? 'web' : deviceType]"
         alt
       />
@@ -117,20 +120,6 @@
               @click="goToPage(features[active])"
               v-if="features[active].titleOut"
             >
-              <!-- <span
-              class="btn-arrow"
-              :class="{ inside: isInside }"
-              :style="{
-                color: mainColor,
-                transform: isInside
-                  ? `translate(-${arrowBaseDisplacement.x}%,calc( ${
-                      arrowBaseDisplacement.y
-                    }% + ${displacementInside * 100}vh)) rotate(180deg)`
-                  : 'translate(0, 0) rotate(0deg)'
-              }"
-              @click="goToPage(features[active])"
-              v-if="features[active].titleOut"
-            > -->
               <span :class="{ jump: !isInside }">
                 <img :src="arrowImg" alt="" />
               </span>
@@ -151,6 +140,11 @@
           </template>
         </div>
       </div>
+      <TimeLimitAlert
+        v-if="isInside && !this.$store.state.timeLimitTrigger"
+        :innerHeight="innerHeight"
+        :displacement="displacementInside * innerHeight"
+      />
     </div>
   </div>
 </template>
@@ -158,14 +152,16 @@
 <script>
 import FeatureContent from './FeatureContent'
 import Progress from './Progress.vue'
+import TimeLimitAlert from './TimeLimitAlert'
 import { rwdMethods, sendGaMethods } from '@/mixins/masterBuilder.js'
 import { fbBrowserResize } from '@/mixins/fbBrowserResize.js'
+import { sendFbPixel } from '@/mixins/fbPixel'
 
 export default {
   name: 'FeaturesPage',
   mixins: [rwdMethods, sendGaMethods, fbBrowserResize],
   props: {
-    active: { type: Number, default: 0 },
+    active: { type: Number },
     features: { type: Array },
     mainColor: { type: String },
     rootUrl: { type: String },
@@ -173,7 +169,8 @@ export default {
   },
   components: {
     Progress,
-    FeatureContent
+    FeatureContent,
+    TimeLimitAlert
   },
   data() {
     return {
@@ -230,15 +227,14 @@ export default {
           action: 'click',
           label: `article_${this.features[this.active].titleOut}`
         })
+        sendFbPixel('閱讀下一頁')
       } else {
         this.destroyObserver()
         window.removeEventListener('scroll', this.countProgressInside, false)
-        // add scroll event listner is moved to watch part
 
         this.isInside = false
         this.isHide = true
         this.$emit('emitIsInside', false)
-        // this.insideContent = {}
         this.$router.back()
         this.displayAreaFromTop = 0
 
@@ -247,7 +243,28 @@ export default {
           action: 'click',
           label: 'back'
         })
-        console.log(this.active)
+
+        const top =
+          this.$refs.featureContainer.offsetTop + this.innerHeight * this.active
+
+        // for safari
+        window.scrollTo({
+          top
+        })
+        this.$nextTick(() => {
+          window.scrollTo({
+            top
+          })
+        })
+
+        // for other
+        setTimeout(() => {
+          this.displacementInside = 0
+          window.scrollTo({
+            top
+          })
+        }, 0)
+        window.addEventListener('scroll', this.countActiveByHeight, false)
       }
     },
     countProgressInside() {
@@ -257,7 +274,6 @@ export default {
         const targetHeight = this.$refs[`target${this.active}`][0].offsetHeight
         this.progressInside =
           (pageYOffset - targetTop) / (targetHeight - this.innerHeight)
-
         // count the replacement of inside part
         if (this.progressInside < 0) {
           this.displacementInside =
@@ -339,20 +355,6 @@ export default {
         }
       })
     },
-    detectingIOS() {
-      return (
-        [
-          'iPad Simulator',
-          'iPhone Simulator',
-          'iPod Simulator',
-          'iPad',
-          'iPhone',
-          'iPod'
-        ].includes(navigator.platform) ||
-        // iPad on iOS 13 detection
-        (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
-      )
-    },
     checkPath() {
       if (Object.keys(this.$route.params).length !== 0) {
         const urlId = this.$route.params.id
@@ -377,10 +379,9 @@ export default {
               false
             )
 
+            this.$emit('emitActive', i)
             this.$nextTick(() => {
-              window.scrollTo({
-                top: this.$refs[`target${i}`][0].offsetTop
-              })
+              this.$refs[`target${i}`][0].scrollIntoView()
               this.displayAreaFromTop = 0
             })
             break
@@ -460,7 +461,7 @@ export default {
             } else {
               this.direction = 'stay'
             }
-            console.log(this.direction)
+
             if (this.direction === 'down') {
               this.$emit(
                 'emitActive',
@@ -478,11 +479,6 @@ export default {
                   this.nextTrigger = false
                 }
 
-                console.log(
-                  `next_${action}_${
-                    this.features[entry.target.dataset.target].titleOut
-                  }`
-                )
                 this.sendGA({
                   category: 'next',
                   action,
@@ -490,6 +486,7 @@ export default {
                     this.features[entry.target.dataset.target].titleOut
                   }`
                 })
+                sendFbPixel('閱讀下一頁')
               }
             }
             if (this.direction === 'up') {
@@ -521,7 +518,6 @@ export default {
       this.observer = {}
     },
     scrollToNext() {
-      console.log('scrolltonext')
       window.scrollTo({
         top: this.$refs[`target${this.active + 1}`][0].offsetTop
       })
@@ -534,11 +530,6 @@ export default {
       this.$emit('emitActive', i)
     },
     handleResize() {
-      // if (this.detectingIOS()) {
-      //   this.innerHeight = document.documentElement.clientHeight
-      // } else {
-      //   this.innerHeight = window.innerHeight
-      // }
       const innerHeight = require('ios-inner-height')
 
       this.innerHeight = innerHeight()
@@ -562,7 +553,7 @@ export default {
       const { innerWidth } = window
 
       if (innerWidth > 768) return { x: 300, y: 300 }
-      else if (innerWidth < 375) return { x: 100, y: 350 }
+      else if (innerWidth < 375) return { x: 100, y: 275 }
       else if (innerWidth >= 375 && innerWidth < 576) return { x: 150, y: 400 }
       // 576~768
       return { x: 200, y: 200 }
@@ -577,7 +568,6 @@ export default {
         this.$emit('emitOnloadGA', this.features[this.active].GATitle)
 
         if (!this.features[this.active].url) {
-          console.log('if:page not exist')
           this.$router.push({ path: this.rootUrl })
           this.$router.push({
             path: `${this.rootUrl}/${this.features[this.active + 1].url}`
@@ -595,38 +585,30 @@ export default {
         }
       } else {
         if (this.direction === 'up') {
-          this.isSideTitleChanged =
-            this.features[this.active].sideTitleImg !==
-            this.features[this.active + 1].sideTitleImg
+          if (
+            Object.keys(this.features[this.active]).length > 0 &&
+            Object.keys(this.features[this.active + 1]).length > 0
+          ) {
+            this.isSideTitleChanged =
+              this.features[this.active].sideTitleImg !==
+              this.features[this.active + 1].sideTitleImg
+          }
         }
         if (this.direction === 'down') {
-          this.isSideTitleChanged =
-            this.features[this.active].sideTitleImg !==
-            this.features[this.active - 1].sideTitleImg
+          if (
+            Object.keys(this.features[this.active]).length > 0 &&
+            Object.keys(this.features[this.active - 1]).length > 0
+          ) {
+            this.isSideTitleChanged =
+              this.features[this.active].sideTitleImg !==
+              this.features[this.active - 1].sideTitleImg
+          }
         }
 
         this.areaActive = false
         setTimeout(() => {
           this.areaActive = true
         }, 250)
-      }
-    },
-    isInside: function() {
-      // const { innerHeight } = window
-
-      if (!this.isInside) {
-        setTimeout(() => {
-          this.displacementInside = 0
-          console.log('this.active:', this.active)
-          console.log('innerHeight:', this.innerHeight)
-          window.scrollTo({
-            top:
-              this.$refs.featureContainer.offsetTop +
-              this.innerHeight * this.active
-          })
-
-          window.addEventListener('scroll', this.countActiveByHeight, false)
-        }, 300)
       }
     }
   },
@@ -647,7 +629,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .outside {
   height: 100vh;
   width: 100vw;
@@ -746,24 +728,16 @@ export default {
   max-width: 100%;
   background-color: rgb(23, 23, 23);
   display: flex;
-  // transition: all 0.1s linear;
 }
 .display-area-bg {
   position: absolute;
   top: 0;
   right: 0;
-  // height: 100vh;
   width: 100vw;
   max-width: 100%;
   transition: all 0.5s ease-out;
-  // transform: translateX(100%);
   opacity: 0;
-  // @media screen and (max-width: 1025px) {
-  //   width: 110vw;
-  //   max-width: 110%;
-  // }
   &.inside {
-    // height: 80vh;
     width: 80vw;
     max-width: 80%;
     transition: all 0.25s ease-out;
@@ -774,7 +748,6 @@ export default {
   }
   &.active {
     opacity: 1;
-    // transform: translateX(0);
   }
 }
 .btn-arrow {
@@ -792,11 +765,11 @@ export default {
   &:focus {
     outline-style: none;
   }
-  transition: all 0.25s ease-out;
-  &.inside {
+  // transition: all 0.25s ease-out;
+  /* &.inside {
     transform: translate(-300%, 300%);
     transition: none;
-  }
+  } */
 }
 .display-content {
   transform: translateY(100vh);
@@ -841,7 +814,7 @@ export default {
   position: relative;
   padding-left: 14.2%;
   padding-top: 0;
-  transition: all 0.25s ease-out;
+  // transition: all 0.25s ease-out;
   &.inactive {
     padding-top: 10%;
     padding-left: 20%;
@@ -884,7 +857,6 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  // height: 100vh;
   width: 100vw;
   transition: all 0.5s;
   background-color: rgb(23, 23, 23);

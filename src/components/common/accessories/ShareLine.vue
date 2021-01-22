@@ -6,7 +6,7 @@
       rel="noopener"
       aria-label="share-line"
       title="share-line"
-      @click="sendGA(formatGA('HeaderShareLine'))"
+      @click="clickHandler"
     >
       <button aria-label="share" name="share-line">
         <i
@@ -30,6 +30,7 @@ import taoyuanData from '../../../data/data-taoyuan'
 import tainanData from '../../../data/data-tainan'
 import kaohsiungData from '../../../data/data-kaohsiung'
 import taichungData from '../../../data/data-taichung'
+import { sendFbPixel } from '@/mixins/fbPixel'
 
 const isMobile = Utils.detectMob()
 const isInApp = Utils.isFacebookApp(148) || Utils.isLineApp()
@@ -69,8 +70,10 @@ export default {
       if (this.$route.path.indexOf('Taichung') !== -1) {
         return taichungData
       }
-      // Taipei
-      return taipeiData
+      if (this.$route.path.indexOf('Taipei') !== -1) {
+        return taipeiData
+      }
+      return null
     },
     shareUrl() {
       let sharedUrl
@@ -119,6 +122,12 @@ export default {
     target() {
       if (!isMobile) return '_blank'
       return '_self'
+    }
+  },
+  methods: {
+    clickHandler() {
+      this.sendGA(this.formatGA('HeaderShareLine'))
+      sendFbPixel('山頭社群分享LINE')
     }
   }
 }

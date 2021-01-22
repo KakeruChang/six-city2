@@ -41,12 +41,8 @@
             分享圖片
           </span>
         </a>
-        <router-link
-          class="link-next link-lg"
-          to="./Kaohsiung"
-          target="_blank"
-          @click="goToNext"
-          >下一篇：高雄市
+        <router-link class="link-next link-lg" to="./Kaohsiung" target="_blank">
+          <span @click="goToNext">下一篇：高雄市</span>
         </router-link>
       </div>
     </ArticleContainer>
@@ -56,6 +52,7 @@
 <script>
 import ArticleContainer from '../common/ui/ArticleContainer'
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
+import { sendFbPixel } from '@/mixins/fbPixel'
 
 export default {
   name: 'ShareTainanProud',
@@ -102,6 +99,7 @@ export default {
         action: 'click',
         label: `fb_${this.metas[this.active].text}`
       })
+      sendFbPixel('頁尾社群臉書按讚')
     },
     goToNext() {
       this.sendGA({
@@ -109,6 +107,7 @@ export default {
         action: 'click',
         label: 'furtherreading_高雄市'
       })
+      sendFbPixel('閱讀下一頁')
     }
   },
   computed: {

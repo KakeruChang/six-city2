@@ -1,5 +1,5 @@
 <template>
-  <i class="scroll-down-arrow" @click="clickAlert">
+  <i class="scroll-down-arrow">
     <div class="arrows">
       <span class="arrow-top">
         <svg
@@ -90,11 +90,6 @@ export default {
     iconColor: {
       type: String,
       default: '#fff'
-    }
-  },
-  methods: {
-    clickAlert() {
-      alert('這不是按鈕！')
     }
   }
 }

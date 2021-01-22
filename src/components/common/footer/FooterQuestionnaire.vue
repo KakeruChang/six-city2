@@ -7,7 +7,7 @@
     name="next-article"
     @click="sendGA(formatGA('FooterQuestoinnaire'))"
   >
-    <NmdButton :size="buttonStyle.size">{{text}}</NmdButton>
+    <NmdButton :size="buttonStyle.size" bgColor="#fff">{{ text }}</NmdButton>
   </a>
 </template>
 
@@ -29,6 +29,9 @@ export default {
     text: {
       type: String,
       default: '請填寫閱讀體驗問卷'
+    },
+    mode: {
+      type: String
     }
   },
   data() {

@@ -28,6 +28,7 @@
 <script>
 import { sendGaMethods } from '@/mixins/masterBuilder.js'
 import VoiceStoryWave from './VoiceStoryWave.vue'
+import { sendFbPixel } from '@/mixins/fbPixel'
 
 export default {
   name: 'VoiceStoryPlay',
@@ -94,6 +95,8 @@ export default {
           action: 'click',
           label: `sound_click_${this.titleGA}`
         })
+
+        sendFbPixel('聲音播放')
       }
     },
     intersectionObserver() {

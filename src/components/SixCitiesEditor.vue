@@ -1,5 +1,5 @@
 <template>
-  <div class="six-cities-editor">
+  <div class="six-cities-editor" :class="{ light: mode === 'light' }">
     <FooterEditor>
       <div>
         <p>統籌製作</p>
@@ -11,7 +11,7 @@
       </div>
       <div>
         <p>網頁製作</p>
-        <p>張庭瑋、周融聖</p>
+        <p>{{ developers }}</p>
       </div>
       <div>
         <p>影像</p>
@@ -32,14 +32,17 @@
 
       <div>
         <p></p>
-        <p>2020.12.8</p>
+        <p>2021.1.25</p>
       </div>
     </FooterEditor>
     <div>
       <FooterShare />
     </div>
     <div class="question-wrapper">
-      <FooterQuestionnaire href="https://www.surveycake.com/s/KpQKN" />
+      <FooterQuestionnaire
+        href="https://www.surveycake.com/s/KpQKN"
+        :mode="mode"
+      />
     </div>
   </div>
 </template>
@@ -58,6 +61,13 @@ export default {
     producer: {
       type: String,
       default: '謝汶均'
+    },
+    developers: {
+      type: String,
+      default: '張庭瑋、周融聖'
+    },
+    mode: {
+      type: String
     }
   },
   components: { FooterEditor, FooterQuestionnaire, FooterShare }
@@ -67,6 +77,12 @@ export default {
 <style lang="scss" scoped>
 .six-cities-editor {
   background-color: rgb(23, 23, 23);
+  &.light {
+    background-color: #eeeeee;
+    p {
+      color: #000;
+    }
+  }
 }
 .question-wrapper {
   padding-bottom: 123px;
